@@ -7,7 +7,7 @@ import base64
 
 from extractedEmail import email
 
-SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+SCOPES = 'https://www.googleapis.com/auth/gmail.modify'
 
 
 
@@ -15,6 +15,7 @@ class gmailHandler:
     label = 'inbox'
     fromFilter = None
     gmailAPI = None
+    readEmailCommand =  {'removeLabelIds': ['UNREAD'], 'addLabelIds': []}
 
     def __init__(self,locationOfCredentials):
         store = file.Storage('token.json')
@@ -46,5 +47,6 @@ class gmailHandler:
         for messageId in messageIds:
             message = self.gmailAPI.users().messages().get(userId='me', id=messageId['id']).execute()
             processedEmails.append(email(message))
+            #self.gmailAPI.users().messages().modify(userId='me', id=messageId['id'], body = self.readEmailCommand).execute()
         return processedEmails
 

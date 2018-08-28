@@ -9,8 +9,12 @@ SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 
 def main():
     gmail = gmailHandler('credentials.json')
-    result = gmail.listen(10)
-    print('here')
+    result = gmail.listen(1000)
+    count = 1
+    for email in result:
+        print(str(count) + ':')
+        email.print()
+        count = count + 1
 
 if __name__ == '__main__':
     main()
