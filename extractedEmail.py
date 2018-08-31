@@ -1,4 +1,5 @@
 import base64
+import re
 
 HEADER_FROM = 14
 HEADER_TO = 15
@@ -20,31 +21,34 @@ class email:
     validEmail = True
     
     def __init__(self,message):
+        self.filterFileName = "Strings_To_Remove.dat"
         self.subject = getParamFromHeader(message ['payload']['headers'], 'Subject')
         self.date = getParamFromHeader(message ['payload']['headers'], 'Date')
         self.sender = getParamFromHeader(message ['payload']['headers'], 'From')
         self.parseParams(message['payload'])
 
     def parseParams(self,messages):
-        text = ''
+        text = " "
         self.parameters = {}
+
+
 
         if 'parts' in messages:
             messages = messages['parts']
             for message in messages:
-                text = text + message['body']['data']
+                strin = str(message['body']['data'])
+                text = str(text) + str(base64.urlsafe_b64decode(strin))
         else:
-            text = text + messages['body']
+            text = text + base64.urlsafe_b64decode(messages['body'])
 
-        paramText = self.decode_base64(self.authentication(text))
-        #paramText = base64.b64decode(self.authentication(text))
-        #paramText = self.authentication(text)
+        text = text.encode().decode()
+        paramText = self.authentication(text)
 
+        print(paramText)
         paramName = None
         for word in paramText.split():
             if not isinstance(word, str):
                 pass;
-                word = word.decode('ASCII')
             if paramName is None and paramName != '\n':
                 paramName = word
                 if paramName[len(paramName) - 1] == '=':
@@ -57,8 +61,22 @@ class email:
 
 
     def authentication(self,data):
+
+        f = open(self.filterFileName, "r")
+
+        data = self.cleanhtml(data)
+
+        for line in f:
+            line = line.replace('\n','')
+            #line = line.replace('\','',1)
+            data = data.replace(line,"")
+
         return data
 
+    def cleanhtml(self,raw_html):
+        cleanr = re.compile('<.*?>')
+        cleantext = re.sub(cleanr, '', raw_html)
+        return cleantext
 
 
     def print(self):
