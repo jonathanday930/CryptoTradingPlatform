@@ -48,7 +48,7 @@ class market(ABC):
 
 
     def processOrder(self,type):
-        
+
 
     def followingLimitOrder(self,type):
         initialPrice = self.getCurrentPrice()
