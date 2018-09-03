@@ -2,22 +2,22 @@ from market import market
 
 
 class Bitmex(market):
-    def limitSell(self):
+    def limitSell(self, price,currency, asset):
         pass
 
-    def limitShortStart(self):
+    def limitShortStart(self, price, currency, asset):
         pass
 
-    def limitShortEnd(self):
+    def limitShortEnd(self, price, currency, asset):
         pass
 
-    def getCurrentPrice(self):
+    def limitBuy(self, price, currency, asset):
         pass
 
-    def closeLimitOrders(self):
+    def getCurrentPrice(self,currency, asset):
         pass
 
-    def limitBuy(self):
+    def closeLimitOrders(self,currency, asset):
         pass
 
 # inherit market
