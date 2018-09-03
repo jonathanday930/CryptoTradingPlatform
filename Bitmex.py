@@ -1,5 +1,6 @@
 from market import market
 
+
 # a controller for ONE bitmex connection. This is a basic formula for how it should look. 
 # Feel free to message me about the design.
 class Bitmex(market):
