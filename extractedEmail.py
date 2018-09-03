@@ -19,19 +19,26 @@ class email:
     parameters = None
     date = None
     validEmail = True
-    
+    boundaryString = '$$'
+
+
     def __init__(self,message):
-        self.filterFileName = "Strings_To_Remove.dat"
         self.subject = getParamFromHeader(message ['payload']['headers'], 'Subject')
         self.date = getParamFromHeader(message ['payload']['headers'], 'Date')
         self.sender = getParamFromHeader(message ['payload']['headers'], 'From')
-        self.parseParams(message['payload'])
+        self.parseSubjectForParams()
 
-    def parseParams(self,messages):
+
+    def parseSubjectForParams(self):
+        self.parameters = []
+
+        for word in self.subjectAuth(self.subject).split():
+            self.parameters.append(word)
+
+
+    def parseBodyForParams(self,messages):
         text = " "
         self.parameters = {}
-
-
 
         if 'parts' in messages:
             messages = messages['parts']
@@ -59,7 +66,6 @@ class email:
                     self.parameters.update({paramName: word})
                     paramName = None
 
-
     def authentication(self,data):
 
         f = open(self.filterFileName, "r")
@@ -84,3 +90,11 @@ class email:
         print('From:' + self.sender)
         print('Date:' + self.date)
         print('Parameters:' + str(self.parameters))
+
+    def subjectAuth(self, subject):
+        firstIndex = subject.find(self.boundaryString)
+
+        secondIndex = subject.find(self.boundaryString,firstIndex + 1)
+        return subject[firstIndex + self.boundaryString.__len__():secondIndex]
+
+    'adawdwdw TEST $$ EOS SHORT 2hr $$'
