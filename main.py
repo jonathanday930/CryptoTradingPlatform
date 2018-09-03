@@ -1,20 +1,14 @@
-
-
+from Bitmex import Bitmex
 # If modifying these scopes, delete the file token.json.
-from gmailHandler import gmailHandler
 
 SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 
 
 
 def main():
-    gmail = gmailHandler('credentials.json')
-    result = gmail.listen(1000)
-    count = 1
-    for email in result:
-        print(str(count) + ':')
-        email.print()
-        count = count + 1
+
+    market = Bitmex(.1, .1, .1, "Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp")
+
 
 if __name__ == '__main__':
     main()

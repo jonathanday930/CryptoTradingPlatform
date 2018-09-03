@@ -2,7 +2,7 @@
 
 from bravado.client import SwaggerClient
 from bravado.requests_client import RequestsClient
-from BitMEXAPIKeyAuthenticator import APIKeyAuthenticator
+from bitmexApi.BitMEXAPIKeyAuthenticator import APIKeyAuthenticator
 
 
 def bitmex(test=True, config=None, api_key=None, api_secret=None):
