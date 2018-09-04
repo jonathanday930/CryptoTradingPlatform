@@ -5,13 +5,14 @@ import hmac
 from bravado.requests_client import Authenticator
 
 
+
 class APIKeyAuthenticator(Authenticator):
     """?api_key authenticator.
-    This authenticator adds BitMEX API key support via header.
-    :param host: Host to authenticate for.
-    :param api_key: API key.
-    :param api_secret: API secret.
-    """
+        This authenticator adds BitMEX API key support via header.
+        :param host: Host to authenticate for.
+        :param api_key: API key.
+        :param api_secret: API secret.
+        """
 
     def __init__(self, host, api_key, api_secret):
         super(APIKeyAuthenticator, self).__init__(host)
