@@ -3,8 +3,8 @@ import time
 from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
-import base64
 
+import extractedEmail
 from extractedEmail import email
 
 SCOPES = 'https://www.googleapis.com/auth/gmail.modify'
@@ -28,9 +28,11 @@ class gmailHandler:
     # responds with the message
     def listen(self, timeoutSeconds):
         count = 0
-        while count < timeoutSeconds:
+        while count < timeoutSeconds or timeoutSeconds < 0:
             response = self.gmailAPI.users().messages().list(userId='me',
-                                                             q='is:unread').execute()
+                                                             q=' is:unread').execute()
+            # from:noreply@tradingview.com
+
             if 'messages' in response:
                 return self.readEmails(response)
             else:
@@ -44,7 +46,12 @@ class gmailHandler:
 
         for messageId in messageIds:
             message = self.gmailAPI.users().messages().get(userId='me', id=messageId['id']).execute()
-            processedEmails.append(email(message))
+            if self.authEmail(message):
+                processedEmails.append(email(message))
             self.gmailAPI.users().messages().modify(userId='me', id=messageId['id'],
                                                     body=self.readEmailCommand).execute()
         return processedEmails
+
+    def authEmail(self, email):
+        return extractedEmail.getParamFromHeader(email['payload']['headers'], 'Subject').find(
+            extractedEmail.email.boundaryString) != -1
