@@ -9,6 +9,7 @@ shortCloseText = 'SHORTCLOSE'
 
 
 class market(ABC):
+    btcToSatoshi = 100000000
     marginFromPrice = None
     maximumDeviationFromPrice = None
     goodLimitThreshold = None
