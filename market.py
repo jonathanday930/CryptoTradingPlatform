@@ -83,7 +83,7 @@ class market(ABC):
             orderID = self.limitBuy(limitPrice, currency, asset, orderID)
         else:
             if type == sellText:
-                orderID = self.limitSell(limitPrice, currency, asset, orderID)
+                orderID = self.limitSell(limitPrice, currency, asset, orderID, orderQuantity)
         if type == shortOpenText:
             orderID = self.limitShortStart(limitPrice, currency, asset, orderID)
         else:

@@ -16,9 +16,12 @@ def main():
     #         email.print()
     #         count = count + 1
 
-    trader = controller(gmailHandler('credentials.json'))
-    trader.addMarket(Bitmex(.1, .1, .1, "Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp"))
-    trader.run()
+    # trader = controller(gmailHandler('credentials.json'))
+    # trader.addMarket(Bitmex(.1, .1, .1, "Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp"), "Bitmex")
+    # trader.run()
+
+    market = Bitmex(.1, .1, .1, 'FEN58-cdNHcj_JmgPDSF3U0-', 'PmJYn7nifJ60pKFo9t8fjIpk7wEJh5KBsnq1kvQiviJBLaJz')
+    # Bitmex.limitBuy()
 
 
 if __name__ == '__main__':
