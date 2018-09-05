@@ -1,15 +1,17 @@
+import datetime
+
 import bitmexApi.bitmex
 from market import market
 
-# a controller for ONE bitmex connection. This is a basic formula for how it should look. 
-# Feel free to message me about the design.
-class Bitmex(market):
-    def getAmountOfItem(self, coin):
-        pass
 
-    # You will store the market API object in bitmex variable in init function
+# a controller for ONE bitmex connection. This is a basic formula for how it should look.
+class Bitmex(market):
     bitmex = None
-    def limitSell(self, price,currency, asset):
+
+    def getAmountOfItem(self, coin=None):
+        return self.bitmex.User.User_getMargin().result()[0]['availableMargin']/self.btcToSatoshi
+
+    def limitSell(self, price, currency, asset):
         pass
 
     def limitShortStart(self, price, currency, asset):
@@ -20,19 +22,23 @@ class Bitmex(market):
 
     def limitBuy(self, price, currency, asset):
         # TODO: figure out quantity params
-        orderQuantity = 10
-        self.bitmex.Order.Order_new(symbol=currency + asset, orderQty=orderQuantity, price=price).result()
-        pass
+        return self.bitmex.Order.Order_new(symbol="XBTUSD", orderQty=10, ordType="Market").result()
 
-    def getCurrentPrice(self,currency, asset):
-        quote = self.bitmex.Quote.Quote_get(symbol=currency + asset).result()
-        return quote
+    def getCurrentPrice(self, currency, asset):
+        startTime = datetime.datetime.now() - datetime.timedelta(minutes=1)
+        trades = self.bitmex.Trade.Trade_get(symbol=asset + currency, startTime=startTime).result()
+        sum = 0
+        volume = 0
+        for trade in trades[0]:
+            sum = sum + (trade['price'] * trade['size'])
+            volume = volume + trade['size']
+        return sum / volume
 
-    def closeLimitOrders(self,currency, asset):
-        #client.Order.Order_cancel(orderID='').result()
+    def closeLimitOrders(self, currency, asset):
+        # client.Order.Order_cancel(orderID='').result()
         self.bitmex.Order.Order_cancelAll().result()
         pass
-    
+
     # use this function to handle connecting to the market (this function is the constructor)
     # You should definitely add parameters to this, probably the api key info
     def __init__(self, priceMargin, maximum, limitThreshold, apiKey, apiKeySecret):
@@ -43,13 +49,13 @@ class Bitmex(market):
 
         ### get orderbook
         orderbook = self.bitmex.OrderBook.OrderBook_getL2(symbol='XBTUSD', depth=20).result()
-        #print(orderbook)
+        # print(orderbook)
 
         ### private api test ( needs api key and secret )
 
         ### get your orders
         orders = self.bitmex.Order.Order_getOrders(symbol='XBTUSD', reverse=True).result()
-        #print(orders)
+        # print(orders)
 
         super(Bitmex, self).__init__(priceMargin, maximum, limitThreshold)
         pass;
