@@ -15,9 +15,6 @@ class Bitmex(market):
     def getAmountOfItem(self, coin=None):
         return self.bitmex.User.User_getMargin().result()[0]['availableMargin']/self.btcToSatoshi
 
-    def limitSell(self, price, currency, asset):
-        pass
-
     def limitShortStart(self, price, currency, asset):
         pass
 
@@ -29,13 +26,18 @@ class Bitmex(market):
         pass
 
     def limitBuy(self, price, currency, asset, orderQuantity, orderId):
-        # TODO: figure out quantity params
         if orderId == None:
-            orderQuantity = 10
-            self.bitmex.Order.Order_new(symbol=currency + asset, orderQty=orderQuantity, price=price).result()
+            result = self.bitmex.Order.Order_new(symbol=currency + asset, orderQty=orderQuantity, ordType="Limit", price=price).result()
+            tradeInfo = result[0]
+            for key, value in tradeInfo.items():
+                if key == "orderID":
+                    newOrderId = (key + ": {0}".format(value))
+            return newOrderId
         else:
-            self.bitmex.Order.Order_amend(orderID=orderId, price=price)
-        pass
+            result = self.bitmex.Order.Order_amend(orderID=orderId, price=price)
+            # tradeInfo = result[0]
+
+        return None
 
     def getCurrentPrice(self, currency, asset):
         startTime = datetime.datetime.now() - datetime.timedelta(minutes=1)
@@ -52,6 +54,18 @@ class Bitmex(market):
         self.bitmex.Order.Order_cancelAll().result()
         pass
 
+    def get_orders(self):
+        # .open_orders() doesn't seem to work
+        # return self.bitmex.open_orders()
+
+        ### get your orders
+        orders = self.bitmex.Order.Order_getOrders(symbol='XBTUSD', reverse=True).result()
+        print(orders)
+        orderList = orders[0]
+        for i in range(len(orderList)):
+            x = orderList[i]
+            print(x)
+
     # use this function to handle connecting to the market (this function is the constructor)
     # You should definitely add parameters to this, probably the api key info
     def __init__(self, priceMargin, maximum, limitThreshold, apiKey, apiKeySecret):
@@ -62,19 +76,25 @@ class Bitmex(market):
 
         #quote = self.bitmex.Quote.Quote_get(symbol="XBTUSD").result()
 
-        orderQuantity = 10
-        # result = self.bitmex.Order.Order_new(symbol="XBTUSD", orderQty= -20, ordType="Limit", price=7329).result()
-        # print(result)
-
         # self.bitmex.Order.Order_amend(orderID="d2968e76-f796-fbfa-9ce0-d36336021f2f", price=7328.5)
 
         ### get orderbook
         orderbook = self.bitmex.OrderBook.OrderBook_getL2(symbol='XBTUSD', depth=20).result()
-        # print(orderbook)
+        print(orderbook)
+
+        # testing order amending
+        # orderID = self.limitBuy(6401.5, "XBT", "USD", -20, None)
+        # print(orderID)
+        # orderID = self.limitBuy(6400.5, "XBT", "USD", 20, "efefbd9d-0c98-9d81-a60d-60d2a3d17d92")
+        # print(orderID)
 
         ### get your orders
         orders = self.bitmex.Order.Order_getOrders(symbol='XBTUSD', reverse=True).result()
-        # print(orders)
+        print(orders)
+        orderList = orders[0]
+        for i in range(len(orderList)):
+            x = orderList[i]
+            print(x)
 
         super(Bitmex, self).__init__(priceMargin, maximum, limitThreshold)
         pass;
