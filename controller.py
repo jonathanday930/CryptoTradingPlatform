@@ -28,3 +28,4 @@ class controller:
                                                                                            currencySubjectNumber],
                                                                                        email.parameters[
                                                                                            assetSubjectNumber])
+
