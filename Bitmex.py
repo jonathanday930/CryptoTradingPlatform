@@ -45,7 +45,7 @@ class Bitmex(market):
 
     def getCurrentPrice(self, currency, asset):
         startTime = datetime.datetime.now() - datetime.timedelta(minutes=1)
-        trades = self.bitmex.Trade.Trade_get(symbol=currency+asset, startTime=startTime).result()
+        trades = self.bitmex.Trade.Trade_get(symbol=asset+currency, startTime=startTime).result()
         sum = 0
         volume = 0
         for trade in trades[0]:
