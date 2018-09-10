@@ -8,21 +8,21 @@ SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 
 def main():
     # gmail tests
-    # gmail = gmailHandler('credentials.json')
-    # count = 1
-    # result = gmail.listen(1)
-    # if not result is None:
-    #     for email in result:
-    #         print(str(count) + ':')
-    #         email.print()
-    #         count = count + 1
+    gmail = gmailHandler('credentials.json')
+    count = 1
+    result = gmail.listen(1)
+    if not result is None:
+        for email in result:
+            print(str(count) + ':')
+            email.print()
+            count = count + 1
 
     # controller tests
-    # trader = controller(gmailHandler('credentials.json'))
-    # trader.addMarket(Bitmex(.1, .1, .1, "Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp"))
-    # trader.run()
+    trader = controller(gmailHandler('credentials.json'))
+    trader.addMarket(Bitmex(.1, .1, .1, "Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp"), 'bitmex')
+    trader.run()
     market = Bitmex(.005, .01, .005, 'FEN58-cdNHcj_JmgPDSF3U0-', 'PmJYn7nifJ60pKFo9t8fjIpk7wEJh5KBsnq1kvQiviJBLaJz')
-    price =market.getAmountOfItem()
+    price = market.getAmountOfItem()
     print(price)
 
 
