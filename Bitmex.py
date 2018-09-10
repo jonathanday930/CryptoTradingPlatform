@@ -12,9 +12,11 @@ class Bitmex(market):
         orderQuantity = orderQuantity * -1
         self.bitmex.Order.Order_new(symbol=currency + asset, orderQty=orderQuantity, price=price, ordType="Limit").result()
 
-    def getAmountOfItem(self, coin=None):
-        return self.bitmex.User.User_getMargin().result()[0]['availableMargin']/self.btcToSatoshi
-
+    def getAmountOfItem(self, coin):
+        if coin.lower() == 'btc':
+            return self.bitmex.User.User_getMargin().result()[0]['availableMargin']/self.btcToSatoshi
+        else:
+            return self.bitmex.User.
     def limitShortStart(self, price, currency, asset):
         pass
 
