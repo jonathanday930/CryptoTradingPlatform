@@ -73,8 +73,10 @@ class Bitmex(market):
 
     # Not working
     def getPosition(self, currency, asset):
-        return self.bitmex.position(currency + asset)
-
+        symbol = '{"symbol": "'+currency+asset + '"}'
+        return self.bitmex.Position.Position_get(filter=symbol).result()
+    def getWallet(self):
+        return self.bitmex.User.User_getWallet()
 
     # use this function to handle connecting to the market (this function is the constructor)
     # You should definitely add parameters to this, probably the api key info
@@ -99,7 +101,9 @@ class Bitmex(market):
         # print(orderID)
 
         # self.marketBuy(20, "XBT", "USD")
-        # self.getPosition('XBT', 'USD')
+        # print(self.getPosition('XBT', 'USD'))
+        # wallet = self.getWallet()
+        # print(wallet)
 
         ### get your orders
         # orders = self.bitmex.Order.Order_getOrders(symbol='XBTUSD', reverse=True).result()
