@@ -23,17 +23,12 @@ class controller:
         self.marketControllers[name] = market
 
     def createOrder(self, email):
-        self.marketControllers['bitmex'].followingLimitOrder(email.parameters[typeSubjectNumber],
-                                                                                       email.parameters[
-                                                                                           currencySubjectNumber],
-                                                                                       email.parameters[
-                                                                                           assetSubjectNumber])
-        # self.marketControllers['bitmex']
-        # Bitmex = self.marketControllers[0]
-        # self.bitmex.followingLimitOrder(
-        #     email.parameters[typeSubjectNumber],
-        #     email.parameters[
-        #         currencySubjectNumber],
-        #     email.parameters[
-        #         assetSubjectNumber])
+        # self.marketControllers['bitmex'].followingLimitOrder(email.parameters[typeSubjectNumber],
+        #                                                                                email.parameters[
+        #                                                                                    currencySubjectNumber],
+        #                                                                                email.parameters[
+        #                                                                                    assetSubjectNumber])
+
+        self.marketControllers['bitmex'].marketBuy(20, email.parameters[currencySubjectNumber],
+                                                             email.parameters[assetSubjectNumber])
 
