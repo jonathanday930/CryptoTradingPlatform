@@ -36,7 +36,13 @@ class Bitmex(market):
         pass
 
     def marketBuy(self, orderQuantity, asset, currency):
-        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
+        orderQuantity = 20
+        self.bitmex.Order.Order_new(symbol=asset+currency, orderQty=orderQuantity, ordType="Market").result()
+        pass
+
+    def marketSell(self, orderQuantity, asset, currency):
+        orderQuantity = -20
+        self.bitmex.Order.Order_new(symbol=asset+currency, orderQty=orderQuantity, ordType="Market").result()
         pass
 
     def limitBuy(self, price, asset, currency, orderQuantity, orderId):
