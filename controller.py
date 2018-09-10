@@ -29,7 +29,7 @@ class controller:
         #                                                                                email.parameters[
         #                                                                                    assetSubjectNumber])
 
-        if email.parameters[marketSubjectNumber] == 'BUY':
+        if email.parameters[typeSubjectNumber] == 'LONG':
             self.marketControllers['bitmex'].marketBuy(None, email.parameters[assetSubjectNumber],
                                                              email.parameters[currencySubjectNumber])
         else:
