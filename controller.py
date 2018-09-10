@@ -29,6 +29,13 @@ class controller:
         #                                                                                email.parameters[
         #                                                                                    assetSubjectNumber])
 
-        self.marketControllers['bitmex'].marketBuy(20, email.parameters[currencySubjectNumber],
-                                                             email.parameters[assetSubjectNumber])
+        if email.parameters[marketSubjectNumber] == 'BUY':
+            self.marketControllers['bitmex'].marketBuy(None, email.parameters[assetSubjectNumber],
+                                                             email.parameters[currencySubjectNumber])
+        else:
+            self.marketControllers['bitmex'].marketSell(None, email.parameters[assetSubjectNumber],
+                                                             email.parameters[currencySubjectNumber])
+
+
+
 
