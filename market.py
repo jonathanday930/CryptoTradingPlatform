@@ -2,13 +2,14 @@ import collections
 from abc import ABC, abstractmethod
 from time import sleep
 
-buyText = 'BUY'
-sellText = 'SELL'
-shortOpenText = 'SHORT'
-shortCloseText = 'SHORTCLOSE'
 
 
 class market(ABC):
+    buyText = 'BUY'
+    sellText = 'SELL'
+    shortOpenText = 'SHORT'
+    shortCloseText = 'SHORTCLOSE'
+
     btcToSatoshi = 100000000
     marginFromPrice = None
     maximumDeviationFromPrice = None
@@ -49,28 +50,28 @@ class market(ABC):
         pass;
 
     def isInRange(self, type, previousPrice, currentPrice, percent):
-        if type == buyText:
+        if type == self.buyText:
             return self.getLimit(type, previousPrice, percent) < currentPrice
         else:
-            if type == sellText:
+            if type == self.sellText:
                 return self.getLimit(type, previousPrice, percent) > currentPrice
             else:
-                if type == shortOpenText:
+                if type == self.shortOpenText:
                     return self.getLimit(type, previousPrice, percent) < currentPrice
                 else:
-                    if type == shortCloseText:
+                    if type == self.shortCloseText:
                         return self.getLimit(type, previousPrice, percent) > currentPrice
 
     def getLimit(self, type, price, percent):
-        if type == buyText:
+        if type == self.buyText:
             return price * (1 + percent)
         else:
-            if type == sellText:
+            if type == self.sellText:
                 return price * (1 - percent)
-        if type == shortOpenText:
+        if type == self.shortOpenText:
             return price * (1 - percent)
         else:
-            if type == shortCloseText:
+            if type == self.shortCloseText:
                 return price * (1 + percent)
 
     def isFittingPrice(self, limitPrice, currentPrice):
@@ -80,15 +81,15 @@ class market(ABC):
     def sendOrder(self, type, currentPrice, currency, asset, orderID):
 
         limitPrice = self.getLimit(type, currentPrice, self.marginFromPrice)
-        if type == buyText:
+        if type == self.buyText:
             orderID = self.limitBuy(limitPrice, currency, asset, orderID)
         else:
-            if type == sellText:
+            if type == self.sellText:
                 orderID = self.limitSell(limitPrice, currency, asset, orderID, orderQuantity)
-        if type == shortOpenText:
+        if type == self.shortOpenText:
             orderID = self.limitShortStart(limitPrice, currency, asset, orderID)
         else:
-            if type == shortCloseText:
+            if type == self.shortCloseText:
                 orderID = self.limitShortEnd(limitPrice, currency, asset, orderID)
         result = collections.namedtuple('result', ['limitPrice', 'orderID'])
         res = result(limitPrice, orderID)
@@ -112,3 +113,8 @@ class market(ABC):
     # we can alter this side of things later to only use a certain amount
     def orderFilled(self, currency):
         return currency == 0
+
+    def getAmountToUse(self,asset,currency, orderType):
+        if(orderType == self.buyText):
+            return self.getAmountOfItem('BTC')
+        return self.getAmountOfItem(asset)
