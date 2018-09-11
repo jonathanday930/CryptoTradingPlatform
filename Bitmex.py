@@ -36,25 +36,29 @@ class Bitmex(market):
         pass
 
     def marketBuy(self, orderQuantity, asset, currency):
-        orderQuantity = 20
         amount = self.getAmountOfItem(asset+currency)
+        print("Current %s%s amount:  %d", asset, currency, amount)
         if amount < 0:
             amountToBuy = amount * -1
+            print("\n %d  %s%s \n", amount, asset, currency)
             self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
 
-        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
+        print("\n %d  %s%s \n", amount, asset, currency)
+        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amount, ordType="Market").result()
         pass
 
 
 
     def marketSell(self, orderQuantity, asset, currency):
-        orderQuantity = -20
         amount = self.getAmountOfItem(asset + currency)
+        print("Current %s%s amount:  %d \n", asset, currency, amount)
+        amountToSell = amount * -1
         if amount > 0:
-            amountToBuy = amount * -1
-            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
+            print("\n %d  %s%s \n", amount, asset, currency)
+            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToSell, ordType="Market").result()
 
-        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
+        print("\n %d  %s%s \n", amount, asset, currency)
+        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToSell, ordType="Market").result()
         pass
 
     def limitBuy(self, price, asset, currency, orderQuantity, orderId):
@@ -101,7 +105,7 @@ class Bitmex(market):
         return orderList
 
     def getWallet(self):
-        return self.bitmex.User.User_getWallet()
+        return self.bitmex.User.User_getWallet().result()
 
     # use this function to handle connecting to the market (this function is the constructor)
     # You should definitely add parameters to this, probably the api key info
@@ -127,8 +131,8 @@ class Bitmex(market):
 
         # self.marketBuy(20, "XBT", "USD")
         # print(self.getPosition('XBT', 'USD'))
-        # wallet = self.getWallet()
-        # print(wallet)
+        wallet = self.getWallet()
+        print(wallet)
 
         ### get your orders
         # orders = self.bitmex.Order.Order_getOrders(symbol='XBTUSD', reverse=True).result()
