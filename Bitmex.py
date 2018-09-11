@@ -1,4 +1,5 @@
 import datetime
+from math import floor
 
 import bitmexApi.bitmex
 from market import market
@@ -8,14 +9,14 @@ from market import market
 class Bitmex(market):
     bitmex = None
 
-    def limitSell(self, price, asset, currency, orderId, orderQuantity):
+    def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         # TODO: figure out quantity params
         orderQuantity = orderQuantity * -1
-        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, price=price,
+        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, price=limitPrice,
                                     ordType="Limit").result()
 
     def getAmountOfItem(self, coin):
-        if coin.lower() == 'btc':
+        if coin.lower() == 'xbt':
             return self.bitmex.User.User_getMargin().result()[0]['availableMargin'] / self.btcToSatoshi
         else:
             symbol = '{"symbol": "' + coin + '"}'
@@ -25,18 +26,18 @@ class Bitmex(market):
             else:
                 return 0
 
-    def limitShortStart(self, price, currency, asset):
+    def limitShortStart(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         orderQuantity = 10
         orderQuantity = orderQuantity * -1
-        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, price=price,
+        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, price=limitPrice,
                                     ordType="Limit").result()
         pass
 
-    def limitShortEnd(self, price, currency, asset):
+    def limitShortEnd(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         pass
 
     def marketBuy(self, orderQuantity, asset, currency):
-        amount = self.getAmountOfItem(asset+currency)
+        amount = self.getAmountOfItem(asset + currency)
         print("Current %s%s amount:  %d", asset, currency, amount)
         if amount < 0:
             amountToBuy = amount * -1
@@ -44,10 +45,8 @@ class Bitmex(market):
             self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
 
         print("\n %d  %s%s \n", amount, asset, currency)
-        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amount, ordType="Market").result()
+        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
         pass
-
-
 
     def marketSell(self, orderQuantity, asset, currency):
         amount = self.getAmountOfItem(asset + currency)
@@ -57,11 +56,11 @@ class Bitmex(market):
             print("\n %d  %s%s \n", amount, asset, currency)
             self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToSell, ordType="Market").result()
 
-        print("\n %d  %s%s \n", amount, asset, currency)
-        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToSell, ordType="Market").result()
+        print("\n %d  %s%s \n", orderQuantity, asset, currency)
+        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
         pass
 
-    def limitBuy(self, price, asset, currency, orderQuantity, orderId):
+    def limitBuy(self, price, asset, currency, orderQuantity, orderId=None):
         if orderId == None:
             result = self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Limit",
                                                  price=price).result()
@@ -89,7 +88,6 @@ class Bitmex(market):
     def closeLimitOrders(self, asset, currency):
         # client.Order.Order_cancel(orderID='').result()
         self.bitmex.Order.Order_cancelAll().result()
-        pass
 
     def get_orders(self, asset, currency):
         # .open_orders() doesn't seem to work
@@ -131,8 +129,8 @@ class Bitmex(market):
 
         # self.marketBuy(20, "XBT", "USD")
         # print(self.getPosition('XBT', 'USD'))
-        wallet = self.getWallet()
-        print(wallet)
+        # wallet = self.getWallet()
+        # print(wallet)
 
         ### get your orders
         # orders = self.bitmex.Order.Order_getOrders(symbol='XBTUSD', reverse=True).result()
@@ -149,4 +147,12 @@ class Bitmex(market):
         if orderType == self.buyText:
             return self.getAmountOfItem('XBt')
         return self.getAmountOfItem(asset)
+
+    def getMaxAmountToUse(self, asset, currency):
+        percentLower = 0.01
+        curr = self.getAmountOfItem('XBt') * (1 - percentLower)
+        price = self.getCurrentPrice(asset, currency)
+        result = floor((curr / price))
+        return result
+
 # inherit market

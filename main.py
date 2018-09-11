@@ -22,6 +22,12 @@ def main():
     trader.addMarket(Bitmex(.1, .1, .1, "Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp"), 'bitmex')
     trader.run()
 
+    # market = Bitmex(.1,.1,.1,"Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp")
+    # price = market.getMaxAmountToUse('ETH','U18')
+    # print(price)
+
+    #market.limitBuy(market.getCurrentPrice('XRP','USD'),'XRP','U18',1)
+
 
 if __name__ == '__main__':
     main()
