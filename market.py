@@ -22,27 +22,27 @@ class market(ABC):
         self.goodLimitThreshold = limitThreshold
 
     @abstractmethod
-    def limitBuy(self, limitPrice, currency, asset, orderNumber=None):
+    def limitBuy(self, limitPrice, asset, currency, orderQuantity, orderNumber=None,):
         pass;
 
     @abstractmethod
-    def limitSell(self, limitPrice, currency, asset, orderNumber=None):
+    def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         pass;
 
     @abstractmethod
-    def limitShortStart(self, limitPrice, currency, asset, orderNumber=None):
+    def limitShortStart(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         pass;
 
     @abstractmethod
-    def limitShortEnd(self, limitPrice, currency, asset, orderNumber=None):
+    def limitShortEnd(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         pass;
 
     @abstractmethod
-    def getCurrentPrice(self, currency, asset):
+    def getCurrentPrice(self, asset, currency):
         pass;
 
     @abstractmethod
-    def closeLimitOrders(self, currency, asset):
+    def closeLimitOrders(self, asset, currency):
         pass;
 
     @abstractmethod
@@ -78,25 +78,25 @@ class market(ABC):
         return ((1 + self.goodLimitThreshold) * limitPrice > currentPrice > (
                 1 - self.goodLimitThreshold) * limitPrice) or limitPrice == 0
 
-    def sendOrder(self, type, currentPrice, currency, asset, orderID):
+    def sendOrder(self, type, currentPrice, asset, currency, orderID):
 
         limitPrice = self.getLimit(type, currentPrice, self.marginFromPrice)
         if type == self.buyText:
-            orderID = self.limitBuy(limitPrice, currency, asset, orderID)
+            orderID = self.limitBuy(limitPrice, asset, currency, orderID)
         else:
             if type == self.sellText:
-                orderID = self.limitSell(limitPrice, currency, asset, orderID, orderQuantity)
+                orderID = self.limitSell(limitPrice, asset, currency, 1, orderID)
         if type == self.shortOpenText:
-            orderID = self.limitShortStart(limitPrice, currency, asset, orderID)
+            orderID = self.limitShortStart(limitPrice, asset, currency, orderID)
         else:
             if type == self.shortCloseText:
-                orderID = self.limitShortEnd(limitPrice, currency, asset, orderID)
+                orderID = self.limitShortEnd(limitPrice, asset, currency, orderID)
         result = collections.namedtuple('result', ['limitPrice', 'orderID'])
         res = result(limitPrice, orderID)
         return res
 
-    def followingLimitOrder(self, type, currency, asset):
-        initialPrice = self.getCurrentPrice(currency, asset)
+    def followingLimitOrder(self, type, asset, currency):
+        initialPrice = self.getCurrentPrice(asset, currency)
         currentPrice = initialPrice
         limitPrice = 0
         orderID = None
@@ -104,15 +104,21 @@ class market(ABC):
         while self.isInRange(type, initialPrice, currentPrice, self.maximumDeviationFromPrice) or self.orderFilled(
                 currency):
             if self.isInRange(type, limitPrice, currentPrice, self.goodLimitThreshold):
-                res = self.sendOrder(type, currentPrice, currency, asset, orderID)
+                res = self.sendOrder(type, currentPrice, asset, currency, orderID)
                 limitPrice = res.limitPrice
                 orderID = res.orderID
             sleep(self.refreshDelay)
-            currentPrice = self.getCurrentPrice(currency, asset)
+            currentPrice = self.getCurrentPrice(asset, currency)
 
     # we can alter this side of things later to only use a certain amount
     def orderFilled(self, currency):
         return currency == 0
+
+    def getMaxAmountToUse(self,asset,currency):
+        percentLower = .05
+        curr = self.getAmountOfItem(currency)
+        price = self.getCurrentPrice(asset,currency)
+        return (curr/price) * (1-percentLower)
 
     def getAmountToUse(self,asset,currency, orderType):
         if(orderType == self.buyText):
