@@ -24,6 +24,11 @@ def main():
     price = market.getAmountToUse('XRP','U18',market.buyText)
     print(price)
 
+    price = market.getCurrentPrice('XRP','U18')
+    print(price)
+
+    market.limitBuy(market.getCurrentPrice('XRP','USD'),'XRP','U18',1)
+
 
 if __name__ == '__main__':
     main()
