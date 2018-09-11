@@ -36,6 +36,24 @@ class Bitmex(market):
         pass
 
     def marketBuy(self, orderQuantity, asset, currency):
+        orderQuantity = 20
+        amount = self.getAmountOfItem(asset+currency)
+        if amount < 0:
+            amountToBuy = amount * -1
+            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
+
+        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
+        pass
+
+
+
+    def marketSell(self, orderQuantity, asset, currency):
+        orderQuantity = -20
+        amount = self.getAmountOfItem(asset + currency)
+        if amount > 0:
+            amountToBuy = amount * -1
+            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
+
         self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
         pass
 

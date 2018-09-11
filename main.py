@@ -18,11 +18,9 @@ def main():
     #         count = count + 1
 
     # controller tests
-    # trader = controller(gmailHandler('credentials.json'))
-    # trader.addMarket(Bitmex(.1, .1, .1, "Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp"), 'bitmex')
-    market = Bitmex(.005, .01, .005, 'FEN58-cdNHcj_JmgPDSF3U0-', 'PmJYn7nifJ60pKFo9t8fjIpk7wEJh5KBsnq1kvQiviJBLaJz')
-    price = market.getAmountToUse('XRP','U18',market.buyText)
-    print(price)
+    trader = controller(gmailHandler('credentials.json'))
+    trader.addMarket(Bitmex(.1, .1, .1, "Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp"), 'bitmex')
+    trader.run()
 
     price = market.getCurrentPrice('XRP','U18')
     print(price)
