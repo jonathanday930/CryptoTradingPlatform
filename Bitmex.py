@@ -37,7 +37,7 @@ class Bitmex(market):
         pass
 
     def marketBuy(self, orderQuantity, asset, currency):
-        amount = self.getAmountOfItem(asset + currency)
+        amount = self.getAvailableBalanceInUsd()
         print("Current %s%s amount:  %d", asset, currency, amount)
         if amount < 0:
             amountToBuy = amount * -1
@@ -45,18 +45,19 @@ class Bitmex(market):
             self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
 
         print("\n %d  %s%s \n", amount, asset, currency)
-        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
+        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amount, ordType="Market").result()
         pass
 
     def marketSell(self, orderQuantity, asset, currency):
-        amount = self.getAmountOfItem(asset + currency)
-        print("Current %s%s amount:  %d \n", asset, currency, amount)
-        amountToSell = amount * -1
-        if amount > 0:
-            print("\n %d  %s%s \n", amount, asset, currency)
+        amountOfItem = self.getAmountOfItem(asset + currency)
+        print("Current %s%s amount:  %d \n", asset, currency, amountOfItem)
+        amountToSell = amountOfItem * -1
+        if amountOfItem > 0:
+            print("\n %d  %s%s \n", amountOfItem, asset, currency)
             self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToSell, ordType="Market").result()
 
         print("\n %d  %s%s \n", orderQuantity, asset, currency)
+        orderQuantity = self.getAvailableBalanceInUsd() * -1
         self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
         pass
 
@@ -83,6 +84,8 @@ class Bitmex(market):
         for trade in trades[0]:
             sum = sum + (trade['price'] * trade['size'])
             volume = volume + trade['size']
+            if volume == 0:
+                return 0
         return sum / volume
 
     def closeLimitOrders(self, asset, currency):
@@ -154,5 +157,12 @@ class Bitmex(market):
         price = self.getCurrentPrice(asset, currency)
         result = floor((curr / price))
         return result
+
+    def getAvailableBalanceInUsd(self):
+        availableBalance = self.bitmex.User.User_getMargin(currency="XBt").result()
+        user = availableBalance[0]
+        balanceInBtc = user['withdrawableMargin'] / 100000000
+        balanceInUsd = floor((balanceInBtc * self.getCurrentPrice('XBT', 'USD'))) - 10
+        return balanceInUsd
 
 # inherit market
