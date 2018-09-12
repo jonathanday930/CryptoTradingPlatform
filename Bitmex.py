@@ -37,29 +37,20 @@ class Bitmex(market):
         pass
 
     def marketBuy(self, orderQuantity, asset, currency):
-        amount = self.getAvailableBalanceInUsd()
-        print("Current %s%s amount:  %d", asset, currency, amount)
+        amount = self.getAmountOfItem(asset + currency)
         if amount < 0:
             amountToBuy = amount * -1
-            print("\n %d  %s%s \n", amount, asset, currency)
             self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
-
-        print("\n %d  %s%s \n", amount, asset, currency)
-        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amount, ordType="Market").result()
-        pass
+        self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
 
     def marketSell(self, orderQuantity, asset, currency):
-        amountOfItem = self.getAmountOfItem(asset + currency)
-        print("Current %s%s amount:  %d \n", asset, currency, amountOfItem)
-        amountToSell = amountOfItem * -1
-        if amountOfItem > 0:
-            print("\n %d  %s%s \n", amountOfItem, asset, currency)
-            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToSell, ordType="Market").result()
+        amount = self.getAmountOfItem(asset + currency)
+        if amount > 0:
+            amountToBuy = amount * -1
+            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
 
-        print("\n %d  %s%s \n", orderQuantity, asset, currency)
-        orderQuantity = self.getAvailableBalanceInUsd() * -1
         self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
-        pass
+
 
     def limitBuy(self, price, asset, currency, orderQuantity, orderId=None):
         if orderId == None:
@@ -84,8 +75,6 @@ class Bitmex(market):
         for trade in trades[0]:
             sum = sum + (trade['price'] * trade['size'])
             volume = volume + trade['size']
-            if volume == 0:
-                return 0
         return sum / volume
 
     def closeLimitOrders(self, asset, currency):
