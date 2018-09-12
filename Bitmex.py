@@ -140,11 +140,16 @@ class Bitmex(market):
             return self.getAmountOfItem('XBt')
         return self.getAmountOfItem(asset)
 
-    def getMaxAmountToUse(self, asset, currency):
+    def getMaxAmountToUse(self, asset, currency, curr=None):
         percentLower = 0.01
-        curr = self.getAmountOfItem('XBt') * (1 - percentLower)
+        if curr is None:
+            curr = self.getAmountOfItem('XBt') * (1 - percentLower)
+
         price = self.getCurrentPrice(asset, currency)
-        result = floor((curr / price))
+        if currency == 'USD' or (currency == 'U18' and asset == 'XBT'):
+            result = floor(curr * price)
+        else:
+            result = floor((curr / price))
         return result
 
 # inherit market

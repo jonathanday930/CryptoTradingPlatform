@@ -7,7 +7,7 @@ marketSubjectNumber = 3
 class controller:
     gmailController = None
     marketControllers = {}
-    marketOrderPercent = 0.5
+    marketOrderPercent = 0.2
     def __init__(self, gmail):
         self.gmailController = gmail
         self.timeOutTime = -1
@@ -28,7 +28,9 @@ class controller:
         #                                                                                    currencySubjectNumber],
         #                                                                                email.parameters[
         #                                                                                    assetSubjectNumber])
-        self.marketOrder(self.marketControllers['bitmex'], self.marketOrderPercent, email.parameters[assetSubjectNumber],
+        market = email.parameters[marketSubjectNumber]
+        if market in self.marketControllers:
+            self.marketOrder(self.marketControllers[market], self.marketOrderPercent, email.parameters[assetSubjectNumber],
                          email.parameters[currencySubjectNumber], email.parameters[typeSubjectNumber])
 
     def marketOrder(self, controller, percentOfAvailableToUse, asset, currency, type):
@@ -37,6 +39,6 @@ class controller:
             controller.marketBuy(controller.getMaxAmountToUse(asset, currency) * percentOfAvailableToUse, asset,
                                  currency)
         else:
-            self.marketControllers['bitmex'].marketSell(
+            controller.marketSell(
                 controller.getMaxAmountToUse(asset, currency) * percentOfAvailableToUse, asset,
                 currency)

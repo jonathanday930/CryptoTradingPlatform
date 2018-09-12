@@ -114,7 +114,7 @@ class market(ABC):
     def orderFilled(self, currency):
         return currency == 0
 
-    def getMaxAmountToUse(self,asset,currency):
+    def gma(self,asset,currency):
         percentLower = .05
         curr = self.getAmountOfItem(currency)
         price = self.getCurrentPrice(asset,currency)
