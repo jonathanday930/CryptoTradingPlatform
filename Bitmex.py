@@ -103,7 +103,7 @@ class Bitmex(market):
         # The super function runs the constructor on the market class that this class inherits from. In other words,
         # done mess with it or the parameters I put in this init function
 
-        self.bitmex = bitmexApi.bitmex.bitmex(test=True, config=None, api_key=apiKey, api_secret=apiKeySecret)
+        self.bitmex = bitmexApi.bitmex.bitmex(test=False, config=None, api_key=apiKey, api_secret=apiKeySecret)
 
         # quote = self.bitmex.Quote.Quote_get(symbol="XBTUSD").result()
 
