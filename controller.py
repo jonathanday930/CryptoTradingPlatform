@@ -7,7 +7,7 @@ marketSubjectNumber = 3
 class controller:
     gmailController = None
     marketControllers = {}
-    marketOrderPercent = 0.2
+    marketOrderPercent = 0.4
     def __init__(self, gmail):
         self.gmailController = gmail
         self.timeOutTime = -1
