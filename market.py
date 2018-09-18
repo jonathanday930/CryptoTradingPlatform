@@ -114,13 +114,13 @@ class market(ABC):
     def orderFilled(self, currency):
         return currency == 0
 
-    def gma(self,asset,currency):
+    def gma(self, asset, currency):
         percentLower = .05
         curr = self.getAmountOfItem(currency)
         price = self.getCurrentPrice(asset,currency)
         return (curr/price) * (1-percentLower)
 
-    def getAmountToUse(self,asset,currency, orderType):
+    def getAmountToUse(self, asset, currency, orderType):
         if(orderType == self.buyText):
             return self.getAmountOfItem('BTC')
         return self.getAmountOfItem(asset)
