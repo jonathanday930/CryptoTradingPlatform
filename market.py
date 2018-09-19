@@ -15,11 +15,15 @@ class market(ABC):
     maximumDeviationFromPrice = None
     goodLimitThreshold = None
     refreshDelay = 1
+    bank = None
 
     def __init__(self, priceMargin, maximum, limitThreshold):
         self.marginFromPrice = priceMargin
         self.maximumDeviationFromPrice = maximum
         self.goodLimitThreshold = limitThreshold
+
+
+
 
     @abstractmethod
     def limitBuy(self, limitPrice, asset, currency, orderQuantity, orderNumber=None,):
@@ -84,6 +88,7 @@ class market(ABC):
     def sendOrder(self, type, currentPrice, asset, currency, orderID):
 
         limitPrice = self.getLimit(type, currentPrice, self.marginFromPrice)
+
         if type == self.buyText:
             orderID = self.limitBuy(limitPrice, asset, currency, orderID)
         else:

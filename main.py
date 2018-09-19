@@ -1,6 +1,7 @@
 # If modifying these scopes, delete the file token.json.
 import sys
 
+import logger
 from Bitmex import Bitmex
 from gmailHandler import gmailHandler
 from controller import controller
@@ -27,8 +28,8 @@ def main():
     while True:
         try:
             trader.run()
-        except:
-            print("Unexpected error:", sys.exc_info()[0])
+        except Exception as e:
+            logger.logError(e)
 
     # market = Bitmex(.1,.1,.1,"Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp")
     # price = market.getMaxAmountToUse('ETH','U18')
