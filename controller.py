@@ -35,12 +35,9 @@ class controller:
                              email.parameters[assetSubjectNumber],
                              email.parameters[currencySubjectNumber], email.parameters[typeSubjectNumber])
 
-    def marketOrder(self, controller, percentOfAvailableToUse, asset, currency, type):
+    def marketOrder(self, market, percentOfAvailableToUse, asset, currency, type):
 
         if type == 'LONG':
-            controller.marketBuy(controller.getMaxAmountToUse(asset, currency) * percentOfAvailableToUse, asset,
-                                 currency)
+            market.marketOrder('buy',asset,currency)
         else:
-            controller.marketSell(
-                controller.getMaxAmountToUse(asset, currency) * percentOfAvailableToUse, asset,
-                currency)
+            market.marketOrder('sell', asset, currency)

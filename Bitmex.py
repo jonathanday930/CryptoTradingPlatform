@@ -2,7 +2,11 @@ import datetime
 from math import floor
 
 import bitmexApi.bitmex
+import logger
 from market import market
+
+marketName = 'Bitmex'
+
 
 # a controller for ONE bitmex connection. This is a basic formula for how it should look.
 class Bitmex(market):
@@ -19,52 +23,49 @@ class Bitmex(market):
         orderQuantity = orderQuantity * -1
         self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, price=limitPrice,
                                     ordType="Limit").result()
-        pass
 
     def limitShortEnd(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         pass
 
-    def marketBuy(self, orderQuantity, asset, currency):
-        amount = self.getAmountOfItem(asset + currency)
-        print("current amount of %s%s: %f \n" % (asset, currency, amount))
-        # if we are currently in a short
+    def resetToEquilibrium_Market(self, amount, asset, currency):
+        before = self.getAmountOfItem('xbt')
+
         if amount < 0:
-            amountToBuy = amount * -1
-            self.logOrder(amountToBuy, asset, currency)
-            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
-            self.logOrder(amountToBuy, asset, currency)
-            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
+            self.marketBuy(-amount, asset, currency, note='Buying for equilibrium')
         else:
-            # in the case that we are in a long position and get passed a long signal we should check the allowed
-            # percentage of the portfolio to invest and add the difference to our current position
-            # numberOfCoins = self.getNumberOfTradingPairs()
-            numberOfCoins = 2
-            availableBalance = self.getAvailableBalanceInUsd()
-            allowedAmount = availableBalance / numberOfCoins
-            extraToBuy = allowedAmount - amount
-            self.logOrder(extraToBuy, asset, currency)
-            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=extraToBuy, ordType="Market").result()
-        pass
+            if amount > 0:
+                self.marketSell(amount, asset, currency, note='Selling for equilibrium')
+        after = self.getAmountOfItem('xbt')
+        return after - before
 
-    def marketSell(self, orderQuantity, asset, currency):
-        amount = self.getAmountOfItem(asset + currency)
-        print("current amount of %s%s: %f \n" % (asset, currency, amount))
 
-        # if we are currently in a Long
-        if amount > 0:
-            amountToBuy = amount * -1
-            self.logOrder(amountToBuy, asset, currency)
-            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
-            self.logOrder(amountToBuy, asset, currency)
-            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
+    def marketOrder(self, type, asset, currency):
+        currentAmount = self.getAmountOfItem(asset + currency)
+        print("current amount of %s%s: %f \n" % (asset, currency, currentAmount))
+
+        change = self.resetToEquilibrium_Market(currentAmount, asset, currency)
+        # orderSize = self.bank.update(change)
+        orderSize = self.getMaxAmountToUse(asset,currency) * 0.4
+        if type == 'buy':
+            self.marketBuy(orderSize,asset,currency,note= 'Going long')
         else:
-            # numberOfCoins = self.getNumberOfTradingPairs()
-            numberOfCoins = 2
-            allowedAmount = (self.getAvailableBalanceInUsd() / numberOfCoins)
-            extraToSell = (allowedAmount - abs(amount)) * -1
-            self.logOrder(extraToSell, asset, currency)
-            self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=extraToSell, ordType="Market").result()
-        pass
+            if type == 'sell':
+                self.marketSell(orderSize,asset,currency,note='Going short')
+
+
+
+    def marketBuy(self, orderQuantity, asset, currency, note=None):
+        result = self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
+        logger.logOrder('Bitmex', 'market',-1,asset,currency, orderQuantity, note=note)
+        return result
+
+    def marketSell(self, orderQuantity, asset, currency, note=None):
+        self.marketBuy(-orderQuantity, asset, currency, note=note)
+
+
+    def closeLimitOrders(self, asset, currency):
+        # client.Order.Order_cancel(orderID='').result()
+        self.bitmex.Order.Order_cancelAll().result()
 
     def limitBuy(self, price, asset, currency, orderQuantity, orderId=None):
         if orderId == None:
@@ -77,26 +78,16 @@ class Bitmex(market):
             return newOrderId
         else:
             result = self.bitmex.Order.Order_amend(orderID=orderId, price=price)
-            # tradeInfo = result[0]
+            return result
 
         return None
 
-    def closeLimitOrders(self, asset, currency):
-        # client.Order.Order_cancel(orderID='').result()
-        self.bitmex.Order.Order_cancelAll().result()
 
-
-    # use this function to handle connecting to the market (this function is the constructor)
-    # You should definitely add parameters to this, probably the api key info
     def __init__(self, priceMargin, maximum, limitThreshold, apiKey, apiKeySecret):
         # The super function runs the constructor on the market class that this class inherits from. In other words,
         # done mess with it or the parameters I put in this init function
 
-        self.bitmex = bitmexApi.bitmex.bitmex(test=False, config=None, api_key=apiKey, api_secret=apiKeySecret)
-
-        # quote = self.bitmex.Quote.Quote_get(symbol="XBTUSD").result()
-        # self.bitmex.Order.Order_amend(orderID="d2968e76-f796-fbfa-9ce0-d36336021f2f", price=7328.5)
-
+        self.bitmex = bitmexApi.bitmex.bitmex(test=True, config=None, api_key=apiKey, api_secret=apiKeySecret)
         super(Bitmex, self).__init__(priceMargin, maximum, limitThreshold)
         pass
 
@@ -128,13 +119,6 @@ class Bitmex(market):
             else:
                 return 0
 
-    def getAvailableBalanceInUsd(self):
-        availableBalance = self.bitmex.User.User_getMargin(currency="XBt").result()
-        user = availableBalance[0]
-        balanceInBtc = user['withdrawableMargin'] / 100000000
-        balanceInUsd = floor((balanceInBtc * self.getCurrentPrice('XBT', 'USD'))) - 1
-        return balanceInUsd
-
     def getCurrentPrice(self, asset, currency):
         startTime = datetime.datetime.now() - datetime.timedelta(minutes=1)
         trades = self.bitmex.Trade.Trade_get(symbol=asset + currency, startTime=startTime).result()
@@ -159,9 +143,45 @@ class Bitmex(market):
     def getNumberOfTradingPairs(self):
         pass
 
-    def logOrder(self, orderQuantity, asset, currency):
-        print("Available Balance: %s \n" % (self.getAvailableBalanceInUsd()))
-        print("Ordering %d contracts of %s%s \n" % (orderQuantity, asset, currency))
-        pass
+    # def logOrder(self, orderQuantity, asset, currency):
+    #     print("Available Balance: %s \n" % (self.getAvailableBalanceInUsd()))
+    #     print("Ordering %d contracts of %s%s \n" % (orderQuantity, asset, currency))
+    #     pass
+#
+#
+#
+#
+#         amount = self.getAmountOfItem(asset + currency)
+#         print("current amount of %s%s: %f \n" % (asset, currency, amount))
+#
+#         # if we are currently in a Long
+#         if amount > 0:
+#             amountToBuy = amount * -1
+#             self.logOrder(amountToBuy, asset, currency)
+#             self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
+#             self.logOrder(amountToBuy, asset, currency)
+#             self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=amountToBuy, ordType="Market").result()
+#         else:
+#             # numberOfCoins = self.getNumberOfTradingPairs()
+#             numberOfCoins = 2
+#             allowedAmount = (self.getAvailableBalanceInUsd() / numberOfCoins)
+#             extraToSell = (allowedAmount - abs(amount)) * -1
+#             self.logOrder(extraToSell, asset, currency)
+#             self.bitmex.Order.Order_new(symbol=asset + currency, orderQty=extraToSell, ordType="Market").result()
+#         pass
 
-# inherit market
+ #
+ # def figureOutShare(self):
+ #        numberOfCoins = 2
+ #        availableBalance = self.getAvailableBalanceInUsd()
+ #        allowedAmount = availableBalance / numberOfCoins
+ #        extraToBuy = allowedAmount - amount
+ #        self.logOrder(extraToBuy, asset, currency)
+
+
+# def getAvailableBalanceInUsd(self):
+#     availableBalance = self.bitmex.User.User_getMargin(currency="XBt").result()
+#     user = availableBalance[0]
+#     balanceInBtc = user['withdrawableMargin'] / 100000000
+#     balanceInUsd = floor((balanceInBtc * self.getCurrentPrice('XBT', 'USD'))) - 1
+#     return balanceInUsd
