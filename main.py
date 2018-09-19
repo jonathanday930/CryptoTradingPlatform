@@ -21,14 +21,14 @@ def main():
 
     # controller tests
     trader = controller(gmailHandler('credentials.json'))
-    trader.addMarket(Bitmex(.1, .1, .1, "Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoO"),
+    trader.addMarket(Bitmex(.1, .1, .1, "KpB3aMhRrNhewW1SfHYT3M4h", "gQLdIXBUXar7PoDUND2DKYsLfAfMh0isCCmPQJjaDUxO0pdV"),
                      'BITMEX')
 
     while True:
-        # try:
+        try:
             trader.run()
-        # except:
-        #     print("Unexpected error:", sys.exc_info()[0])
+        except:
+            print("Unexpected error:", sys.exc_info()[0])
 
     # market = Bitmex(.1,.1,.1,"Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp")
     # price = market.getMaxAmountToUse('ETH','U18')
