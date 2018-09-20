@@ -22,7 +22,7 @@ def main():
 
     # controller tests
     trader = controller(gmailHandler('credentials.json'))
-    trader.addMarket(Bitmex(.1, .1, .1, "FEN58-cdNHcj_JmgPDSF3U0-", "PmJYn7nifJ60pKFo9t8fjIpk7wEJh5KBsnq1kvQiviJBLaJz"),
+    trader.addMarket(Bitmex(.1, .1, .1, "KpB3aMhRrNhewW1SfHYT3M4h", "gQLdIXBUXar7PoDUND2DKYsLfAfMh0isCCmPQJjaDUxO0pdV"),
                      'BITMEX')
 
     while True:

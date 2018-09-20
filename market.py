@@ -42,11 +42,18 @@ class market(ABC):
 
 
     @abstractmethod
+    def limitShortEnd(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
+        pass;
+    @abstractmethod
     def getCurrentPrice(self, asset, currency):
         pass;
 
     @abstractmethod
     def closeLimitOrders(self, asset, currency):
+        pass;
+
+    @abstractmethod
+    def getAmountOfItem(self, coin):
         pass;
 
     @abstractmethod
