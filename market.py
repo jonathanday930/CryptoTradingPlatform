@@ -7,9 +7,8 @@ from time import sleep
 class market(ABC):
     buyText = 'BUY'
     sellText = 'SELL'
-    shortOpenText = 'SHORT'
-    shortCloseText = 'SHORTCLOSE'
 
+    market = None
     btcToSatoshi = 100000000
     marginFromPrice = None
     maximumDeviationFromPrice = None
@@ -17,12 +16,19 @@ class market(ABC):
     refreshDelay = 1
     bank = None
 
-    def __init__(self, priceMargin, maximum, limitThreshold):
+    apiKey = None
+    apiKeySecret = None
+
+    def __init__(self, priceMargin, maximum, limitThreshold, marketApiKey, marketApiKeySecret):
         self.marginFromPrice = priceMargin
         self.maximumDeviationFromPrice = maximum
         self.goodLimitThreshold = limitThreshold
+        self.apiKey = marketApiKey
+        self.apiKeySecret = marketApiKeySecret
 
-
+    @abstractmethod
+    def connect(self):
+        pass;
 
 
     @abstractmethod
@@ -33,13 +39,7 @@ class market(ABC):
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         pass;
 
-    @abstractmethod
-    def limitShortStart(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        pass;
 
-    @abstractmethod
-    def limitShortEnd(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        pass;
 
     @abstractmethod
     def getCurrentPrice(self, asset, currency):
@@ -59,12 +59,6 @@ class market(ABC):
         else:
             if type == self.sellText:
                 return self.getLimit(type, previousPrice, percent) > currentPrice
-            else:
-                if type == self.shortOpenText:
-                    return self.getLimit(type, previousPrice, percent) < currentPrice
-                else:
-                    if type == self.shortCloseText:
-                        return self.getLimit(type, previousPrice, percent) > currentPrice
 
     def getLimit(self, type, price, percent):
         if type == self.buyText:
@@ -72,11 +66,6 @@ class market(ABC):
         else:
             if type == self.sellText:
                 return price * (1 - percent)
-        if type == self.shortOpenText:
-            return price * (1 - percent)
-        else:
-            if type == self.shortCloseText:
-                return price * (1 + percent)
 
     def isFittingPrice(self, limitPrice, currentPrice):
         return ((1 + self.goodLimitThreshold) * limitPrice > currentPrice > (
@@ -91,11 +80,6 @@ class market(ABC):
         else:
             if type == self.sellText:
                 orderID = self.limitSell(limitPrice, asset, currency, 1, orderID)
-        if type == self.shortOpenText:
-            orderID = self.limitShortStart(limitPrice, asset, currency, orderID)
-        else:
-            if type == self.shortCloseText:
-                orderID = self.limitShortEnd(limitPrice, asset, currency, orderID)
         result = collections.namedtuple('result', ['limitPrice', 'orderID'])
         res = result(limitPrice, orderID)
         return res

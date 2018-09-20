@@ -31,7 +31,7 @@ class gmailHandler:
         while count < timeoutSeconds or timeoutSeconds < 0:
             response = self.gmailAPI.users().messages().list(userId='me',
                                                              q=' is:unread from:kalgofund@gmail.com').execute()
-            #
+
 
             if 'messages' in response:
                 return self.readEmails(response)

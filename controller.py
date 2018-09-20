@@ -14,6 +14,9 @@ class controller:
         self.timeOutTime = -1
 
     def run(self):
+        for market in self.marketControllers:
+            self.marketControllers[market].connect()
+
         while True:
             emails = self.gmailController.listen(-1)
             if emails is not None:
