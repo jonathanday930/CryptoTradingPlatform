@@ -11,7 +11,6 @@ marketName = 'Bitmex'
 
 # a controller for ONE bitmex connection. This is a basic formula for how it should look.
 class Bitmex(market):
-    secondAttempt = False
 
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         # TODO: figure out quantity params
@@ -46,7 +45,6 @@ class Bitmex(market):
 
     def marketOrder(self, type, asset, currency):
         try:
-
             currentAmount = self.getAmountOfItem(asset + currency)
             print("current amount of %s%s: %f \n" % (asset, currency, currentAmount))
 
@@ -58,16 +56,16 @@ class Bitmex(market):
             else:
                 if type == 'sell':
                     result = self.marketSell(orderSize, asset, currency, note='Going short')
-            self.secondAttempt = False
+            self.attemptsLeft = self.attemptsTotal= False
             return result
 
         except Exception as e:
             logger.logError(e)
-            if self.secondAttempt:
+            if self.attemptsLeft == 0:
                 return None
             sleep(1)
             self.connect()
-            self.secondAttempt = True
+            self.attemptsLeft = self.attemptsLeft - 1
             self.marketOrder(type, asset, currency)
 
     def marketBuy(self, orderQuantity, asset, currency, note=None):

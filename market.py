@@ -16,9 +16,14 @@ class market(ABC):
     refreshDelay = 1
     bank = None
 
+    attemptsTotal = 10
+    attemptsLeft = attemptsTotal
+    delayBetweenAttempts = 6
+
     apiKey = None
     apiKeySecret = None
 
+    real_money = False
 
 
     def __init__(self,  marketApiKey, marketApiKeySecret,realMoney,name):
@@ -42,9 +47,9 @@ class market(ABC):
 
 
 
-    # @abstractmethod
-    # def limitShortEnd(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-    #     pass;
+    @abstractmethod
+    def marketOrder(self, type, asset, currency):
+        pass;
 
     @abstractmethod
     def getCurrentPrice(self, asset, currency):
@@ -64,10 +69,12 @@ class market(ABC):
 
     def isInRange(self, type, previousPrice, currentPrice, percent):
         if type == self.buyText:
-            return self.getLimit(type, previousPrice, percent) < currentPrice
+            value =  self.getLimit(type, previousPrice, percent) < currentPrice
+            return value
         else:
             if type == self.sellText:
-                return self.getLimit(type, previousPrice, percent) > currentPrice
+                value = self.getLimit(type, previousPrice, percent) > currentPrice
+                return value
 
     def getLimit(self, type, price, percent):
         if type == self.buyText:

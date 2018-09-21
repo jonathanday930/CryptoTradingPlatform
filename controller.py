@@ -9,15 +9,6 @@ marketSubjectNumber = 3
 import os
 
 import json
-from pprint import pprint
-
-
-def createFolder(directory):
-    try:
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-    except OSError:
-        print('Error: Creating directory. ' + directory)
 
 
 class controller:
@@ -46,8 +37,6 @@ class controller:
                 for email in emails:
                     self.createOrder(email)
 
-    def setupAPIFiles(self):
-        pass
 
     def importAPIKeys(self):
         folder = 'API_KEYS/'
@@ -58,6 +47,7 @@ class controller:
                 with open(f.name) as jsonFile:
                     data = json.load(jsonFile)
                     for keySet in data['API_Keys']:
+
                         if keySet['market'] == 'BITMEX':
                             if keySet['real_money'] == self.real_money:
                                 self.addMarket(
