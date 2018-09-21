@@ -26,6 +26,7 @@ class market(ABC):
     apiKeySecret = None
 
     real_money = False
+    limitOrderEnabled = False
 
 
     def __init__(self,  marketApiKey, marketApiKeySecret,realMoney,name):

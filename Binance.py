@@ -3,59 +3,34 @@ from market import market
 from binance.client import Client
 
 class Binance (market):
-    def connect(self):
-        self.market = Client(self.apiKey, self.apiKeySecret)
+    def resetToEquilibrium_Market(self, currentAmount, asset, currency):
         pass
 
-    def marketOrder(self, type, asset, currency):
-        try:
+    def getMaxAmountToUse(self, asset, currency):
+        pass
 
-            currentAmount = self.getAmountOfItem(asset + currency)
-            print("current amount of %s%s: %f \n" % (asset, currency, currentAmount))
-
-            change = self.resetToEquilibrium_Market(currentAmount, asset, currency)
-            # orderSize = self.bank.update(change)
-            orderSize = self.getMaxAmountToUse(asset, currency) * 0.4
-            if type == 'buy':
-                result = self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
-            else:
-                if type == 'sell':
-                    result = self.marketSell(orderSize, asset, currency, note='Going short')
-            self.secondAttempt = False
+    def marketBuy(self, orderSize, asset, currency, note):
+        if self.real_money == True:
+            result = self.market.order_market_buy(
+                symbol=asset + currency,
+                quantity=orderSize)
+            logger.logOrder('Binance', 'market', self.getCurrentPrice(asset, currency), asset, currency,
+                            orderQuantity,
+                            note=note)
             return result
+        else:
+            result = self.market.create_test_order(
+                symbol=asset + currency,
+                side=SIDE_BUY,
+                type=ORDER_TYPE_MARKET,
+                timeInForce=TIME_IN_FORCE_GTC,
+                quantity=orderQuantity,
 
-        except Exception as e:
-            logger.logError(e)
-            if self.secondAttempt:
-                return None
-            sleep(1)
-            self.connect()
-            self.secondAttempt = True
-            self.marketOrder(type, asset, currency)
-
-
-        def marketBuy(self, orderQuantity, asset, currency, note=None):
-            if self.real_money==True:
-                result = self.market.order_market_buy(
-        symbol=asset+currency,
-        quantity=orderQuantity)
-                logger.logOrder('Binance', 'market', self.getCurrentPrice(asset, currency), asset, currency,
-                                orderQuantity,
-                                note=note)
-                return result
-            else:
-                result = self.market.create_test_order(
-                    symbol=asset+currency,
-                    side=SIDE_BUY,
-                    type=ORDER_TYPE_MARKET,
-                    timeInForce=TIME_IN_FORCE_GTC,
-                    quantity=orderQuantity,
-
-        def marketSell(self, orderQuantity, asset, currency, note=None):
+    def marketSell(self, orderSize, asset, currency, note):
             if self.real_money == True:
                 result self.market.order_market_sell(
         symbol=asset+currency,
-        quantity=-orderQuantity)
+        quantity=-orderSize)
                 logger.logOrder('Binance', 'market', self.getCurrentPrice(asset, currency), asset, currency,
                                 orderQuantity,
                                 note=note)
@@ -68,6 +43,11 @@ class Binance (market):
                 type=ORDER_TYPE_MARKET,
                 timeInForce=TIME_IN_FORCE_GTC,
                 quantity=orderQuantity,
+
+    def connect(self):
+        self.market = Client(self.apiKey, self.apiKeySecret)
+        pass
+
 
     def limitBuy(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         pass
