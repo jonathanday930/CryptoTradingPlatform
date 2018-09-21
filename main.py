@@ -21,9 +21,9 @@ def main():
     #         count = count + 1
 
     # controller tests
-    trader = controller(gmailHandler('credentials.json'))
-    trader.addMarket(Bitmex(.1, .1, .1, "KpB3aMhRrNhewW1SfHYT3M4h", "gQLdIXBUXar7PoDUND2DKYsLfAfMh0isCCmPQJjaDUxO0pdV"),
-                     'BITMEX')
+    trader = controller(gmailHandler('credentials.json'), .1, .1, .1)
+    # trader.addMarket(Bitmex("4Utv4iqL31w88lLvRXN7qDtq", "lmoptxdUE8wFcn9GDdJRaecn_XfXDwfJ8_B14Bk3FOIK5Z9q",False,"test"),'BITMEX')
+    trader.importAPIKeys()
 
     trader.addMarket(Bitmex(.2, .11, .1, "B3aMhRrNhewW1SfHYT3M4h", "gQLdIXBUXar7PoDUND2DKYsLfAfMh0isCCmPQJjaDUxO0pdV"),
                      'BITMEX')

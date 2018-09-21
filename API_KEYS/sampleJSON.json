@@ -1,0 +1,12 @@
+{
+  "API_Keys": [
+   
+    {
+      "name": "fake",
+      "market": "fake",
+      "real_money": false,
+      "keyID": "fake",
+      "privateKey": "fake"
+    }
+  ]
+}

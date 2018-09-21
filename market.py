@@ -1,7 +1,7 @@
 import collections
+import bank
 from abc import ABC, abstractmethod
 from time import sleep
-
 
 
 class market(ABC):
@@ -12,6 +12,9 @@ class market(ABC):
     buyText = 'LONG'
     sellText = 'SHORT'
 
+    buyText = 'BUY'
+    sellText = 'SELL'
+    connectorName = None
     market = None
     btcToSatoshi = 100000000
     marginFromPrice = None
@@ -23,12 +26,13 @@ class market(ABC):
     apiKey = None
     apiKeySecret = None
 
-    def __init__(self, priceMargin, maximum, limitThreshold, marketApiKey, marketApiKeySecret):
-        self.marginFromPrice = priceMargin
-        self.maximumDeviationFromPrice = maximum
-        self.goodLimitThreshold = limitThreshold
+
+
+    def __init__(self,  marketApiKey, marketApiKeySecret,realMoney,name):
         self.apiKey = marketApiKey
         self.apiKeySecret = marketApiKeySecret
+        self.real_money = realMoney
+        self.connectorName = name
 
     @abstractmethod
     def connect(self):

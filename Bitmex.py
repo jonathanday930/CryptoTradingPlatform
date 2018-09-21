@@ -55,7 +55,7 @@ class Bitmex(market):
             # orderSize = self.bank.update(change)
             orderSize = self.getMaxAmountToUse(asset, currency) * 0.4
             if type == 'buy':
-                result = self.marketBuy(orderSize, asset, currency, note='Going long')
+                result = self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
             else:
                 if type == 'sell':
                     result = self.marketSell(orderSize, asset, currency, note='Going short')
@@ -84,15 +84,14 @@ class Bitmex(market):
         # client.Order.Order_cancel(orderID='').result()
         self.market.Order.Order_cancelAll().result()
 
-    def __init__(self, priceMargin, maximum, limitThreshold, apiKey, apiKeySecret):
+    def __init__(self, apiKey, apiKeySecret,realMoney,name):
         # The super function runs the constructor on the market class that this class inherits from. In other words,
         # done mess with it or the parameters I put in this init function
-        super(Bitmex, self).__init__(priceMargin, maximum, limitThreshold, apiKey, apiKeySecret)
+        super(Bitmex, self).__init__(apiKey, apiKeySecret,realMoney,name)
         self.connect()
 
     def connect(self):
-        self.market = bitmexApi.bitmex.bitmex(test=False, config=None, api_key=self.apiKey,
-                                              api_secret=self.apiKeySecret)
+        self.market = bitmexApi.bitmex.bitmex(test=not self.real_money, config=None, api_key=self.apiKey, api_secret=self.apiKeySecret)
 
     def getAmountToUse(self, asset, currency, orderType):
         if orderType == self.buyText:
