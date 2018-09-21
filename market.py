@@ -3,6 +3,8 @@ import bank
 from abc import ABC, abstractmethod
 from time import sleep
 
+import logger
+
 
 class market(ABC):
     buyText = 'BUY'
@@ -78,10 +80,12 @@ class market(ABC):
 
     def getLimit(self, type, price, percent):
         if type == self.buyText:
-            return price * (1 + percent)
+            value =  price * (1 + percent)
+            return value
         else:
             if type == self.sellText:
-                return price * (1 - percent)
+                value = price * (1 - percent)
+                return value
 
     def isFittingPrice(self, limitPrice, currentPrice):
         return ((1 + self.goodLimitThreshold) * limitPrice > currentPrice > (
@@ -100,13 +104,38 @@ class market(ABC):
         res = result(limitPrice, orderID)
         return res
 
+    def marketOrder(self, type, asset, currency):
+        try:
+            currentAmount = self.getAmountOfItem(asset + currency)
+            print("current amount of %s%s: %f \n" % (asset, currency, currentAmount))
+
+            change = self.resetToEquilibrium_Market(currentAmount, asset, currency)
+            # orderSize = self.bank.update(change)
+            orderSize = self.getMaxAmountToUse(asset, currency) * 0.4
+            if type ==  self.buyText:
+                result = self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+            else:
+                if type == self.sellText:
+                    result = self.marketSell(orderSize, asset, currency, note='Going short')
+            self.attemptsLeft = self.attemptsTotal
+            return result
+        except Exception as e:
+            logger.logError(e)
+            if self.attemptsLeft == 0:
+                return None
+            sleep(self.delayBetweenAttempts)
+            self.connect()
+            self.attemptsLeft = self.attemptsLeft - 1
+            self.marketOrder(type, asset, currency)
+
+
     def followingLimitOrder(self, type, asset, currency):
         initialPrice = self.getCurrentPrice(asset, currency)
         currentPrice = initialPrice
         limitPrice = 0
         orderID = None
 
-        while self.isInRange(type, initialPrice, currentPrice, self.maximumDeviationFromPrice) or self.orderFilled(
+        while self.isInRange(type, initialPrice, currentPrice, self.maximumDeviationFromPrice) or not self.orderFilled(
                 currency):
             if self.isInRange(type, limitPrice, currentPrice, self.goodLimitThreshold):
                 res = self.sendOrder(type, currentPrice, asset, currency, orderID)
@@ -129,3 +158,19 @@ class market(ABC):
         if(orderType == self.buyText):
             return self.getAmountOfItem('BTC')
         return self.getAmountOfItem(asset)
+
+    @abstractmethod
+    def resetToEquilibrium_Market(self, currentAmount, asset, currency):
+        pass
+
+    @abstractmethod
+    def getMaxAmountToUse(self, asset, currency):
+        pass
+
+    @abstractmethod
+    def marketBuy(self, orderSize, asset, currency, note):
+        pass
+
+    @abstractmethod
+    def marketSell(self, orderSize, asset, currency, note):
+        pass

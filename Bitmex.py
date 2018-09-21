@@ -45,30 +45,9 @@ class Bitmex(market):
         after = self.getAmountOfItem('xbt')
         return after - before
 
-    def marketOrder(self, type, asset, currency):
-        try:
-            currentAmount = self.getAmountOfItem(asset + currency)
-            print("current amount of %s%s: %f \n" % (asset, currency, currentAmount))
 
-            change = self.resetToEquilibrium_Market(currentAmount, asset, currency)
-            # orderSize = self.bank.update(change)
-            orderSize = self.getMaxAmountToUse(asset, currency) * 0.4
-            if type == 'buy':
-                result = self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
-            else:
-                if type == 'sell':
-                    result = self.marketSell(orderSize, asset, currency, note='Going short')
-            self.attemptsLeft = self.attemptsTotal
-            return result
 
-        except Exception as e:
-            logger.logError(e)
-            if self.attemptsLeft == 0:
-                return None
-            sleep(self.delayBetweenAttempts)
-            self.connect()
-            self.attemptsLeft = self.attemptsLeft - 1
-            self.marketOrder(type, asset, currency)
+
 
     def marketBuy(self, orderQuantity, asset, currency, note=None):
         result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
