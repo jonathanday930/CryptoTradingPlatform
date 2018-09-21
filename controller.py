@@ -96,3 +96,6 @@ class controller:
             market.marketOrder('buy', asset, currency)
         else:
             market.marketOrder('sell', asset, currency)
+
+
+
