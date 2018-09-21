@@ -13,7 +13,6 @@ marketName = 'Bitmex'
 class Bitmex(market):
     secondAttempt = False
 
-
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         # TODO: figure out quantity params
         orderQuantity = orderQuantity * -1
@@ -69,9 +68,7 @@ class Bitmex(market):
             sleep(1)
             self.connect()
             self.secondAttempt = True
-            self.marketOrder(type,asset,currency)
-
-
+            self.marketOrder(type, asset, currency)
 
     def marketBuy(self, orderQuantity, asset, currency, note=None):
         result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
@@ -86,10 +83,10 @@ class Bitmex(market):
         # client.Order.Order_cancel(orderID='').result()
         self.market.Order.Order_cancelAll().result()
 
-    def __init__(self, priceMargin, maximum, limitThreshold, apiKey, apiKeySecret):
+    def __init__(self, apiKey, apiKeySecret,realMoney,name):
         # The super function runs the constructor on the market class that this class inherits from. In other words,
         # done mess with it or the parameters I put in this init function
-        super(Bitmex, self).__init__(priceMargin, maximum, limitThreshold, apiKey,apiKeySecret)
+        super(Bitmex, self).__init__(apiKey, apiKeySecret,realMoney,name)
         self.connect()
         pass
 
