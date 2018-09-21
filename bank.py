@@ -2,28 +2,17 @@ import datetime
 import market
 
 
-class bank():
-    daMattress = "bank.txt"
-    file = open(daMattress, "a")
-    market = market(ABC)
+def getBankFile():
+    file = open("bank.txt", 'a')
+    return file
 
-    def getFile(self):
-        file = open(logFile, 'a')
-        return file
 
-    def logBalance(asset, currency):
-        getFile()
-        file.write(
-            exchange + orderType + ' order at ' + datetime.datetime.now() + ': ' + str(amount) + ' of pair ' + str(
-                asset) + str(currency) + ' at price ' + str(price) + 'Note: ' + str(note))
+def logBalance(availableBalance):
+    file = getBankFile()
+    file.write(str(datetime.datetime.now()) + ' - Available Balance: ' + str(availableBalance) + "\n\n")
 
-    def logContract(self, asset, currency):
-        getFile()
-        file.write('ERROR: ')
-        file.write(str(exception))
-        file.write('-----')
 
-    def getAmountOfItem(asset, currency=None):
-        market.getAmountOfItem(asset + currency)
-
+def logContract(asset, currency, amount):
+    file = getBankFile()
+    file.write(str(datetime.datetime.now()) + ' - Amt Of ' + str(asset + currency) + ": " + str(amount))
 

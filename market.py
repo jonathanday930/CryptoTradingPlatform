@@ -1,7 +1,7 @@
 import collections
+import bank
 from abc import ABC, abstractmethod
 from time import sleep
-
 
 
 class market(ABC):
@@ -18,6 +18,8 @@ class market(ABC):
 
     apiKey = None
     apiKeySecret = None
+
+
 
     def __init__(self, priceMargin, maximum, limitThreshold, marketApiKey, marketApiKeySecret):
         self.marginFromPrice = priceMargin
@@ -41,9 +43,10 @@ class market(ABC):
 
 
 
-    @abstractmethod
-    def limitShortEnd(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        pass;
+    # @abstractmethod
+    # def limitShortEnd(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
+    #     pass;
+
     @abstractmethod
     def getCurrentPrice(self, asset, currency):
         pass;
