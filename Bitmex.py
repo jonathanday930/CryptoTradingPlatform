@@ -11,14 +11,14 @@ marketName = 'Bitmex'
 
 # a controller for ONE bitmex connection. This is a basic formula for how it should look.
 class Bitmex(market):
-    secondAttempt = False
-
 
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         # TODO: figure out quantity params
         orderQuantity = orderQuantity * -1
         self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, price=limitPrice,
                                     ordType="Limit").result()
+
+
 
     def limitBuy(self, price, asset, currency, orderQuantity, orderId=None):
         if orderId == None:
@@ -45,31 +45,7 @@ class Bitmex(market):
         after = self.getAmountOfItem('xbt')
         return after - before
 
-    def marketOrder(self, type, asset, currency):
-        try:
 
-            currentAmount = self.getAmountOfItem(asset + currency)
-            print("current amount of %s%s: %f \n" % (asset, currency, currentAmount))
-
-            change = self.resetToEquilibrium_Market(currentAmount, asset, currency)
-            # orderSize = self.bank.update(change)
-            orderSize = self.getMaxAmountToUse(asset, currency) * 0.4
-            if type == 'buy':
-                result = self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
-            else:
-                if type == 'sell':
-                    result = self.marketSell(orderSize, asset, currency, note='Going short')
-            self.secondAttempt = False
-            return result
-
-        except Exception as e:
-            logger.logError(e)
-            if self.secondAttempt:
-                return None
-            sleep(1)
-            self.connect()
-            self.secondAttempt = True
-            self.marketOrder(type,asset,currency)
 
 
 
@@ -86,15 +62,14 @@ class Bitmex(market):
         # client.Order.Order_cancel(orderID='').result()
         self.market.Order.Order_cancelAll().result()
 
-    def __init__(self, priceMargin, maximum, limitThreshold, apiKey, apiKeySecret):
+    def __init__(self, apiKey, apiKeySecret,realMoney,name):
         # The super function runs the constructor on the market class that this class inherits from. In other words,
         # done mess with it or the parameters I put in this init function
-        super(Bitmex, self).__init__(priceMargin, maximum, limitThreshold, apiKey,apiKeySecret)
+        super(Bitmex, self).__init__(apiKey, apiKeySecret,realMoney,name)
         self.connect()
-        pass
 
     def connect(self):
-        self.market = bitmexApi.bitmex.bitmex(test=True, config=None, api_key=self.apiKey, api_secret=self.apiKeySecret)
+        self.market = bitmexApi.bitmex.bitmex(test=not self.real_money, config=None, api_key=self.apiKey, api_secret=self.apiKeySecret)
 
     def getAmountToUse(self, asset, currency, orderType):
         if orderType == self.buyText:
