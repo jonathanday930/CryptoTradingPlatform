@@ -175,3 +175,8 @@ class market(ABC):
     @abstractmethod
     def marketSell(self, orderSize, asset, currency, note):
         pass
+
+    @abstractmethod
+    def getAmountOfItem(self, coin):
+        pass
+
