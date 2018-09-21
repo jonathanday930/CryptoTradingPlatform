@@ -55,7 +55,7 @@ class Bitmex(market):
             # orderSize = self.bank.update(change)
             orderSize = self.getMaxAmountToUse(asset, currency) * 0.4
             if type == 'buy':
-                result = self.marketBuy(orderSize, asset, currency, note='Going long')
+                result = self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
             else:
                 if type == 'sell':
                     result = self.marketSell(orderSize, asset, currency, note='Going short')

@@ -6,7 +6,7 @@ from time import sleep
 
 class market(ABC):
     buyText = 'BUY'
-    sellText = 'SELL'  
+    sellText = 'SELL'
 
     market = None
     btcToSatoshi = 100000000
