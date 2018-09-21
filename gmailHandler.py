@@ -30,7 +30,7 @@ class gmailHandler:
         count = 0
         while count < timeoutSeconds or timeoutSeconds < 0:
             response = self.gmailAPI.users().messages().list(userId='me',
-                                                             q=' is:unread from:kalgofund@gmail.com').execute()
+                                                             q=' is:unread from:noreply@tradingview.com').execute()
 
 
             if 'messages' in response:

@@ -18,6 +18,8 @@ class Bitmex(market):
         self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, price=limitPrice,
                                     ordType="Limit").result()
 
+
+
     def limitBuy(self, price, asset, currency, orderQuantity, orderId=None):
         if orderId == None:
             result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Limit",
@@ -56,14 +58,14 @@ class Bitmex(market):
             else:
                 if type == 'sell':
                     result = self.marketSell(orderSize, asset, currency, note='Going short')
-            self.attemptsLeft = self.attemptsTotal= False
+            self.attemptsLeft = self.attemptsTotal
             return result
 
         except Exception as e:
             logger.logError(e)
             if self.attemptsLeft == 0:
                 return None
-            sleep(1)
+            sleep(self.delayBetweenAttempts)
             self.connect()
             self.attemptsLeft = self.attemptsLeft - 1
             self.marketOrder(type, asset, currency)
@@ -86,7 +88,6 @@ class Bitmex(market):
         # done mess with it or the parameters I put in this init function
         super(Bitmex, self).__init__(apiKey, apiKeySecret,realMoney,name)
         self.connect()
-        pass
 
     def connect(self):
         self.market = bitmexApi.bitmex.bitmex(test=not self.real_money, config=None, api_key=self.apiKey, api_secret=self.apiKeySecret)
