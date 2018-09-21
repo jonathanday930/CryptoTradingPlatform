@@ -63,10 +63,6 @@ class controller:
                                 self.addMarket(
                                     Bitmex(keySet['keyID'], keySet['privateKey'], keySet['real_money'], keySet['name']),
                                     keySet['market'])
-
-                                # '/Users/Desktop/febROSTER2012.xls'
-
-                # print(os.path.join(directory, filename))
                 continue
             else:
                 continue

@@ -22,15 +22,14 @@ def main():
 
     # controller tests
     trader = controller(gmailHandler('credentials.json'), .1, .1, .1)
-    # trader.addMarket(Bitmex(, "KpB3aMhRrNhewW1SfHYT3M4h", "gQLdIXBUXar7PoDUND2DKYsLfAfMh0isCCmPQJjaDUxO0pdV"),
-    # 'BITMEX')
+    # trader.addMarket(Bitmex("4Utv4iqL31w88lLvRXN7qDtq", "lmoptxdUE8wFcn9GDdJRaecn_XfXDwfJ8_B14Bk3FOIK5Z9q",False,"test"),'BITMEX')
     trader.importAPIKeys()
 
-    # while True:
-    #     try:
-    #         trader.run()
-    #     except Exception as e:
-    #         logger.logError(e)
+    while True:
+        try:
+            trader.run()
+        except Exception as e:
+            logger.logError(e)
 
     # market = Bitmex(.1,.1,.1,"Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp")
     # price = market.getMaxAmountToUse('ETH','U18')

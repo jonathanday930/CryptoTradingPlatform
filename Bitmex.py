@@ -91,7 +91,7 @@ class Bitmex(market):
         pass
 
     def connect(self):
-        self.market = bitmexApi.bitmex.bitmex(test=True, config=None, api_key=self.apiKey, api_secret=self.apiKeySecret)
+        self.market = bitmexApi.bitmex.bitmex(test=not self.real_money, config=None, api_key=self.apiKey, api_secret=self.apiKeySecret)
 
     def getAmountToUse(self, asset, currency, orderType):
         if orderType == self.buyText:
