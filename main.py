@@ -25,6 +25,9 @@ def main():
     trader.addMarket(Bitmex(.1, .1, .1, "KpB3aMhRrNhewW1SfHYT3M4h", "gQLdIXBUXar7PoDUND2DKYsLfAfMh0isCCmPQJjaDUxO0pdV"),
                      'BITMEX')
 
+    trader.addMarket(Bitmex(.2, .11, .1, "B3aMhRrNhewW1SfHYT3M4h", "gQLdIXBUXar7PoDUND2DKYsLfAfMh0isCCmPQJjaDUxO0pdV"),
+                     'BITMEX')
+
     while True:
         try:
             trader.run()

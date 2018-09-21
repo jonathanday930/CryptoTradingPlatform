@@ -5,8 +5,12 @@ from time import sleep
 
 
 class market(ABC):
-    buyText = 'BUY'
-    sellText = 'SELL'  
+    attemptsPerOrder = 10
+    attemptsLeft = attemptsPerOrder
+    delayBetweenAttempts = 6
+
+    buyText = 'LONG'
+    sellText = 'SHORT'
 
     market = None
     btcToSatoshi = 100000000
@@ -39,11 +43,6 @@ class market(ABC):
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
         pass;
 
-
-
-    @abstractmethod
-    def limitShortEnd(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        pass;
     @abstractmethod
     def getCurrentPrice(self, asset, currency):
         pass;
