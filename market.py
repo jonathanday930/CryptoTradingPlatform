@@ -64,6 +64,11 @@ class market(ABC):
     def getAmountOfItem(self, coin):
         pass;
 
+
+    @abstractmethod
+    def getTickSize(self,asset,currency):
+        pass
+
     def isInRange(self, type, firstPrice, currentPrice, percent, enabled=True):
         if enabled:
             if type == self.buyText:
@@ -85,9 +90,32 @@ class market(ABC):
                 value = price * (1 - percent)
                 return value
 
-    def sendLimitOrder(self, type, currentPrice, asset, currency, orderQuantity, orderID,note=None):
+    def calculateLimitPrice(self,currentPrice,tickSize):
+        currentPrice = str(Decimal(currentPrice))
+        tickSize = '{0:.10f}'.format(tickSize)[:10]
+        decimalSpot =currentPrice.find(".")
+        has5 =tickSize.find("5")
 
-        limitPrice = Decimal(self.getLimit(type, currentPrice, self.marginFromPrice))
+
+        if has5 > 0:
+            nextDigit = currentPrice[decimalSpot + 1:decimalSpot + has5]
+            if int(nextDigit) < 4:
+                currentPrice=currentPrice[:decimalSpot + has5-1]+ str(0)
+            else:
+                currentPrice = currentPrice[:decimalSpot + has5-1]+str(5)
+        else:
+            to1 = tickSize.find("1")
+            currentPrice = Decimal(tickSize) + Decimal(currentPrice)
+            currentPrice = str(currentPrice)[:decimalSpot+to1]
+
+        return currentPrice
+
+    #'0.00008829000000000001018192474777634970450890250504016876220703125'
+    #0.00008830000000000001018192474778
+    def sendLimitOrder(self, type, currentPrice, asset, currency, orderQuantity, orderID,note=None):
+        tickSize = self.getTickSize(asset,currency)
+
+        limitPrice = Decimal(self.calculateLimitPrice(currentPrice,tickSize))
 
         if type == self.buyText:
             orderID = self.limitBuy(limitPrice, asset, currency, orderQuantity, orderID,note)

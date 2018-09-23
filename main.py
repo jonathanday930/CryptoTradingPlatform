@@ -14,6 +14,7 @@ def main():
 
 
     trader = controller(gmailHandler('credentials.json'), .001, .1, real_money)
+
     trader.importAPIKeys()
     trader.run()
 

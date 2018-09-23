@@ -8,12 +8,18 @@ import logger
 from market import market
 
 
-
 # a controller for ONE bitmex connection. This is a basic formula for how it should look.
 class Bitmex(market):
+
+
+
     marketName = 'BITMEX'
 
     limitOrderEnabled = True
+
+    def getTickSize(self, asset, currency):
+        res = self.market.Instrument.Instrument_get(symbol=asset+currency).result()[0][0]['tickSize']
+        return res
 
     def closeLimitOrder(self, orderID):
         if orderID != None:
@@ -31,7 +37,6 @@ class Bitmex(market):
             else:
                 return type
 
-
     def limitOrderFilled(self, orderID):
         if orderID == None:
             return False
@@ -41,10 +46,10 @@ class Bitmex(market):
         res2 = result['cumQty'] == result['orderQty']
         return res2
 
-    def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None,note= None):
-        return self.limitBuy(limitPrice, asset, currency, -orderQuantity, orderNumber,note)
+    def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None, note=None):
+        return self.limitBuy(limitPrice, asset, currency, -orderQuantity, orderNumber, note)
 
-    def parsePrice(self,asset,currency,price):
+    def parsePrice(self, asset, currency, price):
         digits = 2
         if asset + currency == 'XRPU18':
             digits = 9
@@ -59,21 +64,21 @@ class Bitmex(market):
             increment = Decimal((1 * 10 ** -digits))
             price = price + increment
             strPrice = str(price)
-            # '{0:.10f}'.format(price)[:10]
         return strPrice[:decimalPlace + digits]
 
-    def limitBuy(self, price, asset, currency, orderQuantity, orderId=None,note = None):
-        price = self.parsePrice(asset,currency,price)
+    def limitBuy(self, price, asset, currency, orderQuantity, orderId=None, note=None):
+        #price = self.parsePrice(asset, currency, price)
         global result
         if orderId == None:
             result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Limit",
                                                  price=price).result()
-            logger.logOrder( self.marketName , 'Limit', price, asset, currency, orderQuantity,note)
+            logger.logOrder(self.marketName, 'Limit', price, asset, currency, orderQuantity, note)
 
         else:
             if not self.limitOrderFilled(orderId):
                 result = self.market.Order.Order_amend(orderID=orderId, price=price).result()
-                logger.logOrder(self.marketName , 'Limit', price, asset, currency, orderQuantity, str(note) + ' amend for order: ' + str(orderId))
+                logger.logOrder(self.marketName, 'Limit', price, asset, currency, orderQuantity,
+                                str(note) + ' amend for order: ' + str(orderId))
 
         tradeInfo = result[0]
         for key, value in tradeInfo.items():
@@ -144,14 +149,17 @@ class Bitmex(market):
                 return 0
 
     def getCurrentPrice(self, asset, currency):
-        startTime = datetime.datetime.now() - datetime.timedelta(minutes=0.3)
         trades = self.market.Trade.Trade_get(symbol=asset + currency, count=4, reverse=True).result()
         sum = 0
         volume = 0
+        satoshiDigits = 8
         for trade in trades[0]:
             sum = sum + (trade['price'] * trade['size'])
             volume = volume + trade['size']
-        return sum / volume
+        strRes = sum / volume
+        strRes =str(strRes)
+        return float(strRes)
+
 
     def get_orders(self, asset, currency):
         orders = self.market.Order.Order_getOrders(symbol=asset + currency, reverse=True).result()
