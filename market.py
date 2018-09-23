@@ -140,7 +140,7 @@ class market(ABC):
                 self.followingLimitOrder(self.buyText, asset, currency, -amount, False,note='Selling for equilibrium')
 
         # noinspection PyTypeChecker
-        orderQuantity = self.getMaxAmountToUse(asset, currency) * 0.1
+        orderQuantity = self.getMaxAmountToUse(asset, currency) * 0.4
 
         self.followingLimitOrder(type, asset, currency, orderQuantity, True,note='Standard limit order ')
 

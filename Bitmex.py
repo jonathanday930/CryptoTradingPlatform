@@ -44,8 +44,14 @@ class Bitmex(market):
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None,note= None):
         return self.limitBuy(limitPrice, asset, currency, -orderQuantity, orderNumber,note)
 
-    def parsePrice(self,price):
-        digits = 9
+    def parsePrice(self,asset,currency,price):
+        digits = 2
+        if asset + currency == 'XRPU18':
+            digits = 9
+        else:
+            if asset + currency == 'XBTUSD':
+                return str(price)[:str(price).find(".")]
+
         strPrice = str(price)
         decimalPlace = strPrice.find(".")
         nextDigit = strPrice[decimalPlace + digits:decimalPlace + digits + 1]
@@ -54,11 +60,10 @@ class Bitmex(market):
             price = price + increment
             strPrice = str(price)
             # '{0:.10f}'.format(price)[:10]
-
         return strPrice[:decimalPlace + digits]
 
     def limitBuy(self, price, asset, currency, orderQuantity, orderId=None,note = None):
-        price = self.parsePrice(price)
+        price = self.parsePrice(asset,currency,price)
         global result
         if orderId == None:
             result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Limit",
