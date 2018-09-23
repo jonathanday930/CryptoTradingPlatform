@@ -15,6 +15,7 @@ class gmailHandler:
     fromFilter = None
     gmailAPI = None
     refreshTime = 1
+    real_money = False
     readEmailCommand = {'removeLabelIds': ['UNREAD'], 'addLabelIds': []}
 
     def __init__(self, locationOfCredentials):
@@ -29,9 +30,13 @@ class gmailHandler:
     def listen(self, timeoutSeconds):
         count = 0
         while count < timeoutSeconds or timeoutSeconds < 0:
-            response = self.gmailAPI.users().messages().list(userId='me',
-                                                             q=' is:unread from:noreply@tradingview.com').execute()
 
+            if not self.real_money:
+                response = self.gmailAPI.users().messages().list(userId='me',
+                                                             q=' is:unread from:kalgofund@gmail.com').execute()
+            else:
+                response = self.gmailAPI.users().messages().list(userId='me',
+                                                                 q=' is:unread from:noreply@tradingview.com').execute()
 
             if 'messages' in response:
                 return self.readEmails(response)

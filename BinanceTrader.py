@@ -12,16 +12,16 @@ class BinanceTrader (market):
         self.connect()
 
     def marketOrder(self, type, asset, currency):
-        pass
+        red = 5
 
     def resetToEquilibrium_Market(self, currentAmount, asset, currency):
-        pass
+        red = 5
 
     def getMaxAmountToUse(self, asset, currency):
-        pass
+        red = 5
 
     def marketBuy(self, orderSize, asset, currency, note):
-        if self.real_money == True:
+        if self.real_money:
             result = self.market.order_market_buy(
                 symbol=asset + currency,
                 quantity=orderSize)
@@ -57,23 +57,23 @@ class BinanceTrader (market):
 
     def connect(self):
         self.market = Client(self.apiKey, self.apiKeySecret)
-        pass
+
 
 
     def limitBuy(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        pass
+        red = 5
 
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        pass
+        red = 5
 
     def limitShortEnd(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        pass
+        red = 5
 
     def getCurrentPrice(self, asset, currency):
         prices = self.market.get_all_tickers()
 
     def closeLimitOrders(self, asset, currency):
-        pass
+        red = 5
 
     def getAmountOfItem(self, coin):
         balance = self.market.get_asset_balance(asset=coin)

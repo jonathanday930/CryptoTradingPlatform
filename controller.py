@@ -20,12 +20,13 @@ class controller:
     maximumDeviationFromPrice = None
     goodLimitThreshold = None
 
-    def __init__(self, gmail, priceMargin, maximum, limitThreshold):
+    def __init__(self, gmail, priceMargin, maximum, realMoney):
         self.marginFromPrice = priceMargin
         self.maximumDeviationFromPrice = maximum
-        self.goodLimitThreshold = limitThreshold
         self.gmailController = gmail
         self.timeOutTime = -1
+        self.real_money = realMoney
+        self.gmailController.real_money = realMoney
 
     def run(self):
         for market in self.marketControllers:
@@ -62,21 +63,22 @@ class controller:
         #     data = json.load(f)
 
     def addMarket(self, market, name):
+        market.marginFromPrice = self.marginFromPrice
+        market.maximumDeviationFromPrice = self.maximumDeviationFromPrice
         self.marketControllers[name] = market
 
     def createOrder(self, email):
-        # self.marketControllers['bitmex'].followingLimitOrder(email.parameters[typeSubjectNumber],
-        #                                                                                email.parameters[
-        #                                                                                    currencySubjectNumber],
-        #                                                                                email.parameters[
-        #                                                                                    assetSubjectNumber])
         market = email.parameters[marketSubjectNumber]
+
         if market in self.marketControllers:
-            self.marketOrder(self.marketControllers[market], self.marketOrderPercent,
+            if self.marketControllers[market].limitOrderEnabled:
+                self.marketControllers[market].executeLimitOrder(email.parameters[typeSubjectNumber], email.parameters[assetSubjectNumber], email.parameters[currencySubjectNumber])
+            else:
+                self.marketOrder(self.marketControllers[market],
                              email.parameters[assetSubjectNumber],
                              email.parameters[currencySubjectNumber], email.parameters[typeSubjectNumber])
 
-    def marketOrder(self, market, percentOfAvailableToUse, asset, currency, type):
+    def marketOrder(self, market, asset, currency, type):
 
         if type == 'LONG':
             market.marketOrder('buy', asset, currency)
