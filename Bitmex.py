@@ -17,8 +17,9 @@ class Bitmex(market):
 
 
     def orderCanceled(self, orderID):
-        order = self.limitOrderStatus(orderID)['ordStatus']
-        return order == 'Canceled'
+        order = self.limitOrderStatus(orderID)
+        if not order:
+            return order['ordStatus'] == 'Canceled'
 
 
     def getOrderBook(self, asset, currency):
