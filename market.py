@@ -23,7 +23,7 @@ class market(ABC):
     attemptsLeft = attemptsTotal
     delayBetweenAttempts = 6
 
-    delayBetweenLimitOrder = 3
+    delayBetweenLimitOrder = 1
 
     apiKey = None
     apiKeySecret = None
@@ -151,12 +151,11 @@ class market(ABC):
 
         limitPrice = self.extractLimitPrice(type, asset, currency)
 
-        if limitPrice != previousLimitPrice:
-            if type == self.buyText:
-                orderID = self.limitBuy(limitPrice, asset, currency, orderQuantity, orderID, note)
-            else:
-                if type == self.sellText:
-                    orderID = self.limitSell(limitPrice, asset, currency, orderQuantity, orderID, note)
+        if type == self.buyText:
+            orderID = self.limitBuy(limitPrice, asset, currency, orderQuantity, orderID, note)
+        else:
+            if type == self.sellText:
+                orderID = self.limitSell(limitPrice, asset, currency, orderQuantity, orderID, note)
 
         if not self.orderCanceled(orderID):
             result = collections.namedtuple('result', ['limitPrice', 'orderID'])

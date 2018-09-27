@@ -18,13 +18,14 @@ class Bitmex(market):
 
     def orderCanceled(self, orderID):
         order = self.limitOrderStatus(orderID)
-        if order:
+        if order != False:
             return order['ordStatus'] == 'Canceled'
 
 
     def getOrderBook(self, asset, currency):
         res = self.market.OrderBook.OrderBook_getL2(symbol=asset+currency).result()[0]
         return res
+
 
     def extractLimitPrice(self, type, asset, currency):
         orderBook = self.getOrderBook(asset,currency)
@@ -137,7 +138,7 @@ class Bitmex(market):
         return strPrice[:decimalPlace + digits]
 
     def limitBuy(self, price, asset, currency, orderQuantity, orderId=None, note=None):
-        global result
+        result = None
 
         openOrder = self.orderOpen(orderId)
         orderQuantity = self.quantityLeftInOrder(orderId, orderQuantity)
