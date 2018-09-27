@@ -1,4 +1,5 @@
 import collections
+import traceback
 from decimal import Decimal
 
 from abc import ABC, abstractmethod
@@ -22,7 +23,7 @@ class market(ABC):
     attemptsLeft = attemptsTotal
     delayBetweenAttempts = 6
 
-    delayBetweenLimitOrder = 3
+    delayBetweenLimitOrder = 4
 
     apiKey = None
     apiKeySecret = None
@@ -90,40 +91,67 @@ class market(ABC):
                 value = price * (1 - percent)
                 return value
 
-    def calculateLimitPrice(self,currentPrice,tickSize):
+    def calculateLimitPrice(self,type,currentPrice,tickSize,previousLimitPrice = None):
         currentPrice = str(Decimal(currentPrice))
         tickSize = '{0:.10f}'.format(tickSize)[:10]
         decimalSpot =currentPrice.find(".")
+
+        if decimalSpot == -1:
+            currentPrice = currentPrice + "."
+            decimalSpot = currentPrice.find(".")
         has5 =tickSize.find("5")
 
+        if type == self.buyText:
+            currentPrice = str(Decimal(currentPrice) - Decimal(tickSize))
+
+        else:
+            if type == self.sellText:
+                currentPrice = str(Decimal(currentPrice) + Decimal(tickSize))
 
         if has5 > 0:
-            nextDigit = currentPrice[decimalSpot + 1:decimalSpot + has5]
-            if int(nextDigit) < 4:
-                currentPrice=currentPrice[:decimalSpot + has5-1]+ str(0)
+            nextDigit = str(currentPrice)[decimalSpot + 1:decimalSpot + has5]
+            if int(nextDigit) < 3:
+                currentPrice = currentPrice[:decimalSpot + has5 - 1] + str(0)
             else:
-                currentPrice = currentPrice[:decimalSpot + has5-1]+str(5)
+                if int(nextDigit) < 9:
+                    currentPrice = currentPrice[:decimalSpot + has5 - 1] + str(5)
+                else:
+                    currentPrice = str(Decimal(currentPrice) + Decimal(1.0))
+                    currentPrice = currentPrice[:decimalSpot + has5 - 1] + str(0)
+
         else:
-            to1 = tickSize.find("1")
-            currentPrice = Decimal(tickSize) + Decimal(currentPrice)
-            currentPrice = str(currentPrice)[:decimalSpot+to1]
+                to1 = tickSize.find("1")
+                currentPrice = str(currentPrice)[:decimalSpot+to1]
+
+        if previousLimitPrice != None:
+            if type == self.buyText:
+                if Decimal(currentPrice) < Decimal(previousLimitPrice):
+                    return previousLimitPrice
+            else:
+                if Decimal(currentPrice) > Decimal(previousLimitPrice):
+                    return previousLimitPrice
 
         return currentPrice
 
-    #'0.00008829000000000001018192474777634970450890250504016876220703125'
-    #0.00008830000000000001018192474778
-    def sendLimitOrder(self, type, currentPrice, asset, currency, orderQuantity, orderID,note=None):
+    def sendLimitOrder(self, type, currentPrice, asset, currency, orderQuantity, orderID,note=None,previousLimitPrice = None):
         tickSize = self.getTickSize(asset,currency)
 
-        limitPrice = Decimal(self.calculateLimitPrice(currentPrice,tickSize))
-
-        if type == self.buyText:
-            orderID = self.limitBuy(limitPrice, asset, currency, orderQuantity, orderID,note)
-        else:
-            if type == self.sellText:
-                orderID = self.limitSell(limitPrice, asset, currency, orderQuantity, orderID,note)
         result = collections.namedtuple('result', ['limitPrice', 'orderID'])
-        res = result(limitPrice, orderID)
+        res = result(previousLimitPrice, orderID)
+
+        limitPrice = Decimal(self.calculateLimitPrice(type,currentPrice,tickSize,previousLimitPrice))
+        if limitPrice != previousLimitPrice:
+            if type == self.buyText:
+                orderID = self.limitBuy(limitPrice, asset, currency, orderQuantity, orderID,note)
+            else:
+                if type == self.sellText:
+                    orderID = self.limitSell(limitPrice, asset, currency, orderQuantity, orderID,note)
+
+            if self.orderOpen(orderID):
+                result = collections.namedtuple('result', ['limitPrice', 'orderID'])
+                res = result(limitPrice, orderID)
+            else:
+                res = None
         return res
 
     def marketOrder(self, type, asset, currency):
@@ -141,8 +169,9 @@ class market(ABC):
                     result = self.marketSell(orderSize, asset, currency, note='Going short')
             self.attemptsLeft = self.attemptsTotal
             return result
-        except Exception as e:
-            logger.logError(e)
+        except :
+            tb = traceback.format_exc()
+            logger.logError(tb)
             if self.attemptsLeft == 0:
                 self.attemptsLeft = self.attemptsTotal
                 return None
@@ -162,10 +191,10 @@ class market(ABC):
         amount = self.getAmountFromPair(asset, currency)
 
         if amount > 0:
-            self.followingLimitOrder(self.sellText, asset, currency, amount, False,note='Buying for equilibrium')
+            self.followingLimitOrder(self.sellText, asset, currency, amount, False,note='Selling for equilibrium')
         else:
             if amount < 0:
-                self.followingLimitOrder(self.buyText, asset, currency, -amount, False,note='Selling for equilibrium')
+                self.followingLimitOrder(self.buyText, asset, currency, -amount, False,note='Buying for equilibrium')
 
         # noinspection PyTypeChecker
         orderQuantity = self.getMaxAmountToUse(asset, currency) * 0.4
@@ -179,34 +208,44 @@ class market(ABC):
             currency = self.interpretType(currency)
             type = self.interpretType(type)
 
+            previousLimitPrice = None
             initialPrice = initial_price
             if initialPrice == None:
                 initialPrice = self.getCurrentPrice(asset, currency)
             currentPrice = initialPrice
 
             while self.isInRange(type, initialPrice, currentPrice, self.maximumDeviationFromPrice,
-                                 restricted) and not self.limitOrderFilled(orderID) and orderQuantity != 0:
-                res = self.sendLimitOrder(type, currentPrice, asset, currency, orderQuantity, orderID,note)
-                orderID = res.orderID
-                sleep(self.delayBetweenLimitOrder)
-                currentPrice = self.getCurrentPrice(asset, currency)
+                                 restricted) and orderQuantity != 0:
+                orderQuantity = self.quantityLeftInOrder(orderID, orderQuantity)
+                if orderQuantity != 0:
+                    res = self.sendLimitOrder(type, currentPrice, asset, currency, orderQuantity, orderID,note,previousLimitPrice=previousLimitPrice)
+                    if not hasattr(res,'orderID'):
+                        orderQuantity = self.quantityLeftInOrder(orderID, orderQuantity)
+                        orderID = None
+                    else:
 
-            if (not self.limitOrderFilled(orderID)):
+                        orderID = res.orderID
+                        previousLimitPrice = res.limitPrice
+                        sleep(self.delayBetweenLimitOrder)
+
+                    currentPrice = self.getCurrentPrice(asset, currency)
+            if self.orderOpen(orderID):
                 self.closeLimitOrder(orderID)
 
-        except Exception as e:
-                logger.logError(e)
-                if self.attemptsLeft == 0:
+        except:
+            tb = traceback.format_exc()
+            logger.logError(tb)
+            if self.attemptsLeft == 0:
                     self.attemptsLeft = self.attemptsTotal
                     return None
-                sleep(self.delayBetweenAttempts)
-                self.connect()
-                self.attemptsLeft = self.attemptsLeft - 1
-                self.followingLimitOrder(type, asset, currency,orderQuantity,restricted,initialPrice,orderID)
+            sleep(self.delayBetweenAttempts)
+            self.connect()
+            self.attemptsLeft = self.attemptsLeft - 1
+            self.followingLimitOrder(type, asset, currency,orderQuantity,restricted,initialPrice,orderID)
 
 
     @abstractmethod
-    def limitOrderFilled(self, orderID):
+    def limitOrderStatus(self, orderID):
         pass
 
     @abstractmethod
@@ -244,4 +283,16 @@ class market(ABC):
 
     @abstractmethod
     def closeLimitOrder(self, orderID):
+        pass
+
+    @abstractmethod
+    def orderOpen(self, orderID):
+        pass
+
+    @abstractmethod
+    def limitOrderFilled(self, orderID):
+        pass
+
+    @abstractmethod
+    def quantityLeftInOrder(self, orderID,orderQuantity):
         pass
