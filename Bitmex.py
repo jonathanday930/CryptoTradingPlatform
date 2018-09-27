@@ -13,6 +13,50 @@ class Bitmex(market):
 
 
 
+
+    def quantityLeftInOrder(self, orderID,orderQuantity):
+        if orderID == None:
+            return orderQuantity
+        else:
+            status = self.limitOrderStatus(orderID)
+            return status['orderQty']-status['cumQty']
+
+    def orderOpen(self, orderID):
+        if orderID == None:
+            return False
+        order = self.limitOrderStatus(orderID)
+        status = order['ordStatus']
+        one = order['ordStatus'] != 'Canceled'
+        two = order['ordStatus'] != 'Filled'
+        return one and two
+
+    def limitOrderStatus(self, orderID, triesLeft = None):
+        if triesLeft==None:
+            triesLeft = 1
+        if orderID == None:
+            return False
+        filter = '{"orderID": "' + orderID + '"}'
+        res = self.market.Order.Order_getOrders(filter=filter).result()
+
+        try:
+            res = res[0][0]
+            status = res['ordStatus']
+        except:
+            if triesLeft != 0:
+                sleep(1)
+                return self.limitOrderStatus(orderID)
+            triesLeft = triesLeft - 1
+            logger.logError('--- ORDER LIST ERROR ---')
+
+        return res
+
+    def limitOrderFilled(self, orderID):
+        if orderID == None:
+            return False
+        self.limitOrderStatus(orderID)
+        return result['cumQty'] == result['orderQty']
+
+
     marketName = 'BITMEX'
 
     limitOrderEnabled = True
@@ -37,14 +81,7 @@ class Bitmex(market):
             else:
                 return type
 
-    def limitOrderFilled(self, orderID):
-        if orderID == None:
-            return False
-        filter = '{"orderID": "' + orderID + '"}'
-        res = self.market.Order.Order_getOrders(filter=filter)
-        result = res.result()[0][0]
-        res2 = result['cumQty'] == result['orderQty']
-        return res2
+
 
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None, note=None):
         return self.limitBuy(limitPrice, asset, currency, -orderQuantity, orderNumber, note)
@@ -67,18 +104,26 @@ class Bitmex(market):
         return strPrice[:decimalPlace + digits]
 
     def limitBuy(self, price, asset, currency, orderQuantity, orderId=None, note=None):
-        #price = self.parsePrice(asset, currency, price)
         global result
-        if orderId == None:
-            result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Limit",
-                                                 price=price).result()
-            logger.logOrder(self.marketName, 'Limit', price, asset, currency, orderQuantity, note)
 
-        else:
-            if not self.limitOrderFilled(orderId):
+        openOrder = self.orderOpen(orderId)
+        orderQuantity = self.quantityLeftInOrder(orderId, orderQuantity)
+        if openOrder and orderQuantity != 0:
+            try:
                 result = self.market.Order.Order_amend(orderID=orderId, price=price).result()
                 logger.logOrder(self.marketName, 'Limit', price, asset, currency, orderQuantity,
                                 str(note) + ' amend for order: ' + str(orderId))
+            except Exception as e:
+                if e.response.status_code == 400:
+                    logger.logError('LIMIT AMEND ERROR')
+                    if orderQuantity != 0:
+                        openOrder = False
+
+
+        if not openOrder and orderQuantity != 0:
+            result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Limit",
+                                             price=price, execInst='ParticipateDoNotInitiate').result()
+            logger.logOrder(self.marketName, 'Limit', price, asset, currency, orderQuantity, note)
 
         tradeInfo = result[0]
         for key, value in tradeInfo.items():
@@ -152,7 +197,6 @@ class Bitmex(market):
         trades = self.market.Trade.Trade_get(symbol=asset + currency, count=4, reverse=True).result()
         sum = 0
         volume = 0
-        satoshiDigits = 8
         for trade in trades[0]:
             sum = sum + (trade['price'] * trade['size'])
             volume = volume + trade['size']
