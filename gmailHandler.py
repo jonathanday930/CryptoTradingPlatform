@@ -17,6 +17,7 @@ class gmailHandler:
     refreshTime = 1
     real_money = False
     readEmailCommand = {'removeLabelIds': ['UNREAD'], 'addLabelIds': []}
+    lastReceivedEmails = None
 
     def __init__(self, locationOfCredentials):
         store = file.Storage('token.json')
@@ -49,13 +50,22 @@ class gmailHandler:
         messageIds = emails['messages']
         processedEmails = []
 
+        self.lastReceivedEmails = messageIds
+
         for messageId in messageIds:
             message = self.gmailAPI.users().messages().get(userId='me', id=messageId['id']).execute()
             if self.authEmail(message):
                 processedEmails.append(email(message))
+
+        return processedEmails
+
+
+
+
+    def setEmailsToRead(self):
+        for messageId in self.lastReceivedEmails:
             self.gmailAPI.users().messages().modify(userId='me', id=messageId['id'],
                                                     body=self.readEmailCommand).execute()
-        return processedEmails
 
     def authEmail(self, email):
         return extractedEmail.getParamFromHeader(email['payload']['headers'], 'Subject').find(

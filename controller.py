@@ -36,7 +36,9 @@ class controller:
             emails = self.gmailController.listen(-1)
             if emails is not None:
                 for email in emails:
-                    self.createOrder(email)
+                    result = self.createOrder(email)
+                    if result:
+                        self.gmailController.setEmailsToRead()
 
 
     def importAPIKeys(self):
@@ -72,18 +74,18 @@ class controller:
 
         if market in self.marketControllers:
             if self.marketControllers[market].limitOrderEnabled:
-                self.marketControllers[market].executeLimitOrder(email.parameters[typeSubjectNumber], email.parameters[assetSubjectNumber], email.parameters[currencySubjectNumber])
+                return self.marketControllers[market].executeLimitOrder(email.parameters[typeSubjectNumber], email.parameters[assetSubjectNumber], email.parameters[currencySubjectNumber])
             else:
-                self.marketOrder(self.marketControllers[market],
+                return self.marketOrder(self.marketControllers[market],
                              email.parameters[assetSubjectNumber],
                              email.parameters[currencySubjectNumber], email.parameters[typeSubjectNumber])
 
     def marketOrder(self, market, asset, currency, type):
 
         if type == 'LONG':
-            market.marketOrder('buy', asset, currency)
+            return market.marketOrder('buy', asset, currency)
         else:
-            market.marketOrder('sell', asset, currency)
+            return market.marketOrder('sell', asset, currency)
 
 
 

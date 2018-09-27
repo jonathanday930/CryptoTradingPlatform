@@ -10,8 +10,42 @@ from market import market
 
 # a controller for ONE bitmex connection. This is a basic formula for how it should look.
 class Bitmex(market):
+    marketName = 'BITMEX'
+
+    limitOrderEnabled = True
 
 
+
+    def orderCanceled(self, orderID):
+        order = self.limitOrderStatus(orderID)['ordStatus']
+        return order == 'Canceled'
+
+
+    def getOrderBook(self, asset, currency):
+        res = self.market.OrderBook.OrderBook_getL2(symbol=asset+currency).result()[0]
+        return res
+
+    def extractLimitPrice(self, type, asset, currency):
+        orderBook = self.getOrderBook(asset,currency)
+
+        limitPrice = -5
+
+        if type == self.buyText:
+            limitPrice = 0
+        else:
+            if type == self.sellText:
+                limitPrice = 999999
+
+        for order in orderBook:
+
+            if self.buyText.lower() == order['side'].lower():
+                if order['price'] > limitPrice:
+                    limitPrice = order['price']
+            else:
+                if self.sellText.lower() == order['side'].lower():
+                    if order['price'] < limitPrice:
+                        limitPrice = order['price']
+        return limitPrice
 
 
     def quantityLeftInOrder(self, orderID,orderQuantity):
@@ -57,9 +91,7 @@ class Bitmex(market):
         return result['cumQty'] == result['orderQty']
 
 
-    marketName = 'BITMEX'
 
-    limitOrderEnabled = True
 
     def getTickSize(self, asset, currency):
         res = self.market.Instrument.Instrument_get(symbol=asset+currency).result()[0][0]['tickSize']
