@@ -252,6 +252,7 @@ class market(ABC):
                 return None
             sleep(self.delayBetweenAttempts)
             self.connect()
+            currentPrice = self.getCurrentPrice(asset,currency)
             self.attemptsLeft = self.attemptsLeft - 1
             self.followingLimitOrder(type, asset, currency, orderQuantity, restricted, initialPrice, orderID)
 

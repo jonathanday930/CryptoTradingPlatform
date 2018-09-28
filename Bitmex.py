@@ -20,6 +20,7 @@ class Bitmex(market):
         order = self.limitOrderStatus(orderID)
         if order != False:
             return order['ordStatus'] == 'Canceled'
+        return True
 
 
     def getOrderBook(self, asset, currency):
@@ -107,10 +108,10 @@ class Bitmex(market):
             return None
 
     def interpretType(self, type):
-        if type == 'LONG':
+        if type.lower() == 'LONG'.lower():
             return self.buyText
         else:
-            if type == 'SHORT':
+            if type.lower() == 'SHORT'.lower():
                 return self.sellText
             else:
                 return type
@@ -158,12 +159,14 @@ class Bitmex(market):
             result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Limit",
                                              price=price, execInst='ParticipateDoNotInitiate').result()
             logger.logOrder(self.marketName, 'Limit', price, asset, currency, orderQuantity, note)
-
-        tradeInfo = result[0]
-        for key, value in tradeInfo.items():
-            if key == "orderID":
-                newOrderId = (key + ": {0}".format(value))
-                return newOrderId[9:]
+        if result is not None:
+            tradeInfo = result[0]
+            for key, value in tradeInfo.items():
+                if key == "orderID":
+                    newOrderId = (key + ": {0}".format(value))
+                    return newOrderId[9:]
+        else:
+            return None
 
     def resetToEquilibrium_Market(self, amount, asset, currency):
         before = self.getAmountOfItem('xbt')
