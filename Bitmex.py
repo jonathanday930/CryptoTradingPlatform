@@ -256,6 +256,10 @@ class Bitmex(market):
     def getNumberOfTradingPairs(self):
         pass
 
+    def setLeverage(self, asset, currency):
+        self.market.Position.Leverage(symbol=(asset+currency), leverage=2)
+        pass
+
     # def logOrder(self, orderQuantity, asset, currency):
     #     print("Available Balance: %s \n" % (self.getAvailableBalanceInUsd()))
     #     print("Ordering %d contracts of %s%s \n" % (orderQuantity, asset, currency))
