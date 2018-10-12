@@ -23,7 +23,7 @@ class market(ABC):
     attemptsLeft = attemptsTotal
     delayBetweenAttempts = 6
 
-    delayBetweenLimitOrder = 1
+    delayBetweenLimitOrder = 5
 
     apiKey = None
     apiKeySecret = None
@@ -141,7 +141,7 @@ class market(ABC):
         return currentPrice
 
     @abstractmethod
-    def orderCanceled(self,orderID):
+    def orderCanceled(self, orderID):
         pass
 
     def sendLimitOrder(self, type, asset, currency, orderQuantity, orderID, note=None, previousLimitPrice=None):
@@ -151,18 +151,24 @@ class market(ABC):
 
         limitPrice = self.extractLimitPrice(type, asset, currency)
 
-        if type == self.buyText:
-            orderID = self.limitBuy(limitPrice, asset, currency, orderQuantity, orderID, note)
-        else:
-            if type == self.sellText:
-                orderID = self.limitSell(limitPrice, asset, currency, orderQuantity, orderID, note)
+        if limitPrice != previousLimitPrice or orderID is None:
+            if type == self.buyText:
+                orderID = self.limitBuy(limitPrice, asset, currency, orderQuantity, orderID, note)
+            else:
+                if type == self.sellText:
+                    orderID = self.limitSell(limitPrice, asset, currency, orderQuantity, orderID, note)
 
-        if not self.orderCanceled(orderID):
-            result = collections.namedtuple('result', ['limitPrice', 'orderID'])
-            res = result(limitPrice, orderID)
-        else:
+            if not self.orderCanceled(orderID):
+                limitPrice = self.getOrderPrice(orderID)
+                result = collections.namedtuple('result', ['limitPrice', 'orderID'])
+                res = result(limitPrice, orderID)
+            else:
+                res = None
+
+        if not self.orderOpen(orderID):
             res = None
         return res
+
 
     def marketOrder(self, type, asset, currency):
         try:
@@ -198,7 +204,12 @@ class market(ABC):
                 return self.buyText
 
     def executeLimitOrder(self, type, asset, currency):
+        asset = self.interpretType(asset)
+        currency = self.interpretType(currency)
+        type = self.interpretType(type)
+
         amount = self.getAmountFromPair(asset, currency)
+
 
         if amount > 0:
             self.followingLimitOrder(self.sellText, asset, currency, amount, False, note='Selling for equilibrium')
@@ -214,15 +225,13 @@ class market(ABC):
     def followingLimitOrder(self, type, asset, currency, orderQuantity, restricted=True, initial_price=None,
                             orderID=None, note=None):
         try:
-
-            asset = self.interpretType(asset)
-            currency = self.interpretType(currency)
-            type = self.interpretType(type)
-
             previousLimitPrice = None
             initialPrice = initial_price
-            if initialPrice == None:
+            if initialPrice is None:
                 initialPrice = self.getCurrentPrice(asset, currency)
+                previousLimitPrice = initialPrice
+
+            if previousLimitPrice is None:
                 previousLimitPrice = initialPrice
 
             while self.isInRange(type, initialPrice, previousLimitPrice, self.maximumDeviationFromPrice,
@@ -242,6 +251,8 @@ class market(ABC):
 
             if self.orderOpen(orderID):
                 self.closeLimitOrder(orderID)
+
+            logger.logCompletedOrder(self.marketName, ' Maker Limit ', previousLimitPrice, initialPrice, asset, currency, orderQuantity, note=note)
             return True
 
         except:
@@ -252,9 +263,10 @@ class market(ABC):
                 return None
             sleep(self.delayBetweenAttempts)
             self.connect()
-            currentPrice = self.getCurrentPrice(asset,currency)
             self.attemptsLeft = self.attemptsLeft - 1
-            self.followingLimitOrder(type, asset, currency, orderQuantity, restricted, initialPrice, orderID)
+            orderQuantity = self.quantityLeftInOrder(orderID,orderQuantity)
+            self.followingLimitOrder(type, asset, currency, orderQuantity, restricted, initialPrice, orderID=orderID,
+                                     note=note)
 
     @abstractmethod
     def limitOrderStatus(self, orderID):
@@ -302,9 +314,9 @@ class market(ABC):
         pass
 
     @abstractmethod
-    def limitOrderFilled(self, orderID):
+    def quantityLeftInOrder(self, orderID, orderQuantity):
         pass
 
     @abstractmethod
-    def quantityLeftInOrder(self, orderID, orderQuantity):
+    def getOrderPrice(self, orderID):
         pass

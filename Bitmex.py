@@ -10,6 +10,13 @@ from market import market
 
 # a controller for ONE bitmex connection. This is a basic formula for how it should look.
 class Bitmex(market):
+
+    def getOrderPrice(self, orderID):
+        order = self.limitOrderStatus(orderID)
+        if order is not None:
+            return order['price']
+        return None
+
     marketName = 'BITMEX'
 
     limitOrderEnabled = True
@@ -87,14 +94,6 @@ class Bitmex(market):
 
         return res
 
-    def limitOrderFilled(self, orderID):
-        if orderID == None:
-            return False
-        self.limitOrderStatus(orderID)
-        return result['cumQty'] == result['orderQty']
-
-
-
 
     def getTickSize(self, asset, currency):
         res = self.market.Instrument.Instrument_get(symbol=asset+currency).result()[0][0]['tickSize']
@@ -114,8 +113,9 @@ class Bitmex(market):
             if type.lower() == 'SHORT'.lower():
                 return self.sellText
             else:
-                return type
-
+                if type.lower() == 'u18':
+                    return 'Z18'
+        return type
 
 
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None, note=None):
@@ -142,17 +142,21 @@ class Bitmex(market):
         result = None
 
         openOrder = self.orderOpen(orderId)
-        orderQuantity = self.quantityLeftInOrder(orderId, orderQuantity)
         if openOrder and orderQuantity != 0:
             try:
                 result = self.market.Order.Order_amend(orderID=orderId, price=price).result()
                 logger.logOrder(self.marketName, 'Limit', price, asset, currency, orderQuantity,
                                 str(note) + ' amend for order: ' + str(orderId))
             except Exception as e:
+
                 if e.response.status_code == 400:
                     logger.logError('LIMIT AMEND ERROR')
+                    orderQuantity = self.quantityLeftInOrder(orderId,orderQuantity)
                     if orderQuantity != 0:
                         openOrder = False
+                else:
+                    logger.logError('UNKNOWN LIMIT ERROR: ' + str(e))
+                    raise e
 
 
         if not openOrder and orderQuantity != 0:
@@ -213,7 +217,7 @@ class Bitmex(market):
             curr = self.getAmountOfItem('XBt') * (1 - percentLower)
 
         price = self.getCurrentPrice(asset, currency)
-        if currency == 'USD' or (currency == 'U18' and asset == 'XBT'):
+        if currency == 'USD' or (currency == 'Z18' and asset == 'XBT'):
             result = floor(curr * price)
         else:
             result = floor((curr / price))
