@@ -252,7 +252,7 @@ class market(ABC):
             if self.orderOpen(orderID):
                 self.closeLimitOrder(orderID)
 
-            logger.logCompletedOrder(self.marketName, ' Maker Limit ', previousLimitPrice, initialPrice, asset, currency, orderQuantity, note=note)
+            logger.logCompletedOrder(self.marketName, ' Maker Limit ', previousLimitPrice, initialPrice, asset, currency, note=note)
             return True
 
         except:
