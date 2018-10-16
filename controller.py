@@ -1,3 +1,4 @@
+import logger
 from Bitmex import Bitmex
 from market import market
 
@@ -71,14 +72,17 @@ class controller:
 
     def createOrder(self, email):
         market = email.parameters[marketSubjectNumber]
-
+        type = email.parameters[typeSubjectNumber]
+        asset = email.parameters[assetSubjectNumber]
+        currency = email.parameters[currencySubjectNumber]
+        logger.logEmail(market, type, asset, currency)
         if market in self.marketControllers:
             if self.marketControllers[market].limitOrderEnabled:
-                return self.marketControllers[market].executeLimitOrder(email.parameters[typeSubjectNumber], email.parameters[assetSubjectNumber], email.parameters[currencySubjectNumber])
+                return self.marketControllers[market].executeLimitOrder(type, asset, currency)
             else:
                 return self.marketOrder(self.marketControllers[market],
-                             email.parameters[assetSubjectNumber],
-                             email.parameters[currencySubjectNumber], email.parameters[typeSubjectNumber])
+                             asset,
+                             currency, type)
 
     def marketOrder(self, market, asset, currency, type):
 
