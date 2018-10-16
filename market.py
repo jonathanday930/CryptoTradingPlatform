@@ -6,6 +6,7 @@ from abc import ABC, abstractmethod
 from time import sleep
 
 import logger
+import bank
 
 
 class market(ABC):
@@ -173,16 +174,20 @@ class market(ABC):
     def marketOrder(self, type, asset, currency):
         try:
             currentAmount = self.getAmountOfItem(asset + currency)
-            print("current amount of %s%s: %f \n" % (asset, currency, currentAmount))
+            text = "current amount of %s%s: %f \n  %s" % (asset, currency, currentAmount, type)
+            print(text)
+            bank.logNote(text)
 
             change = self.resetToEquilibrium_Market(currentAmount, asset, currency)
-            # orderSize = self.bank.update(change)
+            bank.logBalance(self.getAmountOfItem('xbt'))
             orderSize = self.getMaxAmountToUse(asset, currency) * 0.4
             if type == self.buyText:
                 result = self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+                bank.logContract(asset, currency, self.getAmountOfItem(asset + currency))
             else:
                 if type == self.sellText:
                     result = self.marketSell(orderSize, asset, currency, note='Going short')
+                    bank.logContract(asset, currency, self.getAmountOfItem(asset + currency))
             self.attemptsLeft = self.attemptsTotal
             return True
         except:
@@ -195,6 +200,7 @@ class market(ABC):
             self.connect()
             self.attemptsLeft = self.attemptsLeft - 1
             self.marketOrder(type, asset, currency)
+
 
     def switchOrder(self, type):
         if type == self.buyText:
