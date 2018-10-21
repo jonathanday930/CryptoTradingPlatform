@@ -3,11 +3,16 @@ import sys
 
 import logger
 from Bitmex import Bitmex
-import BinanceTrader
+from BinanceTrader import BinanceTrader
 from gmailHandler import gmailHandler
 from controller import controller
-
-SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+# import ccxt
+# exchange = ccxt.binance()
+# exchange_time = exchange.public_get_time()['serverTime']
+# your_time = exchange.milliseconds()
+# print('Exchange UTC time:', exchange_time, exchange.iso8601(exchange_time))
+# print('Your UTC time:', your_time, exchange.iso8601(your_time))
+# SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 
 
 def main():
@@ -34,7 +39,16 @@ def main():
     #         trader.run()
     #     except Exception as e:
     #         logger.logError(e)
-    test=BinanceTrader("D82391RviO0eyFGm4QMK3EGTkd2D0p4viQesB8W4tVVpSo4nIUo0IDnVcCk65OGR","G1n85emNiXJNWdMWAE7HlwQ1FvDx7OSNE8ZN8hmqNgvj5pJMTuU0XVUjyRRa2G4d")
+
+
+    # # controller tests
+    test = BinanceTrader("D82391RviO0eyFGm4QMK3EGTkd2D0p4viQesB8W4tVVpSo4nIUo0IDnVcCk65OGR", "G1n85emNiXJNWdMWAE7HlwQ1FvDx7OSNE8ZN8hmqNgvj5pJMTuU0XVUjyRRa2G4d", True, "test1")
+
+    trader = controller(gmailHandler('credentials.json'), .1, .1, .1)
+    trader.addMarket(test, "binance")
+
+
+    test.marketBuy(1, "XRP", "BTC", None)
 
 
     # market = Bitmex(.1,.1,.1,"Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp")

@@ -11,10 +11,8 @@ class BinanceTrader (market):
         super(BinanceTrader, self).__init__(apiKey, apiKeySecret,realMoney,name)
         self.connect()
 
-    def marketOrder(self, type, asset, currency):
-        pass
 
-    def resetToEquilibrium_Market(self, currentAmount, asset, currency):
+    def marketOrder(self, type, asset, currency):
         pass
 
     def getMaxAmountToUse(self, asset, currency):
@@ -22,6 +20,7 @@ class BinanceTrader (market):
 
     def marketBuy(self, orderSize, asset, currency, note):
         if self.real_money == True:
+            print("buying %d of %s" % (orderSize, asset + currency))
             result = self.market.order_market_buy(
                 symbol=asset + currency,
                 quantity=orderSize)
@@ -34,7 +33,6 @@ class BinanceTrader (market):
                 symbol=asset + currency,
                 side='BUY',
                 type='MARKET',
-                timeInForce='GTC',
                 quantity=orderSize)
 
     def marketSell(self, orderSize, asset, currency, note):
@@ -59,22 +57,14 @@ class BinanceTrader (market):
         self.market = Client(self.apiKey, self.apiKeySecret)
         pass
 
-
-    def limitBuy(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        pass
-
-    def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        pass
-
-    def limitShortEnd(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        pass
-
     def getCurrentPrice(self, asset, currency):
         prices = self.market.get_all_tickers()
-
-    def closeLimitOrders(self, asset, currency):
-        pass
 
     def getAmountOfItem(self, coin):
         balance = self.market.get_asset_balance(asset=coin)
         return balance
+         result = self.market.Position.Position_get(filter=symbol).result()
+            if len(result[0]) > 0:
+                return result[0][0]['currentQty']
+            else:
+                return 0
