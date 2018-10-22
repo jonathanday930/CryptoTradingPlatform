@@ -37,6 +37,7 @@ class BinanceTrader (market):
 
     def marketSell(self, orderSize, asset, currency, note):
             if self.real_money == True:
+                print("selling %d of %s" % (orderSize, asset + currency))
                 result = self.market.order_market_sell(
         symbol=asset+currency,
         quantity=orderSize)
