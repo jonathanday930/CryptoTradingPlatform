@@ -1,10 +1,16 @@
 {
   "API_Keys": [
-   
     {
-      "name": "fake",
-      "market": "fake",
+      "name": "JSON1",
+      "market": "BITMEX",
       "real_money": false,
+      "keyID": "fake",
+      "privateKey": "fake"
+    },
+    {
+      "name": "JSON2",
+      "market": "BINANCE",
+      "real_money": true,
       "keyID": "fake",
       "privateKey": "fake"
     }

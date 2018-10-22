@@ -47,12 +47,14 @@ class controller:
                 with open(f.name) as jsonFile:
                     data = json.load(jsonFile)
                     for keySet in data['API_Keys']:
-
                         if keySet['market'] == 'BITMEX':
                             if keySet['real_money'] == self.real_money:
                                 self.addMarket(
                                     Bitmex(keySet['keyID'], keySet['privateKey'], keySet['real_money'], keySet['name']),
                                     keySet['market'])
+
+                        if keySet['market'] == 'BINANCE':
+                            self.addMarket(BinanceTrader(keySet['keyID'], keySet['privateKey'], keySet['real_money'], keySet['name']))
                 continue
             else:
                 continue
