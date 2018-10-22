@@ -1,0 +1,7 @@
+Binancemarket order at 2018-09-24 23:04:58.906554: 1 of pair XRPBTC at price NoneNote: None
+Binancemarket order at 2018-10-21 18:09:41.204893: 1 of pair XRPBTC at price NoneNote: None
+Binancemarket order at 2018-10-21 18:11:53.528167: 1 of pair XRPBTC at price NoneNote: None
+Binancemarket order at 2018-10-21 18:14:47.271018: 1 of pair XRPBTC at price NoneNote: None
+Binancemarket order at 2018-10-21 18:14:48.027299: 1 of pair XRPBTC at price NoneNote: 
+Binancemarket order at 2018-10-21 18:19:23.658325: 1 of pair XRPBTC at price NoneNote: None
+Binancemarket order at 2018-10-21 18:19:24.351740: 1 of pair XRPBTC at price NoneNote: 

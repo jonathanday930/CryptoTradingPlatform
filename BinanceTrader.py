@@ -35,6 +35,15 @@ class BinanceTrader (market):
                 type='MARKET',
                 quantity=orderSize)
 
+    def getAmountOfItem(self, coin):
+        balance = self.market.get_asset_balance(asset=coin)
+        return balance
+         # result = self.market.Position.Position_get(filter=symbol).result()
+         #    if len(result[0]) > 0:
+         #        return result[0][0]['currentQty']
+         #    else:
+         #        return 0
+
     def marketSell(self, orderSize, asset, currency, note):
             if self.real_money == True:
                 print("selling %d of %s" % (orderSize, asset + currency))
@@ -61,11 +70,3 @@ class BinanceTrader (market):
     def getCurrentPrice(self, asset, currency):
         prices = self.market.get_all_tickers()
 
-    def getAmountOfItem(self, coin):
-        balance = self.market.get_asset_balance(asset=coin)
-        return balance
-         # result = self.market.Position.Position_get(filter=symbol).result()
-         #    if len(result[0]) > 0:
-         #        return result[0][0]['currentQty']
-         #    else:
-         #        return 0
