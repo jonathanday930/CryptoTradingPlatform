@@ -50,6 +50,12 @@ def main():
 
     test.marketBuy(1, "XRP", "BTC", None)
 
+    amt = test.getAmountOfItem("XRP")
+    print(amt)
+
+    test.marketSell(1, "XRP", "BTC", "")
+
+
 
     # market = Bitmex(.1,.1,.1,"Bm23pmDAYgPq4JN-bbKipuq_", "gMH-WNVpS17cstY_0YOCe8kirlItoURrsYNCJKd6UhUjyoOp")
     # price = market.getMaxAmountToUse('ETH','U18')

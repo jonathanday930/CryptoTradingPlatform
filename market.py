@@ -40,13 +40,13 @@ class market(ABC):
         pass;
 
 
-    @abstractmethod
-    def limitBuy(self, limitPrice, asset, currency, orderQuantity, orderNumber=None,):
-        pass;
-
-    @abstractmethod
-    def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        pass;
+    # @abstractmethod
+    # def limitBuy(self, limitPrice, asset, currency, orderQuantity, orderNumber=None,):
+    #     pass;
+    #
+    # @abstractmethod
+    # def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
+    #     pass;
 
 
 
@@ -58,9 +58,9 @@ class market(ABC):
     def getCurrentPrice(self, asset, currency):
         pass;
 
-    @abstractmethod
-    def closeLimitOrders(self, asset, currency):
-        pass;
+    # @abstractmethod
+    # def closeLimitOrders(self, asset, currency):
+    #     pass;
 
     @abstractmethod
     def getAmountOfItem(self, coin):
@@ -160,9 +160,9 @@ class market(ABC):
             return self.getAmountOfItem('BTC')
         return self.getAmountOfItem(asset)
 
-    @abstractmethod
-    def resetToEquilibrium_Market(self, currentAmount, asset, currency):
-        pass
+    # @abstractmethod
+    # def resetToEquilibrium_Market(self, currentAmount, asset, currency):
+    #     pass
 
     @abstractmethod
     def getMaxAmountToUse(self, asset, currency):

@@ -39,7 +39,7 @@ class BinanceTrader (market):
             if self.real_money == True:
                 result = self.market.order_market_sell(
         symbol=asset+currency,
-        quantity=-orderSize)
+        quantity=orderSize)
                 logger.logOrder('Binance', 'market', self.getCurrentPrice(asset, currency), asset, currency,
                                 orderSize,
                                 note=note)
@@ -63,8 +63,8 @@ class BinanceTrader (market):
     def getAmountOfItem(self, coin):
         balance = self.market.get_asset_balance(asset=coin)
         return balance
-         result = self.market.Position.Position_get(filter=symbol).result()
-            if len(result[0]) > 0:
-                return result[0][0]['currentQty']
-            else:
-                return 0
+         # result = self.market.Position.Position_get(filter=symbol).result()
+         #    if len(result[0]) > 0:
+         #        return result[0][0]['currentQty']
+         #    else:
+         #        return 0
