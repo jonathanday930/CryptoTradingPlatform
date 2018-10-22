@@ -1,4 +1,5 @@
 import datetime
+from decimal import Decimal
 from math import floor
 from time import sleep
 
@@ -6,33 +7,170 @@ import bitmexApi.bitmex
 import logger
 from market import market
 
-marketName = 'Bitmex'
-
 
 # a controller for ONE bitmex connection. This is a basic formula for how it should look.
 class Bitmex(market):
 
-    def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None):
-        # TODO: figure out quantity params
-        orderQuantity = orderQuantity * -1
-        self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, price=limitPrice,
-                                    ordType="Limit").result()
+    def getOrderPrice(self, orderID):
+        order = self.limitOrderStatus(orderID)
+        if order is not None:
+            return order['price']
+        return None
+
+    marketName = 'BITMEX'
+
+    limitOrderEnabled = True
 
 
 
-    def limitBuy(self, price, asset, currency, orderQuantity, orderId=None):
-        if orderId == None:
+    def orderCanceled(self, orderID):
+        order = self.limitOrderStatus(orderID)
+        if order != False:
+            return order['ordStatus'] == 'Canceled'
+        return True
+
+
+    def getOrderBook(self, asset, currency):
+        res = self.market.OrderBook.OrderBook_getL2(symbol=asset+currency).result()[0]
+        return res
+
+
+    def extractLimitPrice(self, type, asset, currency):
+        orderBook = self.getOrderBook(asset,currency)
+
+        limitPrice = -5
+
+        if type == self.buyText:
+            limitPrice = 0
+        else:
+            if type == self.sellText:
+                limitPrice = 999999
+
+        for order in orderBook:
+
+            if self.buyText.lower() == order['side'].lower():
+                if order['price'] > limitPrice:
+                    limitPrice = order['price']
+            else:
+                if self.sellText.lower() == order['side'].lower():
+                    if order['price'] < limitPrice:
+                        limitPrice = order['price']
+        return limitPrice
+
+
+    def quantityLeftInOrder(self, orderID,orderQuantity):
+        if orderID == None:
+            return orderQuantity
+        else:
+            status = self.limitOrderStatus(orderID)
+            return status['orderQty']-status['cumQty']
+
+    def orderOpen(self, orderID):
+        if orderID == None:
+            return False
+        order = self.limitOrderStatus(orderID)
+        status = order['ordStatus']
+        one = order['ordStatus'] != 'Canceled'
+        two = order['ordStatus'] != 'Filled'
+        return one and two
+
+    def limitOrderStatus(self, orderID, triesLeft = None):
+        if triesLeft==None:
+            triesLeft = 1
+        if orderID == None:
+            return False
+        filter = '{"orderID": "' + orderID + '"}'
+        res = self.market.Order.Order_getOrders(filter=filter).result()
+
+        try:
+            res = res[0][0]
+            status = res['ordStatus']
+        except:
+            if triesLeft != 0:
+                sleep(1)
+                return self.limitOrderStatus(orderID)
+            triesLeft = triesLeft - 1
+            logger.logError('--- ORDER LIST ERROR ---')
+
+        return res
+
+
+    def getTickSize(self, asset, currency):
+        res = self.market.Instrument.Instrument_get(symbol=asset+currency).result()[0][0]['tickSize']
+        return res
+
+    def closeLimitOrder(self, orderID):
+        if orderID != None:
+            res = self.market.Order.Order_cancel(orderID=orderID).result()
+            return res
+        else:
+            return None
+
+    def interpretType(self, type):
+        if type.lower() == 'LONG'.lower():
+            return self.buyText
+        else:
+            if type.lower() == 'SHORT'.lower():
+                return self.sellText
+            else:
+                if type.lower() == 'u18':
+                    return 'Z18'
+        return type
+
+
+    def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None, note=None):
+        return self.limitBuy(limitPrice, asset, currency, -orderQuantity, orderNumber, note)
+
+    def parsePrice(self, asset, currency, price):
+        digits = 2
+        if asset + currency == 'XRPU18':
+            digits = 9
+        else:
+            if asset + currency == 'XBTUSD':
+                return str(price)[:str(price).find(".")]
+
+        strPrice = str(price)
+        decimalPlace = strPrice.find(".")
+        nextDigit = strPrice[decimalPlace + digits:decimalPlace + digits + 1]
+        if int(nextDigit) > 4:
+            increment = Decimal((1 * 10 ** -digits))
+            price = price + increment
+            strPrice = str(price)
+        return strPrice[:decimalPlace + digits]
+
+    def limitBuy(self, price, asset, currency, orderQuantity, orderId=None, note=None):
+        result = None
+
+        openOrder = self.orderOpen(orderId)
+        if openOrder and orderQuantity != 0:
+            try:
+                result = self.market.Order.Order_amend(orderID=orderId, price=price).result()
+                logger.logOrder(self.marketName, 'Limit', price, asset, currency, orderQuantity,
+                                str(note) + ' amend for order: ' + str(orderId))
+            except Exception as e:
+
+                if e.response.status_code == 400:
+                    logger.logError('LIMIT AMEND ERROR')
+                    orderQuantity = self.quantityLeftInOrder(orderId,orderQuantity)
+                    if orderQuantity != 0:
+                        openOrder = False
+                else:
+                    logger.logError('UNKNOWN LIMIT ERROR: ' + str(e))
+                    raise e
+
+
+        if not openOrder and orderQuantity != 0:
             result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Limit",
-                                                 price=price).result()
+                                             price=price, execInst='ParticipateDoNotInitiate').result()
+            logger.logOrder(self.marketName, 'Limit', price, asset, currency, orderQuantity, note)
+        if result is not None:
             tradeInfo = result[0]
             for key, value in tradeInfo.items():
                 if key == "orderID":
                     newOrderId = (key + ": {0}".format(value))
-            return newOrderId
+                    return newOrderId[9:]
         else:
-            result = self.market.Order.Order_amend(orderID=orderId, price=price)
-            return result
-        return None
+            return None
 
     def resetToEquilibrium_Market(self, amount, asset, currency):
         before = self.getAmountOfItem('xbt')
@@ -44,10 +182,6 @@ class Bitmex(market):
                 self.marketSell(amount, asset, currency, note='Selling for equilibrium')
         after = self.getAmountOfItem('xbt')
         return after - before
-
-
-
-
 
     def marketBuy(self, orderQuantity, asset, currency, note=None):
         result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
@@ -62,14 +196,15 @@ class Bitmex(market):
         # client.Order.Order_cancel(orderID='').result()
         self.market.Order.Order_cancelAll().result()
 
-    def __init__(self, apiKey, apiKeySecret,realMoney,name):
+    def __init__(self, apiKey, apiKeySecret, realMoney, name):
         # The super function runs the constructor on the market class that this class inherits from. In other words,
         # done mess with it or the parameters I put in this init function
-        super(Bitmex, self).__init__(apiKey, apiKeySecret,realMoney,name)
+        super(Bitmex, self).__init__(apiKey, apiKeySecret, realMoney, name)
         self.connect()
 
     def connect(self):
-        self.market = bitmexApi.bitmex.bitmex(test=not self.real_money, config=None, api_key=self.apiKey, api_secret=self.apiKeySecret)
+        self.market = bitmexApi.bitmex.bitmex(test=not self.real_money, config=None, api_key=self.apiKey,
+                                              api_secret=self.apiKeySecret)
 
     def getAmountToUse(self, asset, currency, orderType):
         if orderType == self.buyText:
@@ -82,7 +217,7 @@ class Bitmex(market):
             curr = self.getAmountOfItem('XBt') * (1 - percentLower)
 
         price = self.getCurrentPrice(asset, currency)
-        if currency == 'USD' or (currency == 'U18' and asset == 'XBT'):
+        if currency == 'USD' or (currency == 'Z18' and asset == 'XBT'):
             result = floor(curr * price)
         else:
             result = floor((curr / price))
@@ -100,14 +235,16 @@ class Bitmex(market):
                 return 0
 
     def getCurrentPrice(self, asset, currency):
-        startTime = datetime.datetime.now() - datetime.timedelta(minutes=1)
-        trades = self.market.Trade.Trade_get(symbol=asset + currency, startTime=startTime).result()
+        trades = self.market.Trade.Trade_get(symbol=asset + currency, count=4, reverse=True).result()
         sum = 0
         volume = 0
         for trade in trades[0]:
             sum = sum + (trade['price'] * trade['size'])
             volume = volume + trade['size']
-        return sum / volume
+        strRes = sum / volume
+        strRes =str(strRes)
+        return float(strRes)
+
 
     def get_orders(self, asset, currency):
         orders = self.market.Order.Order_getOrders(symbol=asset + currency, reverse=True).result()

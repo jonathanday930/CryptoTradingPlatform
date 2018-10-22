@@ -11,16 +11,17 @@ class BinanceTrader (market):
         super(BinanceTrader, self).__init__(apiKey, apiKeySecret,realMoney,name)
         self.connect()
 
-
     def marketOrder(self, type, asset, currency):
+        pass
+
+    def resetToEquilibrium_Market(self, currentAmount, asset, currency):
         pass
 
     def getMaxAmountToUse(self, asset, currency):
         pass
 
     def marketBuy(self, orderSize, asset, currency, note):
-        if self.real_money == True:
-            print("buying %d of %s" % (orderSize, asset + currency))
+        if self.real_money:
             result = self.market.order_market_buy(
                 symbol=asset + currency,
                 quantity=orderSize)
@@ -38,11 +39,6 @@ class BinanceTrader (market):
     def getAmountOfItem(self, coin):
         balance = self.market.get_asset_balance(asset=coin)
         return balance
-         # result = self.market.Position.Position_get(filter=symbol).result()
-         #    if len(result[0]) > 0:
-         #        return result[0][0]['currentQty']
-         #    else:
-         #        return 0
 
     def marketSell(self, orderSize, asset, currency, note):
             if self.real_money == True:
