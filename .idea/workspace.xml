@@ -1,70 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e4be7aa4-fcc1-45c9-b514-29dfcaf03454" name="Default Changelist" comment="">
+    <list default="true" id="e341a2d9-eece-4551-ac96-b6f7c5a522e5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API_KEYS/sampleJSON.json" beforeDir="false" afterPath="$PROJECT_DIR$/API_KEYS/sampleJSON.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BinanceTrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/BinanceTrader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bitmex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bitmex.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bank.py" beforeDir="false" afterPath="$PROJECT_DIR$/bank.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmailHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/gmailHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/logger.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/.idea/market_maker.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/_settings_base.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/auth/APIKeyAuth.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/auth/APIKeyAuthWithExpires.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/auth/AccessTokenAuth.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/auth/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/bitmex.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/custom_strategy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/_settings_base.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/auth/APIKeyAuth.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/auth/APIKeyAuthWithExpires.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/auth/AccessTokenAuth.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/auth/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/bitmex.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/market_maker.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/utils/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/utils/constants.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/utils/dotdict.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/utils/errors.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/utils/log.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/utils/math.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/ws/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/market_maker/ws/ws_thread.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/utils/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/utils/constants.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/utils/dotdict.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/utils/errors.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/utils/log.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/utils/math.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/ws/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/market_maker/ws/ws_thread.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/marketmaker" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/setup.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/test/websocket-apikey-auth-test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market maker master/test/websocket-multiplexing-test.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/market.py" beforeDir="false" afterPath="$PROJECT_DIR$/market.py" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/TradingViewTrader$Unnamed__1_.coverage" NAME="Unnamed (1) Coverage Results" MODIFIED="1540164589121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TradingViewTrader$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1540757540892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TradingViewTrader$main.coverage" NAME="main Coverage Results" MODIFIED="1540759644101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
   <component name="FUSProjectUsageTrigger">
-    <session id="-2072850224">
+    <session id="1464557604">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="json" value="43" />
-          <entry key="py" value="38" />
+          <entry key="Python Console" value="24" />
+          <entry key="dummy" value="174" />
+          <entry key="json" value="10" />
+          <entry key="py" value="1400" />
+          <entry key="txt" value="422" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="43" />
-          <entry key="Python" value="38" />
+          <entry key="JSON" value="10" />
+          <entry key="PLAIN_TEXT" value="596" />
+          <entry key="Python" value="1424" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="json" value="3" />
+          <entry key="py" value="16" />
+          <entry key="txt" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JSON" value="3" />
+          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="Python" value="16" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.31" value="1" />
+          <entry key="project.open.time.35" value="1" />
+          <entry key="project.opened" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.checkout.remote" value="2" />
+          <entry key="git.branch.compare" value="2" />
+          <entry key="git.branch.create.new" value="1" />
+          <entry key="git.branch.delete.local" value="1" />
+          <entry key="git.branch.merge" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts" />
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Bitmex.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2363">
-              <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
+            <state>
+              <caret line="189" column="13" selection-start-line="189" selection-start-column="13" selection-end-line="189" selection-end-column="13" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/market.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-415">
-              <caret line="175" column="69" lean-forward="true" selection-start-line="175" selection-start-column="69" selection-end-line="175" selection-end-column="69" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BinanceTrader.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,8 +142,47 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gmailHandler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="27" selection-start-line="27" selection-end-line="27" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/market.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="290" column="19" lean-forward="true" selection-start-line="290" selection-start-column="19" selection-end-line="290" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BinanceTrader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/API_KEYS/sampleJSON.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="85" selection-start-line="14" selection-start-column="85" selection-end-line="14" selection-end-column="85" />
             </state>
           </provider>
         </entry>
@@ -82,17 +190,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="755">
-              <caret line="88" column="57" lean-forward="true" selection-start-line="88" selection-start-column="57" selection-end-line="88" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/extractedEmail.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7">
-              <caret line="18" column="8" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+            <state relative-caret-position="150">
+              <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -100,52 +199,108 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bank.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/binance/helpers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="105">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#16#33#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/API_KEYS/sampleJSON.json">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/binance/client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+            <state relative-caret-position="105">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>run</find>
-      <find>sample</find>
-      <find>API_KEYS</find>
-      <find>bank</find>
+      <find>subject</find>
+      <find>open</find>
+      <find>Listened</find>
+      <find>test=tru</find>
+      <find>test=</find>
+      <find>limitOrderEnabled</find>
+      <find>account</find>
     </findStrings>
+    <replaceStrings>
+      <replace>openBankFile</replace>
+    </replaceStrings>
     <dirStrings>
-      <dir>C:\Users\powbo\PycharmProjects\TradingViewTrader</dir>
+      <dir>$PROJECT_DIR$/market maker master</dir>
+      <dir>$PROJECT_DIR$</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Develop" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/Develop" />
+                <branch-info repo="$PROJECT_DIR$" source="origin/Binanace" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="master" />
+              </list>
+            </value>
+          </entry>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/controller.py" />
+        <option value="$PROJECT_DIR$/Bitmex.py" />
+        <option value="$PROJECT_DIR$/bank.txt" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/bank.py" />
+        <option value="$PROJECT_DIR$/market.py" />
+        <option value="$PROJECT_DIR$/BinanceTrader.py" />
         <option value="$PROJECT_DIR$/API_KEYS/sampleJSON.json" />
+        <option value="$PROJECT_DIR$/controller.py" />
+        <option value="$PROJECT_DIR$/binance/helpers.py" />
       </list>
     </option>
   </component>
@@ -156,19 +311,44 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1912" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1360" />
+    <option name="height" value="367" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="1" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="TradingViewTrader" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TradingViewTrader" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TradingViewTrader" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TradingViewTrader" type="462c0819:PsiDirectoryNode" />
+              <item name="bitmexApi" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TradingViewTrader" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TradingViewTrader" type="462c0819:PsiDirectoryNode" />
+              <item name="market maker master" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TradingViewTrader" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TradingViewTrader" type="462c0819:PsiDirectoryNode" />
+              <item name="market maker master" type="462c0819:PsiDirectoryNode" />
+              <item name="market_maker" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -179,14 +359,136 @@
             <path>
               <item name="TradingViewTrader" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="API_KEYS" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="binance" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/main.py" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/binance" />
+    </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Bitmex.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/controller.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/gmailHandler.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/logger.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/market.py</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -200,130 +502,419 @@
       </list>
     </option>
   </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="Unnamed (1)" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.5" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bank.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.5" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.5" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Unnamed (1)" />
+      <item itemvalue="Python.Unnamed" />
+      <item itemvalue="Python.main" />
+    </list>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="938af31d-95d3-43ce-a4b3-01a535769310" name="Default Changelist" comment="" />
-      <created>1540166486338</created>
+      <changelist id="e341a2d9-eece-4551-ac96-b6f7c5a522e5" name="Default Changelist" comment="" />
+      <created>1536006484554</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1540166486338</updated>
+      <updated>1536006484554</updated>
     </task>
+    <task id="LOCAL-00001" summary="Put the bank logging calls in place at the end of the marketOrder function. Planning on adding profit logging when we have some data to test with. Limit order logging is in place but not tested on working limit orders.">
+      <created>1538003123967</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1538003123967</updated>
+    </task>
+    <task id="LOCAL-00002" summary="got the bank logging nicely for market orders, works well when limit orders go thru, but needs to be tested more. Ideas on profit logging coming soon.">
+      <created>1538024094216</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1538024094216</updated>
+    </task>
+    <task id="LOCAL-00003" summary="bank logging calls in place and working for market orders. need to be tested on working limit orders though.">
+      <created>1538024601599</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1538024601599</updated>
+    </task>
+    <task id="LOCAL-00004" summary="started on the bank object.">
+      <created>1537506901429</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1537506901429</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Put the bank logging calls in place at the end of the marketOrder function. Planning on adding profit logging when we have some data to test with.">
+      <created>1537822746933</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1537822746933</updated>
+    </task>
+    <task id="LOCAL-00006" summary="limitBuy(), marketBuy(), and getOrders() working">
+      <created>1536214933914</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1536214933914</updated>
+    </task>
+    <task id="LOCAL-00007" summary="did some code cleanup and testing.">
+      <created>1536366996707</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1536366996707</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fixed getPosition did more testing.">
+      <created>1536541223603</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1536541223603</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fixed getCurrentPrice">
+      <created>1536542626296</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1536542626297</updated>
+    </task>
+    <task id="LOCAL-00010" summary="my bad">
+      <created>1536543381847</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1536543381847</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added some logic to make a market buy or sell for if the email says BUY or SHORT">
+      <created>1536545378660</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1536545378660</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added marketSell function">
+      <created>1536546445874</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1536546445874</updated>
+    </task>
+    <task id="LOCAL-00013" summary="added some logs. need to merge to fix marketBuy and sell">
+      <created>1536652542381</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1536652542381</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added the getAvailableBalanceInUsd() function. integrated it with the market buys and sells to now invest with almost 100% of the portfolio">
+      <created>1536733568827</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1536733568827</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-1" y="0" width="1368" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49946696" visible="true" weight="0.329718" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Python Console" order="11" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50053304" side_tool="true" weight="0.329718" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.26060605" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.4939394" visible="true" weight="0.27580646" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.505303" side_tool="true" weight="0.32903227" />
+      <window_info anchor="bottom" id="Version Control" order="3" sideWeight="0.4939394" weight="0.019354839" />
+      <window_info anchor="bottom" id="Python Console" order="4" sideWeight="0.49469697" weight="0.32903227" />
+      <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="6" />
+      <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49924242" weight="0.23225807" />
+      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.49772727" weight="0.41451612" />
+      <window_info anchor="bottom" id="Debug" order="9" sideWeight="0.49848485" weight="0.3951613" />
+      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="right" id="Database" order="0" weight="0.32954547" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="SciView" order="2" />
+      <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.26060605" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.49469697" visible="true" weight="0.4299517" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.505303" side_tool="true" visible="true" weight="0.4299517" />
+      <window_info anchor="bottom" id="Version Control" order="3" sideWeight="0.49469697" weight="0.5225806" />
+      <window_info anchor="bottom" id="Python Console" order="4" sideWeight="0.49621212" weight="0.32903227" />
+      <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="6" />
+      <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49924242" weight="0.23225807" />
+      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.49848485" weight="0.41451612" />
+      <window_info anchor="bottom" id="Debug" order="9" sideWeight="0.49848485" weight="0.3951613" />
+      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="right" id="Database" order="0" weight="0.32954547" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="SciView" order="2" />
+      <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Bitmex API python files" />
+    <MESSAGE value="implementing the bitmex API" />
+    <MESSAGE value="merged" />
+    <MESSAGE value="Integrated and tested limit and market buys, sells, and order amend calls to the API" />
+    <MESSAGE value="limitBuy(), marketBuy(), and getOrders() working" />
+    <MESSAGE value="did some code cleanup and testing." />
+    <MESSAGE value="fixed getPosition did more testing." />
+    <MESSAGE value="fixed getCurrentPrice" />
+    <MESSAGE value="my bad" />
+    <MESSAGE value="added some logic to make a market buy or sell for if the email says BUY or SHORT" />
+    <MESSAGE value="added marketSell function" />
+    <MESSAGE value="added some logs. need to merge to fix marketBuy and sell" />
+    <MESSAGE value="added the getAvailableBalanceInUsd() function. integrated it with the market buys and sells to now invest with almost 100% of the portfolio" />
+    <MESSAGE value="did some code cleanup and redid the logic for marketBuy and MarketSell" />
+    <MESSAGE value="started on the bank object." />
+    <MESSAGE value="Put the bank logging calls in place at the end of the marketOrder function. Planning on adding profit logging when we have some data to test with." />
+    <MESSAGE value="Put the bank logging calls in place at the end of the marketOrder function. Planning on adding profit logging when we have some data to test with. Limit order logging is in place but not tested on working limit orders." />
+    <MESSAGE value="got the bank logging nicely for market orders, works well when limit orders go thru, but needs to be tested more. Ideas on profit logging coming soon." />
+    <MESSAGE value="bank logging calls in place and working for market orders. need to be tested on working limit orders though." />
+    <option name="LAST_COMMIT_MESSAGE" value="bank logging calls in place and working for market orders. need to be tested on working limit orders though." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>14</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/controller.py</url>
-          <line>74</line>
-          <option name="timeStamp" value="1" />
+          <line>62</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/controller.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/extractedEmail.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bank.txt" />
+    <entry file="file://$PROJECT_DIR$/logger.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bitmexApi/bitmex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="315">
+          <caret line="22" column="77" selection-start-line="22" selection-start-column="77" selection-end-line="22" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.5/dist-packages/httplib2/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="1193" selection-start-line="1193" selection-end-line="1193" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/market.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="290" column="19" lean-forward="true" selection-start-line="290" selection-start-column="19" selection-end-line="290" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/API_KEYS/sampleJSON.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="85" selection-start-line="14" selection-start-column="85" selection-end-line="14" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9701">
+          <caret line="1663" selection-start-line="1663" selection-end-line="1663" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.5/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="308" selection-start-line="308" selection-end-line="308" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Bitmex.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2363">
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
+        <state>
+          <caret line="189" column="13" selection-start-line="189" selection-start-column="13" selection-end-line="189" selection-end-column="13" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/order.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extractedEmail.py">
+    <entry file="file://$PROJECT_DIR$/gmailHandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7">
-          <caret line="18" column="8" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        <state relative-caret-position="90">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="755">
-          <caret line="88" column="57" lean-forward="true" selection-start-line="88" selection-start-column="57" selection-end-line="88" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/market.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-415">
-          <caret line="175" column="69" lean-forward="true" selection-start-line="175" selection-start-column="69" selection-end-line="175" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BinanceTrader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+        <state relative-caret-position="150">
+          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/binance/client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/API_KEYS/sampleJSON.json">
+    <entry file="file://$PROJECT_DIR$/BinanceTrader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/binance/helpers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#16#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

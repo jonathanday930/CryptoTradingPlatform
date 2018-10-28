@@ -3,16 +3,16 @@
     {
       "name": "JSON1",
       "market": "BITMEX",
-      "real_money": false,
-      "keyID": "fake",
-      "privateKey": "fake"
+      "real_money": true,
+      "keyID": "8_Ec_skX8SSsiOjCi86ePIlO",
+      "privateKey": "Ny2evXSw_CF2clmG7rTFBD2I6OPhsL5vC-R7cGzWGucHJt1t"
     },
     {
       "name": "JSON2",
       "market": "BINANCE",
       "real_money": true,
-      "keyID": "fake",
-      "privateKey": "fake"
+      "keyID": "8JPfGMnsras1IBshyOUPba6FF583Ith8izZzWHJbgAnQA0YGcKqn3Yr8vt4RDdLt",
+      "privateKey": "R7gNFJht6inBVjmm4blS5dwCiIkrIatLjfac4woiF8EpiUWWH8IBRUrPKDT7vIRB"
     }
   ]
 }

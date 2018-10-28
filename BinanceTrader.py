@@ -25,6 +25,7 @@ class BinanceTrader (market):
             result = self.market.order_market_buy(
                 symbol=asset + currency,
                 quantity=orderSize)
+            bank.logBalance("Binance", self.getAmountOfItem(asset+currency))
             logger.logOrder('Binance', 'market', self.getCurrentPrice(asset, currency), asset, currency,
                             orderSize,
                             note=note)
@@ -36,23 +37,20 @@ class BinanceTrader (market):
                 type='MARKET',
                 quantity=orderSize)
 
-    def getAmountOfItem(self, coin):
-        balance = self.market.get_asset_balance(asset=coin)
-        return balance
 
     def marketSell(self, orderSize, asset, currency, note):
             if self.real_money == True:
                 print("selling %d of %s" % (orderSize, asset + currency))
                 result = self.market.order_market_sell(
-        symbol=asset+currency,
-        quantity=orderSize)
+                    symbol=asset+currency,
+                    quantity=orderSize)
                 logger.logOrder('Binance', 'market', self.getCurrentPrice(asset, currency), asset, currency,
                                 orderSize,
                                 note=note)
                 return result
 
             else:
-                 result = self.market.create_test_order(
+                result = self.market.create_test_order(
                 symbol=asset + currency,
                 side='SELL',
                 type='MARKET',
@@ -66,3 +64,14 @@ class BinanceTrader (market):
     def getCurrentPrice(self, asset, currency):
         prices = self.market.get_all_tickers()
 
+    def getAmountOfItem(self, coin):
+        balance = self.market.get_asset_balance(asset=coin)
+        return balance
+
+    def getAvailableBalance(self):
+        respnse = self.market.get_account()
+        print(response)
+        return
+
+    def getPrice(self, symbol):
+        return self.market.get_orderbook_ticker(symbol=symbol)

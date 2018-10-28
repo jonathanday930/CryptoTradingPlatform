@@ -7,16 +7,21 @@ def getBankFile():
     return file
 
 
-def logBalance(availableBalance):
+def logBalance(availableBalance, exchangeName):
     file = getBankFile()
-    text = str(datetime.datetime.now()) + ' - Available Balance: ' + str(availableBalance) + "\n\n"
+    text = format("Exchange: %s:\nAvalable balance: %s\nTime: %s\n\n" % (exchangeName,
+                                                                         str(availableBalance),
+                                                                         str(datetime.datetime.now())))
     file.write(text)
     file.close()
 
 
-def logContract(asset, currency, amount):
+def logContract(asset, currency, amount, exchangeName):
     file = getBankFile()
-    text = str(datetime.datetime.now()) + ' - Amt Of ' + str(asset + currency) + ": " + str(amount)
+    text = str("Exchange: %s:\nCoin: %s\nAmount: %d\nTime: %s\n\n" % (exchangeName,
+                                                                      asset+currency,
+                                                                      amount,
+                                                                      str(datetime.datetime.now())))
     file.write(text)
     file.close()
 

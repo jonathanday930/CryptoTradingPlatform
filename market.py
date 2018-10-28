@@ -172,7 +172,6 @@ class market(ABC):
             bank.logNote(text)
 
             change = self.resetToEquilibrium_Market(currentAmount, asset, currency)
-            bank.logBalance(self.getAmountOfItem('xbt'))
             orderSize = self.getMaxAmountToUse(asset, currency) * 0.4
             if type == self.buyText:
                 result = self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')

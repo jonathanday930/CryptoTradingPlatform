@@ -10,7 +10,7 @@ SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 def main():
 
     #  CHANGE THIS TO GO FROM TESTNET TO LIVENET
-    real_money = True
+    real_money = False
 
     trader = controller(gmailHandler('credentials.json'), .001, .1, real_money)
 
