@@ -61,7 +61,7 @@ class controller:
                         if keySet['market'] == 'BINANCE':
                             apiKey = keySet['keyID']
                             test = BinanceTrader(keySet['keyID'], keySet['privateKey'], keySet['real_money'], keySet['name'])
-                            self.addMarket(test, "binance")
+                            self.addMarket(test, keySet['market'])
                 continue
             else:
                 continue
