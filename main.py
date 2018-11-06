@@ -12,23 +12,13 @@ SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 def main():
 
     #  CHANGE THIS TO GO FROM TESTNET TO LIVENET
-    real_money = False
-    #
-    trader = controller(gmailHandler('credentials.json'), .001, .1, real_money)
-    #
-    # trader.importAPIKeys()
-    # trader.run()
+    real_money = True
 
-    # test = BinanceTrader("",
-    #                      "", True, "test1")
-    #
-    # trader.addMarket(test, "BINANCE")
-    # test.getCurrentPrice("BTC", "USDT")
-    # availableBalance = test.getAvailableBalance()
-    # xrpPrice = test.getCurrentPrice("XRP", "BTC")
-    # test.getAmountOfItem("XRP")
-    # test.getStepSize("XRP", "BTC");
-    # test.marketOrder("sell", "XRP", "BTC")
+    trader = controller(gmailHandler('credentials.json'), .001, .1, real_money)
+
+    trader.importAPIKeys()
+    trader.run()
+
 
 
 

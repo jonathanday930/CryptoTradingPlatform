@@ -9022,3 +9022,2247 @@ binance.exceptions.BinanceAPIException: APIError(code=-1013): Filter failure: LO
 
 ----- 
 Binance market order at 2018-11-02 02:35:44.880788 : 1.0 of pair XRPBTC at price 7.181e-05 Note: Going short
+Email received at: 2018-11-02 02:56:14.053843 : LONG GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 37, in marketOrder
+    assetPrice = self.getCurrentPrice(asset, currency)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 37, in marketOrder
+    assetPrice = self.getCurrentPrice(asset, currency)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 37, in marketOrder
+    assetPrice = self.getCurrentPrice(asset, currency)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 37, in marketOrder
+    assetPrice = self.getCurrentPrice(asset, currency)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 37, in marketOrder
+    assetPrice = self.getCurrentPrice(asset, currency)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 63, in marketBuy
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Filter failure: LOT_SIZE
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 37, in marketOrder
+    assetPrice = self.getCurrentPrice(asset, currency)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 37, in marketOrder
+    assetPrice = self.getCurrentPrice(asset, currency)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 37, in marketOrder
+    assetPrice = self.getCurrentPrice(asset, currency)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 63, in marketBuy
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Filter failure: LOT_SIZE
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 37, in marketOrder
+    assetPrice = self.getCurrentPrice(asset, currency)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 63, in marketBuy
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Filter failure: LOT_SIZE
+
+----- 
+Email received at: 2018-11-02 03:21:10.479809 : LONG GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 42, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 42, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-02 03:24:54.369548 : LONG GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 42, in marketOrder
+    round(orderSize, ndigits=n)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 42, in marketOrder
+    round(orderSize, ndigits=n)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 621, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-02 03:26:17.635519 : LONG GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 40, in marketOrder
+    n = stepSize.as_tuple().exponent * -1
+AttributeError: 'float' object has no attribute 'as_tuple'
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 40, in marketOrder
+    n = stepSize.as_tuple().exponent * -1
+AttributeError: 'float' object has no attribute 'as_tuple'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 40, in marketOrder
+    n = stepSize.as_tuple().exponent * -1
+AttributeError: 'float' object has no attribute 'as_tuple'
+
+----- 
+Email received at: 2018-11-02 16:25:40.346270 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 52, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 52, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 621, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-02 17:10:20.767608 : SHORT XRPBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 51, in marketOrder
+    orderSize = self.getAmountOfItem(asset, currency)
+TypeError: getAmountOfItem() takes 2 positional arguments but 3 were given
+
+----- 
+Email received at: 2018-11-04 18:34:35.739446 : LONG XRPBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1021): Timestamp for this request is outside of the recvWindow.
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1021): Timestamp for this request is outside of the recvWindow.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 84, in marketBuy
+    bank.logBalance("Binance", self.getAmountOfItem(asset+currency))
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 128, in getAmountOfItem
+    balance = self.market.get_asset_balance(asset=asset)["free"]
+TypeError: 'NoneType' object is not subscriptable
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1021): Timestamp for this request is outside of the recvWindow.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 84, in marketBuy
+    bank.logBalance("Binance", self.getAmountOfItem(asset+currency))
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 128, in getAmountOfItem
+    balance = self.market.get_asset_balance(asset=asset)["free"]
+TypeError: 'NoneType' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 84, in marketBuy
+    bank.logBalance("Binance", self.getAmountOfItem(asset+currency))
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 128, in getAmountOfItem
+    balance = self.market.get_asset_balance(asset=asset)["free"]
+TypeError: 'NoneType' object is not subscriptable
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1021): Timestamp for this request is outside of the recvWindow.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 84, in marketBuy
+    bank.logBalance("Binance", self.getAmountOfItem(asset+currency))
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 128, in getAmountOfItem
+    balance = self.market.get_asset_balance(asset=asset)["free"]
+TypeError: 'NoneType' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 84, in marketBuy
+    bank.logBalance("Binance", self.getAmountOfItem(asset+currency))
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 128, in getAmountOfItem
+    balance = self.market.get_asset_balance(asset=asset)["free"]
+TypeError: 'NoneType' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 377, in _make_request
+    httplib_response = conn.getresponse(buffering=True)
+TypeError: getresponse() got an unexpected keyword argument 'buffering'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 174, in _request
+    response = getattr(self.session, method)(uri, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 511, in post
+    return self.request('POST', url, data=data, json=json, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 468, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 576, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 376, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 560, in urlopen
+    body=body, headers=headers)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 379, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.5/http/client.py", line 1197, in getresponse
+    response.begin()
+  File "/usr/lib/python3.5/http/client.py", line 297, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.5/http/client.py", line 258, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.5/socket.py", line 575, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.5/ssl.py", line 929, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.5/ssl.py", line 791, in read
+    return self._sslobj.read(len, buffer)
+  File "/usr/lib/python3.5/ssl.py", line 575, in read
+    v = self._sslobj.read(len, buffer)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-04 18:35:44.908036 : LONG XRPBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 35, in marketOrder
+    text = "current amount of %s: %f \n  %s" % (asset, currentAmount, type)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 35, in marketOrder
+    text = "current amount of %s: %f \n  %s" % (asset, currentAmount, type)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-04 18:39:32.337703 : LONG XRPBTC on: BINANCE
+Email received at: 2018-11-04 18:41:19.785733 : SHORT XRPBTC on: BINANCE
+Binance market order at 2018-11-04 18:42:05.294944 : 15 of pair XRPBTC at price 7.212e-05 Note: Going short
+Email received at: 2018-11-04 18:44:29.588100 : LONG GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-04 18:48:20.259222 : LONG GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 377, in _make_request
+    httplib_response = conn.getresponse(buffering=True)
+TypeError: getresponse() got an unexpected keyword argument 'buffering'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 174, in _request
+    response = getattr(self.session, method)(uri, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 511, in post
+    return self.request('POST', url, data=data, json=json, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 468, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 576, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 376, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 560, in urlopen
+    body=body, headers=headers)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 379, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.5/http/client.py", line 1197, in getresponse
+    response.begin()
+  File "/usr/lib/python3.5/http/client.py", line 297, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.5/http/client.py", line 258, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.5/socket.py", line 575, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.5/ssl.py", line 929, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.5/ssl.py", line 791, in read
+    return self._sslobj.read(len, buffer)
+  File "/usr/lib/python3.5/ssl.py", line 575, in read
+    v = self._sslobj.read(len, buffer)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-04 18:49:00.253232 : LONG GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+Email received at: 2018-11-04 18:53:31.144025 : LONG GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 83, in marketBuy
+    quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1294, in order_market_buy
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+Email received at: 2018-11-04 18:53:58.178869 : LONG GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 48, in marketOrder
+    orderSize = math.floor(orderSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-04 20:05:19.411572 : LONG GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 59, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 59, in marketOrder
+    self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-04 20:18:31.641256 : LONG GVTBTC on: BINANCE
+Email received at: 2018-11-04 20:46:25.054468 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 71, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 71, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-04 20:54:45.856492 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 49, in marketOrder
+    orderSize = self.calculateOrderSize(orderSize)
+TypeError: calculateOrderSize() missing 1 required positional argument: 'stepSize'
+
+----- 
+Email received at: 2018-11-04 20:56:14.828857 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    if (stepSize < 0):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 50, in marketOrder
+    if (stepSize < 0):
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-04 20:56:58.749529 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 56, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 112, in marketSell
+    result = self.market.order_market_sell(symbol=asset + currency, quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1320, in order_market_sell
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+Email received at: 2018-11-04 20:57:10.815843 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 56, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 112, in marketSell
+    result = self.market.order_market_sell(symbol=asset + currency, quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1320, in order_market_sell
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+Email received at: 2018-11-04 20:57:21.346761 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 56, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 112, in marketSell
+    result = self.market.order_market_sell(symbol=asset + currency, quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1320, in order_market_sell
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+Email received at: 2018-11-04 20:57:31.483474 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 56, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 112, in marketSell
+    result = self.market.order_market_sell(symbol=asset + currency, quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1320, in order_market_sell
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+Email received at: 2018-11-04 20:57:43.788789 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 56, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 112, in marketSell
+    result = self.market.order_market_sell(symbol=asset + currency, quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1320, in order_market_sell
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+Email received at: 2018-11-04 20:57:56.858674 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 56, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 112, in marketSell
+    result = self.market.order_market_sell(symbol=asset + currency, quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1320, in order_market_sell
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+Email received at: 2018-11-04 20:58:06.919790 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 56, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 112, in marketSell
+    result = self.market.order_market_sell(symbol=asset + currency, quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1320, in order_market_sell
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+Email received at: 2018-11-04 20:58:19.820036 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 56, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 112, in marketSell
+    result = self.market.order_market_sell(symbol=asset + currency, quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1320, in order_market_sell
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+Email received at: 2018-11-04 20:58:31.909648 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 56, in marketOrder
+    result = self.marketSell(orderSize, asset, currency, note='Going short')
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 112, in marketSell
+    result = self.market.order_market_sell(symbol=asset + currency, quantity=orderSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1320, in order_market_sell
+    return self.order_market(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1268, in order_market
+    return self.create_order(**params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 1133, in create_order
+    return self._post('order', True, data=params)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 209, in _post
+    return self._request_api('post', path, signed, version, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 180, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 175, in _request
+    return self._handle_response(response)
+  File "/home/alex/PycharmProjects/TradingViewTrader/binance/client.py", line 199, in _handle_response
+    raise BinanceAPIException(response)
+binance.exceptions.BinanceAPIException: APIError(code=-1013): Invalid quantity.
+
+----- 
+Email received at: 2018-11-04 20:59:19.607213 : SHORT GVTBTC on: BINANCE
+ERROR: 
+Traceback (most recent call last):
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 49, in marketOrder
+    orderSize = self.calculateOrderSize(orderSize, stepSize)
+  File "/home/alex/PycharmProjects/TradingViewTrader/BinanceTrader.py", line 49, in marketOrder
+    orderSize = self.calculateOrderSize(orderSize, stepSize)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 715, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/home/alex/Desktop/pycharm-2018.2.2/helpers/pydev/pydevd.py", line 812, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+
+----- 
+Email received at: 2018-11-04 21:00:43.590839 : SHORT GVTBTC on: BINANCE
+Binance market order at 2018-11-04 21:03:46.614444 : 0.22 of pair GVTBTC at price 0.0015696 Note: Going short

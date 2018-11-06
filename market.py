@@ -29,7 +29,7 @@ class market(ABC):
     apiKey = None
     apiKeySecret = None
 
-    real_money = False
+    real_money = True
     limitOrderEnabled = False
 
     def __init__(self, marketApiKey, marketApiKeySecret, realMoney, name):
@@ -54,9 +54,9 @@ class market(ABC):
     def getCurrentPrice(self, asset, currency):
         pass;
 
-    @abstractmethod
-    def closeLimitOrders(self, asset, currency):
-        pass;
+    # @abstractmethod
+    # def closeLimitOrders(self, asset, currency):
+    #     pass;
 
     @abstractmethod
     def getAmountOfItem(self, coin):

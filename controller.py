@@ -17,7 +17,7 @@ class controller:
     gmailController = None
     marketControllers = {}
     marketOrderPercent = 0.4
-    real_money = False
+    real_money = True
     marginFromPrice = None
     maximumDeviationFromPrice = None
     goodLimitThreshold = None

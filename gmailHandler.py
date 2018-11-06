@@ -15,7 +15,7 @@ class gmailHandler:
     fromFilter = None
     gmailAPI = None
     refreshTime = 1
-    real_money = False
+    real_money = True
     readEmailCommand = {'removeLabelIds': ['UNREAD'], 'addLabelIds': []}
     lastReceivedEmails = None
 

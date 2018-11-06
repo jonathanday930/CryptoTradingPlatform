@@ -1,6 +1,6 @@
 # coding=utf-8
 
-import dateparser
+# import dateparser
 import pytz
 
 from datetime import datetime

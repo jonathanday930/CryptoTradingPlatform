@@ -1,3 +1,6 @@
+import decimal
+import math
+
 import bank
 import logger
 import traceback
@@ -13,9 +16,11 @@ class BinanceTrader (market):
     def __init__(self, apiKey, apiKeySecret,realMoney,name):
         # The super function runs the constructor on the market class that this class inherits from. In other words,
         # done mess with it or the parameters I put in this init function
+        numberOfCoins = 20
+
         super(BinanceTrader, self).__init__(apiKey, apiKeySecret,realMoney,name)
         self.connect()
-        self.setAllocationAmt(10)
+        self.setAllocationAmt(numberOfCoins)
 
 
     def setAllocationAmt(self, numberOfCoins):
@@ -33,27 +38,49 @@ class BinanceTrader (market):
             if type == 'buy':
                 amtOfBtcToBuy = self.allocationAmtInBtc
                 assetPrice = self.getCurrentPrice(asset, currency)
-                orderSize = (amtOfBtcToBuy/assetPrice) - (assetPrice % self.getStepSize(asset, currency))
+                orderSize = (amtOfBtcToBuy/assetPrice)
+                stepSize = str(self.getStepSize(asset, currency))
+                orderSize = self.calculateOrderSize(orderSize, stepSize)
                 self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
             else:
                 if type == 'sell':
-                    assetPrice = self.getAmountOfItem(asset)
-                    orderSize = assetPrice - (assetPrice % self.getStepSize(asset, currency))
+                    orderSize = self.getAmountOfItem(asset)
+                    stepSize = self.getStepSize(asset, currency)
+                    orderSize = self.calculateOrderSize(orderSize, stepSize)
                     result = self.marketSell(orderSize, asset, currency, note='Going short')
             self.attemptsLeft = self.attemptsTotal
             return True
         except:
             tb = traceback.format_exc()
             logger.logError(tb)
+            print(tb)
             if self.attemptsLeft == 0:
                 self.attemptsLeft = self.attemptsTotal
                 return None
             sleep(self.delayBetweenAttempts)
             self.connect()
             self.attemptsLeft = self.attemptsLeft - 1
-            self.marketOrder(type, asset, currency)
+            # self.marketOrder(type, asset, currency)
         pass
 
+
+    def calculateOrderSize(self, orderSize, stepSize):
+        stepSize = str(stepSize)
+        if stepSize == "1":
+            orderSize = math.floor(orderSize)
+        elif stepSize == "0.1":
+            orderSize = (math.floor(orderSize * 10)) * .1
+        elif stepSize == "0.01":
+            orderSize = (math.floor(orderSize * 100)) * .01
+        elif stepSize == "0.001":
+            orderSize = (math.floor(orderSize * 1000)) * .001
+        elif stepSize == "0.0001":
+            orderSize = (math.floor(orderSize * 10000)) * .0001
+        elif stepSize == "0.00001":
+            orderSize = (math.floor(orderSize * 100000)) * .00001
+        elif stepSize == "0.000001":
+            orderSize = (math.floor(orderSize * 1000000)) * .000001
+        return orderSize
 
 
     def marketBuy(self, orderSize, asset, currency, note):
