@@ -43,7 +43,9 @@ class gmailHandler:
                 return self.readEmails(response)
             else:
                 time.sleep(self.refreshTime)
-                print("Listened for " + str(count) + " seconds")
+                if count % 240 == 0:
+                    print("\n")
+                print(".", end="", flush=True)
                 count = count + 1
 
     def readEmails(self, emails):
@@ -56,6 +58,8 @@ class gmailHandler:
             message = self.gmailAPI.users().messages().get(userId='me', id=messageId['id']).execute()
             if self.authEmail(message):
                 processedEmails.append(email(message))
+            else:
+                self.setEmailsToRead()
 
         return processedEmails
 

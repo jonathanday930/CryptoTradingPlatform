@@ -36,7 +36,7 @@ class controller:
 
         while True:
             emails = self.gmailController.listen(-1)
-            if emails is not None:
+            if len(emails) != 0:
                 for email in emails:
                     result = self.createOrder(email)
                     if result:

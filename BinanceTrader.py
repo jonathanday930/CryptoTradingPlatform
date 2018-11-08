@@ -1,6 +1,4 @@
-import decimal
 import math
-
 import bank
 import logger
 import traceback
@@ -12,22 +10,20 @@ from binance.client import Client
 class BinanceTrader (market):
 
     allocationAmtInBtc = 0
+    numberOfCoins = 20
 
     def __init__(self, apiKey, apiKeySecret,realMoney,name):
         # The super function runs the constructor on the market class that this class inherits from. In other words,
         # done mess with it or the parameters I put in this init function
-        numberOfCoins = 20
 
-        super(BinanceTrader, self).__init__(apiKey, apiKeySecret,realMoney,name)
+        super(BinanceTrader, self).__init__(apiKey, apiKeySecret, realMoney, name)
         self.connect()
-        self.setAllocationAmt(numberOfCoins)
-
+        self.setAllocationAmt(self.numberOfCoins)
 
     def setAllocationAmt(self, numberOfCoins):
         self.allocationAmtInBtc = self.getAvailableBalance() / numberOfCoins
-        print(self.allocationAmtInBtc)
+        print("Allocation amount for %d coins: %.8f" % (self.numberOfCoins, self.allocationAmtInBtc))
         return
-
 
     def marketOrder(self, type, asset, currency):
         try:
@@ -39,7 +35,7 @@ class BinanceTrader (market):
                 amtOfBtcToBuy = self.allocationAmtInBtc
                 assetPrice = self.getCurrentPrice(asset, currency)
                 orderSize = (amtOfBtcToBuy/assetPrice)
-                stepSize = str(self.getStepSize(asset, currency))
+                stepSize = self.getStepSize(asset, currency)
                 orderSize = self.calculateOrderSize(orderSize, stepSize)
                 self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
             else:
@@ -59,14 +55,14 @@ class BinanceTrader (market):
                 return None
             sleep(self.delayBetweenAttempts)
             self.connect()
-            self.attemptsLeft = self.attemptsLeft - 1
+            self.attemptsLeft = self.attemptsLeft - 3
             # self.marketOrder(type, asset, currency)
         pass
 
 
     def calculateOrderSize(self, orderSize, stepSize):
         stepSize = str(stepSize)
-        if stepSize == "1":
+        if stepSize == "1.0" or stepSize == "1":
             orderSize = math.floor(orderSize)
         elif stepSize == "0.1":
             orderSize = (math.floor(orderSize * 10)) * .1
@@ -88,20 +84,19 @@ class BinanceTrader (market):
             result = self.market.order_market_buy(
                 symbol=asset + currency,
                 quantity=orderSize)
-            bank.logBalance("Binance", self.getAmountOfItem(asset+currency))
+            bank.logBalance("Binance", self.getAmountOfItem(asset))
             logger.logOrder('Binance', 'market', self.getCurrentPrice(asset, currency), asset, currency,
                             orderSize,
                             note=note)
             return result
         else:
-            result = self.market.create_test_order(
-                symbol=asset + currency,
-                side='BUY',
-                type='MARKET',
-                quantity=orderSize)
+            print("Testing an order, REAL MONEY = False")
 
 
     def marketSell(self, orderSize, asset, currency, note):
+        #if ordersize is less than stepsize
+            if orderSize < self.getStepSize(asset, currency):
+                return
             if self.real_money == True:
                 print("selling %d of %s" % (orderSize, asset + currency))
                 result = self.market.order_market_sell(symbol=asset + currency, quantity=orderSize)
@@ -133,7 +128,6 @@ class BinanceTrader (market):
 
     def getAmountOfItem(self, asset):
         balance = self.market.get_asset_balance(asset=asset)["free"]
-        print("%s: %s" % (asset, balance))
         return float(balance)
 
     def getAvailableBalance(self):
