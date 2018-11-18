@@ -10,7 +10,8 @@ from binance.client import Client
 class BinanceTrader (market):
 
     allocationAmtInBtc = 0
-    numberOfCoins = 20
+    NUMBER_OF_COINS = 6
+    AVAILABLE_BALANCE = 0.007
 
     def __init__(self, apiKey, apiKeySecret,realMoney,name):
         # The super function runs the constructor on the market class that this class inherits from. In other words,
@@ -18,11 +19,12 @@ class BinanceTrader (market):
 
         super(BinanceTrader, self).__init__(apiKey, apiKeySecret, realMoney, name)
         self.connect()
-        self.setAllocationAmt(self.numberOfCoins)
+        self.setAllocationAmt(self.NUMBER_OF_COINS)
 
     def setAllocationAmt(self, numberOfCoins):
-        self.allocationAmtInBtc = self.getAvailableBalance() / numberOfCoins
-        print("Allocation amount for %d coins: %.8f" % (self.numberOfCoins, self.allocationAmtInBtc))
+        self.allocationAmtInBtc = self.AVAILABLE_BALANCE / numberOfCoins
+        print("Allocation amount for %d coins: %.8f" % (self.NUMBER_OF_COINS, self.allocationAmtInBtc))
+        bank.logBalance(self.AVAILABLE_BALANCE, "BINANCE")
         return
 
     def marketOrder(self, type, asset, currency):
@@ -32,18 +34,26 @@ class BinanceTrader (market):
             print(text)
 
             if type == 'buy':
-                amtOfBtcToBuy = self.allocationAmtInBtc
                 assetPrice = self.getCurrentPrice(asset, currency)
-                orderSize = (amtOfBtcToBuy/assetPrice)
+                orderSize = (self.allocationAmtInBtc/assetPrice)
                 stepSize = self.getStepSize(asset, currency)
                 orderSize = self.calculateOrderSize(orderSize, stepSize)
+
+                if currentAmount > orderSize:
+                    print("attempted to buy %s%s while already in a position" % (asset, currency))
+                    return True
+
+                print("Buying %d" % (orderSize))
                 self.marketBuy(orderSize, asset, currency, note='Going long.. Previous round trip profit')
+                bank.logContract(asset, currency, orderSize, "BINANCE")
             else:
                 if type == 'sell':
                     orderSize = self.getAmountOfItem(asset)
                     stepSize = self.getStepSize(asset, currency)
                     orderSize = self.calculateOrderSize(orderSize, stepSize)
+                    print("Selling %d" % (orderSize))
                     result = self.marketSell(orderSize, asset, currency, note='Going short')
+                    bank.logContract(asset, currency, orderSize, "BINANCE")
             self.attemptsLeft = self.attemptsTotal
             return True
         except:
@@ -55,7 +65,7 @@ class BinanceTrader (market):
                 return None
             sleep(self.delayBetweenAttempts)
             self.connect()
-            self.attemptsLeft = self.attemptsLeft - 3
+            self.attemptsLeft = 0
             # self.marketOrder(type, asset, currency)
         pass
 
