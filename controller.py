@@ -1,11 +1,6 @@
-import logger
-from Bitmex import Bitmex
-from market import market
+import time
 
-assetSubjectNumber = 0
-currencySubjectNumber = 1
-typeSubjectNumber = 2
-marketSubjectNumber = 3
+from markets.bitmex.Bitmex import Bitmex
 
 import os
 
@@ -13,7 +8,6 @@ import json
 
 
 class controller:
-    gmailController = None
     marketControllers = {}
     marketOrderPercent = 0.4
     real_money = False
@@ -29,18 +23,42 @@ class controller:
         self.real_money = realMoney
         self.gmailController.real_money = realMoney
 
+        self.strategies = {}
+
     def run(self):
         for market in self.marketControllers:
             self.marketControllers[market].connect()
-
+        currentOrders = []
         while True:
-            emails = self.gmailController.listen(-1)
-            if emails is not None:
-                for email in emails:
-                    result = self.createOrder(email)
-                    if result:
-                        self.gmailController.setEmailsToRead()
+            for strategy in self.strategies:
+                newOrders = strategy.runStrategy()
+                for order in newOrders:
+                    order[strategy] = strategy.strategyName
+                self.removeDuplicateOrders(newOrders, currentOrders)
+                currentOrders.extend(newOrders)
 
+            self.processOrders(currentOrders)
+
+            time.sleep(1)
+
+    def processOrders(self,currentOrders):
+        for order in currentOrders:
+            if order.market.upper() in self.marketControllers:
+                self.marketControllers[order.market.upper()].makeOrder(order)
+
+        for order in currentOrders[:]:
+            if 'result' in order:
+                # TODO: LOG FUNCTION
+                self.strategies[order['strategy']].finalizeOrder(order)
+                currentOrders.remove(order)
+
+    def removeDuplicateOrders(self, newOrders, orders):
+        for newOrder in newOrders[:]:
+            if 'id' in newOrder:
+                for order in orders:
+                    if 'id' in order:
+                        if order['id'] == newOrder['id'] and order['strategy'] == newOrder['strategy']:
+                            newOrders.remove(newOrder)
 
     def importAPIKeys(self):
         folder = 'API_KEYS/'
@@ -70,19 +88,8 @@ class controller:
         market.maximumDeviationFromPrice = self.maximumDeviationFromPrice
         self.marketControllers[name] = market
 
-    def createOrder(self, email):
-        market = email.parameters[marketSubjectNumber]
-        type = email.parameters[typeSubjectNumber]
-        asset = email.parameters[assetSubjectNumber]
-        currency = email.parameters[currencySubjectNumber]
-        logger.logEmail(market, type, asset, currency)
-        if market in self.marketControllers:
-            if self.marketControllers[market].limitOrderEnabled:
-                return self.marketControllers[market].executeLimitOrder(type, asset, currency)
-            else:
-                return self.marketOrder(self.marketControllers[market],
-                             asset,
-                             currency, type)
+    def addStrategy(self, strategy):
+        self.strategies[strategy.strategyName] = strategy
 
     def marketOrder(self, market, asset, currency, type):
 
@@ -90,6 +97,3 @@ class controller:
             return market.marketOrder('buy', asset, currency)
         else:
             return market.marketOrder('sell', asset, currency)
-
-
-
