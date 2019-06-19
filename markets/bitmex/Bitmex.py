@@ -1,49 +1,34 @@
+import math
 from decimal import Decimal
 from math import floor
 from time import sleep
 
 import markets.bitmex.bitmexApi.bitmex
 from debug import logger
-from markets.marketBaseClass import market
+
+from markets.makerLimitOrderMarket import makerLimitOrderMarket
 
 
 # a controller for ONE bitmex connection. This is a basic formula for how it should look.
-class Bitmex(market):
-
-    def getOrderPrice(self, orderID):
-        order = self.limitOrderStatus(orderID)
-        if order is not None:
-            return order['price']
-        return None
+class Bitmex(makerLimitOrderMarket):
 
     marketName = 'BITMEX'
 
     limitOrderEnabled = True
 
-
-
-    def orderCanceled(self, orderID):
-        order = self.limitOrderStatus(orderID)
-        if order != False:
-            return order['ordStatus'] == 'Canceled'
-        return True
-
-
-    def getOrderBook(self, asset, currency):
-        res = self.market.OrderBook.OrderBook_getL2(symbol=asset+currency).result()[0]
-        return res
-
+    def orderisOpen(self, orderID):
+        pass
 
     def extractMakerLimitPrice(self, type, asset, currency):
-        orderBook = self.getOrderBook(asset,currency)
+        orderBook = self.getOrderBook(currency, asset)
 
         limitPrice = -5
 
         if type == self.buyText:
-            limitPrice = 0
+            limitPrice = -math.inf
         else:
             if type == self.sellText:
-                limitPrice = 999999
+                limitPrice = math.inf
 
         for order in orderBook:
 
@@ -56,13 +41,30 @@ class Bitmex(market):
                         limitPrice = order['price']
         return limitPrice
 
+    def getOrderPrice(self, orderID):
+        order = self.limitOrderStatus(orderID)
+        if order is not None:
+            return order['price']
+        return None
 
-    def quantityLeftInOrder(self, orderID,orderQuantity):
+
+
+    def orderCanceled(self, orderID):
+        order = self.limitOrderStatus(orderID)
+        if order != False:
+            return order['ordStatus'] == 'Canceled'
+        return True
+
+    def getOrderBook(self, asset, currency):
+        res = self.market.OrderBook.OrderBook_getL2(symbol=asset + currency).result()[0]
+        return res
+
+    def quantityLeftInOrder(self, orderID, orderQuantity=None):
         if orderID == None:
             return orderQuantity
         else:
             status = self.limitOrderStatus(orderID)
-            return status['orderQty']-status['cumQty']
+            return status['orderQty'] - status['cumQty']
 
     def orderOpen(self, orderID):
         if orderID == None:
@@ -73,8 +75,8 @@ class Bitmex(market):
         two = order['ordStatus'] != 'Filled'
         return one and two
 
-    def limitOrderStatus(self, orderID, triesLeft = None):
-        if triesLeft==None:
+    def limitOrderStatus(self, orderID, triesLeft=None):
+        if triesLeft == None:
             triesLeft = 1
         if orderID == None:
             return False
@@ -93,9 +95,8 @@ class Bitmex(market):
 
         return res
 
-
     def getTickSize(self, asset, currency):
-        res = self.market.Instrument.Instrument_get(symbol=asset+currency).result()[0][0]['tickSize']
+        res = self.market.Instrument.Instrument_get(symbol=asset + currency).result()[0][0]['tickSize']
         return res
 
     def closeLimitOrder(self, orderID):
@@ -115,7 +116,6 @@ class Bitmex(market):
                 if type.lower() == 'u18':
                     return 'Z18'
         return type
-
 
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None, note=None):
         return self.limitBuy(limitPrice, asset, currency, -orderQuantity, orderNumber, note)
@@ -150,17 +150,16 @@ class Bitmex(market):
 
                 if e.response.status_code == 400:
                     logger.logError('LIMIT AMEND ERROR')
-                    orderQuantity = self.quantityLeftInOrder(orderId,orderQuantity)
+                    orderQuantity = self.quantityLeftInOrder(orderId, orderQuantity)
                     if orderQuantity != 0:
                         openOrder = False
                 else:
                     logger.logError('UNKNOWN LIMIT ERROR: ' + str(e))
                     raise e
 
-
         if not openOrder and orderQuantity != 0:
-            result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Limit",
-                                             price=price, execInst='ParticipateDoNotInitiate').result()
+            result = self.market.Order.Order_new(symbol=currency + asset, orderQty=orderQuantity, ordType="Limit",
+                                                 price=price, execInst='ParticipateDoNotInitiate').result()
             logger.logOrder(self.marketName, 'Limit', price, asset, currency, orderQuantity, note)
         if result is not None:
             tradeInfo = result[0]
@@ -222,7 +221,7 @@ class Bitmex(market):
             result = floor((curr / price))
         return result
 
-    def getAmountOfItem(self, val1,val2):
+    def getAmountOfItem(self, val1, val2=None,orderType=None):
         if val1.lower() == 'xbt' and val2 is None:
             return self.market.User.User_getMargin().result()[0]['availableMargin'] / self.btcToSatoshi
         else:
@@ -233,17 +232,16 @@ class Bitmex(market):
             else:
                 return 0
 
-    def getCurrentPrice(self, asset, currency):
-        trades = self.market.Trade.Trade_get(symbol=asset + currency, count=4, reverse=True).result()
+    def getCurrentPrice(self, val1, val2=None):
+        trades = self.market.Trade.Trade_get(symbol=val1 + val2, count=4, reverse=True).result()
         sum = 0
         volume = 0
         for trade in trades[0]:
             sum = sum + (trade['price'] * trade['size'])
             volume = volume + trade['size']
         strRes = sum / volume
-        strRes =str(strRes)
+        strRes = str(strRes)
         return float(strRes)
-
 
     def get_orders(self, asset, currency):
         orders = self.market.Order.Order_getOrders(symbol=asset + currency, reverse=True).result()
@@ -260,7 +258,7 @@ class Bitmex(market):
         pass
 
     def setLeverage(self, asset, currency):
-        self.market.Position.Leverage(symbol=(asset+currency), leverage=2)
+        self.market.Position.Leverage(symbol=(asset + currency), leverage=2)
         pass
 
     # def logOrder(self, orderQuantity, asset, currency):

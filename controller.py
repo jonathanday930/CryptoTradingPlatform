@@ -15,13 +15,11 @@ class controller:
     maximumDeviationFromPrice = None
     goodLimitThreshold = None
 
-    def __init__(self, gmail, priceMargin, maximum, realMoney):
+    def __init__(self, priceMargin, maximum, realMoney):
         self.marginFromPrice = priceMargin
         self.maximumDeviationFromPrice = maximum
-        self.gmailController = gmail
         self.timeOutTime = -1
         self.real_money = realMoney
-        self.gmailController.real_money = realMoney
 
         self.strategies = {}
 
@@ -30,21 +28,20 @@ class controller:
             self.marketControllers[market].connect()
         currentOrders = []
         while True:
-            for strategy in self.strategies:
-                newOrders = strategy.runStrategy()
+            for strategy in self.strategies.values():
+                newOrders = strategy.runStrategy(self.marketControllers)
                 for order in newOrders:
-                    order[strategy] = strategy.strategyName
+                    order['strategy'] = strategy.strategyName
                 self.removeDuplicateOrders(newOrders, currentOrders)
                 currentOrders.extend(newOrders)
 
             self.processOrders(currentOrders)
-
-            time.sleep(1)
+            time.sleep(5)
 
     def processOrders(self,currentOrders):
         for order in currentOrders:
-            if order.market.upper() in self.marketControllers:
-                self.marketControllers[order.market.upper()].makeOrder(order)
+            if order['market'].upper() in self.marketControllers:
+                self.marketControllers[order['market'].upper()].makeOrder(order)
 
         for order in currentOrders[:]:
             if 'result' in order:

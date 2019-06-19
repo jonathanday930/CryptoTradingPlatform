@@ -3,9 +3,12 @@ from httplib2 import Http
 
 from oauth2client import file, client, tools
 
+from markets import marketBaseClass
+
 SCOPES = 'https://www.googleapis.com/auth/gmail.modify'
 
 from strategies.strategy import strategy
+from markets.marketBaseClass import marketBaseClass
 
 
 class gmailStrategy(strategy):
@@ -17,15 +20,12 @@ class gmailStrategy(strategy):
     refreshTime = 1
     real_money = False
     readEmailCommand = {'removeLabelIds': ['UNREAD'], 'addLabelIds': []}
-    lastReceivedEmails = None
-
 
     boundaryString = '$$'
-    assetSubjectNumber = 0
-    currencySubjectNumber = 1
+    assetSubjectNumber = 1
+    currencySubjectNumber = 0
     typeSubjectNumber = 2
     marketSubjectNumber = 3
-
 
     def __init__(self, configFile=None):
 
@@ -36,7 +36,6 @@ class gmailStrategy(strategy):
             flow = client.flow_from_clientsecrets(configFile, SCOPES)
             creds = tools.run_flow(flow, store)
         self.gmailAPI = build('gmail', 'v1', http=creds.authorize(Http()))
-
 
     def runStrategy(self, marketControllers):
 
@@ -51,14 +50,19 @@ class gmailStrategy(strategy):
         else:
             return []
 
-
-
+    def interpretType(self, word):
+        if word.upper() == 'LONG':
+            return marketBaseClass.buyText
+        else:
+            if word.upper() == 'SHORT':
+                return marketBaseClass.sellText
+            else:
+                return word
 
     # Returns a list of orders created from the email
     def readEmails(self, emails):
         messageIds = emails['messages']
 
-        self.lastReceivedEmails = messageIds
         orders = []
         for messageId in messageIds:
             message = self.gmailAPI.users().messages().get(userId='me', id=messageId['id']).execute()
@@ -66,8 +70,9 @@ class gmailStrategy(strategy):
                 params = self.getSubjectMessage(message)
 
                 order = {'currency': params[self.currencySubjectNumber], 'asset': params[self.assetSubjectNumber],
-                         'action': params[self.typeSubjectNumber], 'market': params[self.marketSubjectNumber],
-                         'action-type': 'LIMIT', 'id': str(messageId)}
+                         'action': self.interpretType(params[self.typeSubjectNumber]),
+                         'market': params[self.marketSubjectNumber],
+                         'action-type': 'LIMIT', 'id': messageId['id']}
                 orders.append(order)
         return orders
 
@@ -83,14 +88,13 @@ class gmailStrategy(strategy):
             if header['name'] == 'Subject':
                 return header['value']
 
-
-    def finalizeOrder(self,order):
+    def finalizeOrder(self, order):
         if str(order['result']) == str(0):
             self.setEmailToRead(order['id'])
 
-    def setEmailToRead(self,messageID):
+    def setEmailToRead(self, messageID):
         self.gmailAPI.users().messages().modify(userId='me', id=messageID,
-                                                    body=self.readEmailCommand).execute()
+                                                body=self.readEmailCommand).execute()
 
     def authEmail(self, email):
         return self.getSubjectFromMessage(email).find(
