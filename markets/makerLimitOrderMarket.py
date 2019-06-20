@@ -132,6 +132,7 @@ class makerLimitOrderMarket(marketBaseClass):
 
         if not order.get('equilibrium'):
             amount = self.getAmountOfItem(str(order['currency']), str(order['asset']))
+            order['equilibriumQuantity'] = amount
             if amount > 0 and order['action'] == self.sellText:
                 order['currentAction'] = self.sellText
             else:
@@ -147,12 +148,13 @@ class makerLimitOrderMarket(marketBaseClass):
             if 'amount' in order:
                 amount = order['amount']
             else:
-                # TODO: This should not be here long term
+                # TODO: This should not be here long term. Amounts need to be taken care of in strategy.
                 if order['asset'] == 'USD':
                     amount = (self.getAmountOfItem(order['currency']) * self.getCurrentPrice(order['currency'],
                                                                                              order['asset'])) * .4
                 else:
-                    amount = (self.getAmountOfItem('xbt') / self.getCurrentPrice(order['currency'],order['asset'])) * .4
+                    amount = (self.getAmountOfItem('xbt') / self.getCurrentPrice(order['currency'],
+                                                                                 order['asset'])) * .4
 
         order['initialPrice'] = self.getCurrentPrice(order['currency'], order['asset'])
         order['initialized'] = True
@@ -164,6 +166,7 @@ class makerLimitOrderMarket(marketBaseClass):
         while tries < tryMaxCount:
             try:
                 if not order.get('initialized'):
+                    #TODO: Allow option to not reach equilibrium
                     self.initializeLimitOrder(order)
 
                 if order.get('completed'):
@@ -174,7 +177,7 @@ class makerLimitOrderMarket(marketBaseClass):
                     abs(self.quantityLeftInOrder(order.get('orderID'), math.inf)),
                     abs(order.get('orderQuantity', math.inf)))
 
-                if self.isInRange(order['action'], order['initialPrice'],
+                if self.isInRange(order['currentAction'], order['initialPrice'],
                                   self.getCurrentPrice(order['currency'], order['asset']),
                                   self.maximumDeviationFromPrice,
                                   order['equilibrium']) and order.get('orderQuantity') != 0:
@@ -208,10 +211,16 @@ class makerLimitOrderMarket(marketBaseClass):
         if not order['equilibrium']:
             order['equilibrium'] = True
             order['initialized'] = False
+            self.logOrderInBank(order, action=order['currentAction'], orderAmount=order['equilibriumQuantity'],
+                                orderPrice=order.get('currentPrice'))
+
         else:
             if not order.get('completed'):
                 order['completed'] = True
                 order['result'] = '0'
+                self.logOrderInBank(order, action=order['action'], orderAmount=order['amount'],
+                                    orderPrice=order.get('currentPrice'))
+
         logger.logCompletedOrder(self.marketName, ' Maker Limit ',
                                  order.get('previousOrderPrice', -9999),
                                  order.get('initialPrice', -69), order['action'], order['asset'],

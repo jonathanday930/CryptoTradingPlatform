@@ -1,5 +1,6 @@
 import time
 
+from debug import bank
 from markets.bitmex.Bitmex import Bitmex
 
 import os
@@ -48,6 +49,9 @@ class controller:
                 # TODO: LOG FUNCTION
                 self.strategies[order['strategy']].finalizeOrder(order)
                 currentOrders.remove(order)
+                #TODO: make bank updates correctly done
+                for market in self.marketControllers:
+                    bank.updateBalanceHistory(market)
 
     def removeDuplicateOrders(self, newOrders, orders):
         for newOrder in newOrders[:]:

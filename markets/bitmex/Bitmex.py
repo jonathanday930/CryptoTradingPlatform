@@ -10,7 +10,10 @@ from markets.makerLimitOrderMarket import makerLimitOrderMarket
 
 
 # a controller for ONE bitmex connection. This is a basic formula for how it should look.
-class Bitmex(makerLimitOrderMarket):
+from markets.marketOrderMarket import marketOrderMarket
+
+
+class Bitmex(marketOrderMarket):
 
     marketName = 'BITMEX'
 
@@ -170,20 +173,9 @@ class Bitmex(makerLimitOrderMarket):
         else:
             return None
 
-    def resetToEquilibrium_Market(self, amount, asset, currency):
-        before = self.getAmountOfItem('xbt')
-
-        if amount < 0:
-            self.marketBuy(-amount, asset, currency, note='Buying for equilibrium')
-        else:
-            if amount > 0:
-                self.marketSell(amount, asset, currency, note='Selling for equilibrium')
-        after = self.getAmountOfItem('xbt')
-        return after - before
-
-    def marketBuy(self, orderQuantity, asset, currency, note=None):
-        result = self.market.Order.Order_new(symbol=asset + currency, orderQty=orderQuantity, ordType="Market").result()
-        logger.logOrder('Bitmex', 'market', self.getCurrentPrice(asset, currency), asset, currency, orderQuantity,
+    def marketBuy(self, orderQuantity, currency, asset, note=None):
+        result = self.market.Order.Order_new(symbol=currency + asset, orderQty=orderQuantity, ordType="Market").result()
+        logger.logOrder('Bitmex', 'market', self.getCurrentPrice(currency, asset), asset, currency, orderQuantity,
                         note=note)
         return result
 
@@ -209,23 +201,11 @@ class Bitmex(makerLimitOrderMarket):
             return self.getAmountOfItem('XBt')
         return self.getAmountOfItem(asset)
 
-    def getMaxAmountToUse(self, asset, currency, curr=None):
-        percentLower = 0.01
-        if curr is None:
-            curr = self.getAmountOfItem('XBt') * (1 - percentLower)
-
-        price = self.getCurrentPrice(asset, currency)
-        if currency == 'USD' or (currency == 'Z18' and asset == 'XBT'):
-            result = floor(curr * price)
-        else:
-            result = floor((curr / price))
-        return result
-
     def getAmountOfItem(self, val1, val2=None,orderType=None):
         if val1.lower() == 'xbt' and val2 is None:
             return self.market.User.User_getMargin().result()[0]['availableMargin'] / self.btcToSatoshi
         else:
-            symbol = '{"symbol": "' + str(val1) + ' ' + str(val2) + '"}'
+            symbol = '{"symbol": "' + str(val1) + str(val2) + '"}'
             result = self.market.Position.Position_get(filter=symbol).result()
             if len(result[0]) > 0:
                 return result[0][0]['currentQty']
