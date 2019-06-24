@@ -1,0 +1,12 @@
+{
+  "API_Keys": [
+
+    {
+      "name": "Bitmex1",
+      "market": "BITMEX",
+      "real_money": false,
+      "keyID": "o-NXlyuwxCmbL81XWtUz4LrW",
+      "privateKey": "GHDriwneTRHZKFbKrKYjAghP0WUoYHzQOwQ2rI0xJmJyVYRf"
+    }
+  ]
+}

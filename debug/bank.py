@@ -163,9 +163,18 @@ def updatePairBalance(pairPath):
                     balance['currentBal'] = changeAmount
                     record['closers']=[]
                     balance['balanceDecomposition'] = [record]
+    calculatePairProfits(finishedPairs)
     overwriteJsonFile(pairPath + '/' + balanceFilename, balance)
     overwriteJsonFile(pairPath + '/' + pairsFilename, finishedPairs)
 
+
+def calculatePairProfits(pairs):
+    for pair in pairs:
+        profitAmount = 0
+        for closer in pair['closers']:
+            profitAmount += closer['profit']
+        pair['profitPercent'] = profitAmount/abs(pair['amount'])
+        pair['totalprofits'] = profitAmount
 
 def updateMarketBalanceFromDir(marketPath):
     for root, dirs, files in os.walk(marketPath, topdown=False):
@@ -177,9 +186,9 @@ def updateMarketBalanceFromDir(marketPath):
 
 
 def getOldestTransaction(balanceDecomp):
-    max = math.inf
+    max = {'count': math.inf}
     for transaction in balanceDecomp:
-        if transaction['count'] < max:
+        if transaction['count'] < max['count']:
             max = transaction
     return max
 
