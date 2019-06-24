@@ -1,4 +1,4 @@
-from debug import logger
+from recording import logger
 from markets.marketBaseClass import market
 from markets.binance.binance import Client
 

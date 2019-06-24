@@ -4,7 +4,7 @@ from math import floor
 from time import sleep
 
 import markets.bitmex.bitmexApi.bitmex
-from debug import logger
+from recording import logger
 
 from markets.makerLimitOrderMarket import makerLimitOrderMarket
 

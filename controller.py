@@ -1,6 +1,6 @@
 import time
 
-from debug import bank
+from recording import bank
 from markets.bitmex.Bitmex import Bitmex
 
 import os

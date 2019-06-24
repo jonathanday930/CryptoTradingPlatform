@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from debug import bank
+from recording import bank
 
 
 def getIfExists(dict, key):

@@ -4,8 +4,8 @@ import traceback
 from abc import abstractmethod
 from asyncio import sleep
 
-import debug.logger
-from debug import logger
+import recording.logger
+from recording import logger
 from markets.marketBaseClass import marketBaseClass
 
 

@@ -9,7 +9,7 @@ from os import path
 
 from recordtype import recordtype
 
-from debug import logger
+from recording import logger
 from markets.marketBaseClass import marketBaseClass
 
 orderBookLocation = 'logs'
