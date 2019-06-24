@@ -7,7 +7,9 @@ from strategies.gmail.gmailStrategy import gmailStrategy
 
 SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 #
-# bank.updateBalanceHistory('BITMEX')
+bank.updateAllBalances()
+
+a = input()
 
 # CHANGE THIS TO GO FROM TESTNET TO LIVENET
 real_money = False

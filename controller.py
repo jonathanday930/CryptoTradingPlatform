@@ -39,7 +39,7 @@ class controller:
             self.processOrders(currentOrders)
             time.sleep(5)
 
-    def processOrders(self,currentOrders):
+    def processOrders(self, currentOrders):
         for order in currentOrders:
             if order['market'].upper() in self.marketControllers:
                 self.marketControllers[order['market'].upper()].makeOrder(order)
@@ -49,9 +49,8 @@ class controller:
                 # TODO: LOG FUNCTION
                 self.strategies[order['strategy']].finalizeOrder(order)
                 currentOrders.remove(order)
-                #TODO: make bank updates correctly done
-                for market in self.marketControllers:
-                    bank.updateBalanceHistory(market)
+                # TODO: make bank updates correctly done
+                bank.updateAllBalances()
 
     def removeDuplicateOrders(self, newOrders, orders):
         for newOrder in newOrders[:]:
