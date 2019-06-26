@@ -2,23 +2,19 @@ from abc import ABC, abstractmethod
 
 from recording import bank
 
-
-def getIfExists(dict, key):
-    if key in dict:
-        return dict[key]
-    else:
-        return None
-
+buyText = 'BUY'
+sellText = 'SELL'
 
 class marketBaseClass(ABC):
     limitOrderEnabled = None
-    buyText = 'BUY'
-    sellText = 'SELL'
+    buyText = buyText
+    sellText = sellText
     connectorName = None
     market = None
     btcToSatoshi = 100000000
     bank = None
-    marketName = ' marketName is set to nothing. You must change it '
+
+    marketName = ' marketName is set to nothing. You must change it in market specifications'
     contractExchange = False
 
     apiKey = None
@@ -26,9 +22,7 @@ class marketBaseClass(ABC):
 
     real_money = False
 
-    def __init__(self, marketApiKey, marketApiKeySecret, realMoney, name):
-        self.apiKey = marketApiKey
-        self.apiKeySecret = marketApiKeySecret
+    def __init__(self, realMoney,name,*args):
         self.real_money = realMoney
         self.connectorName = name
 
@@ -62,6 +56,7 @@ class marketBaseClass(ABC):
     def logOrderInBank(self, order, orderAmount=None, orderPrice=None, action=None):
         transactionStatement = {}
         transactionStatement['market'] = order['market']
+        transactionStatement['strategy'] = order['strategy']
         transactionStatement['currency'] = order['currency']
         transactionStatement['asset'] = order['asset']
         transactionStatement['amount'] = orderAmount

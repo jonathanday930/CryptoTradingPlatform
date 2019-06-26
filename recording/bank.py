@@ -10,7 +10,6 @@ from os import path
 from recordtype import recordtype
 
 from recording import logger
-from markets.marketBaseClass import marketBaseClass
 
 orderBookLocation = 'logs'
 
@@ -35,7 +34,7 @@ def sign(number):
 
 def trimDict(transactionStatement):
     for key in transactionStatement:
-        if key not in ['time', 'action', 'price', 'amount', 'note', 'market', 'asset', 'currency', "action-type"]:
+        if key not in ['time', 'action', 'price', 'amount', 'note', 'market', 'asset', 'currency', "action-type",'strategy']:
             del transactionStatement[key]
 
 
@@ -87,6 +86,8 @@ def updateAllBalances():
 
 
 def getCorrectSignForRecord(record):
+    from markets.marketBaseClass import marketBaseClass
+
     if record['action'] == marketBaseClass.sellText:
         record['amount'] = - abs(record['amount'])
     else:
@@ -94,6 +95,8 @@ def getCorrectSignForRecord(record):
 
 
 def calculateProfit(oldTrans, newTrans, amount, initialAction):
+    from markets.marketBaseClass import marketBaseClass
+
     change = calculateChange(oldTrans['price'], newTrans['price'])
 
     if initialAction == marketBaseClass.sellText:
@@ -104,11 +107,10 @@ def calculateProfit(oldTrans, newTrans, amount, initialAction):
 
 
 def updatePairBalance(pairPath):
-    maxBalance = -math.inf
     data = readJsonFile(pairPath + '/' + allTradeFileName)
     balance = {'currentBal': 0,
                'totalProfits': 0,
-               'maxBalance':-math.inf,
+               'maxBalance':0,
                'balanceDecomposition': []
                }
     # balanceDecompEntry = record with key for closers

@@ -2,7 +2,6 @@ from controller import controller
 from recording import bank
 from strategies.gmail.gmailStrategy import gmailStrategy
 
-bank.updateAllBalances()
 
 # CHANGE THIS TO GO FROM TESTNET TO LIVENET
 real_money = False

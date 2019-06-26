@@ -1,5 +1,6 @@
 import time
 
+from markets.livetest.livetest import livetest
 from recording import bank
 from markets.bitmex.Bitmex import Bitmex
 
@@ -65,16 +66,18 @@ class controller:
         for filename in os.listdir(folder):
             if filename.endswith(".json"):
                 f = open('./' + folder + filename)
-                a = f.name
                 with open(f.name) as jsonFile:
                     data = json.load(jsonFile)
                     for keySet in data['API_Keys']:
-
+#TODO allow for multiple markets of the same type but different name
                         if keySet['market'] == 'BITMEX':
                             if keySet['real_money'] == self.real_money:
                                 self.addMarket(
-                                    Bitmex(keySet['keyID'], keySet['privateKey'], keySet['real_money'], keySet['name']),
+                                    Bitmex( keySet['real_money'], keySet['name'],keySet['keyID'], keySet['privateKey']),
                                     keySet['market'])
+                        else:
+                            if keySet['market'] == 'LIVETEST':
+                                self.addMarket(livetest(keySet['real_money'],keySet['name'],keySet['key']),keySet['market'] )
                 continue
             else:
                 continue

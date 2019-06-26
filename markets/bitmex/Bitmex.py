@@ -14,6 +14,8 @@ from markets.marketOrderMarket import marketOrderMarket
 
 
 class Bitmex(marketOrderMarket):
+    apiKey = None
+    apiKeySecret = None
 
     marketName = 'BITMEX'
 
@@ -186,10 +188,13 @@ class Bitmex(marketOrderMarket):
         # client.Order.Order_cancel(orderID='').result()
         self.market.Order.Order_cancelAll().result()
 
-    def __init__(self, apiKey, apiKeySecret, realMoney, name):
+
+    def __init__(self, realMoney, name,apiKey, apiKeySecret):
         # The super function runs the constructor on the market class that this class inherits from. In other words,
         # done mess with it or the parameters I put in this init function
-        super(Bitmex, self).__init__(apiKey, apiKeySecret, realMoney, name)
+        super(Bitmex, self).__init__(realMoney, name)
+        self.apiKey = apiKey
+        self.apiKeySecret= apiKeySecret
         self.connect()
 
     def connect(self):
