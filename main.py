@@ -12,7 +12,7 @@ bank.updateAllBalances()
 real_money = False
 
 telegramBot = TelegramStrategy()
-telegramThread = threading.Thread(target=telegramBot.run()).start()
+telegramThread = threading.Thread(target=telegramBot.listen()).start()
 
 trader = controller(.001, .1, real_money)
 trader.importAPIKeys()
