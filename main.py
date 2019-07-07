@@ -17,5 +17,6 @@ telegramThread = threading.Thread(target=telegramBot.listen()).start()
 trader = controller(.001, .1, real_money)
 trader.importAPIKeys()
 trader.addStrategy(gmailStrategy('strategies/gmail/credentials.json'))
+trader.addStrategy(telegramBot)
 trader.run()
 

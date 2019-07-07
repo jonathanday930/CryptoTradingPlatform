@@ -2,21 +2,22 @@
 
 '''Class for listening to Telegram chat messages and parsing for trade alerts'''
 
+import datetime
 import logging
 import json
-from time import strftime, sleep
+import re
+from strategies.strategy import strategy
 from telethon.sync import TelegramClient
 from telethon import events
 
 
 
-class TelegramStrategy():
+class TelegramStrategy(strategy):
 
     strategyName = 'Telegram'
 
-    market = 'BINANCE'
-    currency = 'BTC'
     channel = None
+    orders = []
     telegramClient = None
     message = None
     apiID = None
@@ -39,6 +40,7 @@ class TelegramStrategy():
         async def my_event_handler(event):
             print(event.raw_text)
             parseMessage(self, event.raw_text)
+
         self.telegramClient.start()
         self.telegramClient.run_until_disconnected()
 
@@ -56,16 +58,30 @@ class TelegramStrategy():
                     print('PLEASE ADD TELEGRAM API KEYS TO Telegram/TelegramCredentials.json\n')
 
 
+    def runStrategy(self, marketControllers):
+        return self.orders
+
+    def addOrder(self, order):
+        self.orders.append(order)
 
 
-def parseMessage(self, text):
+def parseMessage(telegramStrategy, text):
     """Grab the message parse the data and format for Gmail
     handler. subject looks like: '$$$ BUY BTC USD $$$' """
 
+    market = 'BINANCE'
+    currency = 'BTC'
+
     coin = None
+    order = None
     takeGains = []
-    alertIdentifiers = ["BUY", "Buy", "Entry", "ENTRY"]
-    takeProfitIdentifiers = ["Tg", "TG", "Tp", "TP"]
+
+    alertIdentifiers = ["buy", "entry", "zone", "stop", "stoploss"]
+    takeProfitIdentifiers = ["tg", "tp", "take", "profit", "gains"]
+    entryPriceIdentifiers = ["buy", "zone", "buyzone", "enter", "entry"]
+    stopPriceIdentifiers = ["stop", "stoploss", "loss", "enter", "entry"]
+
+    text = text.lower()
 
     if any(x in text for x in alertIdentifiers):
 
@@ -76,20 +92,28 @@ def parseMessage(self, text):
 
             if '#' in line:
                 coin = line[line.find("#") + 1:]
-
                 if " " in line:
                     coin = coin[:line.find(" ")]
-
                 print("Coin: " + coin + "\n")
 
+
+            if any(x in line for x in entryPriceIdentifiers):
+                entryPrice = int(re.search(r'\d+', line).group())
+                print("Entry Price: %d\n" % entryPrice)
+
+
             if any(x in line for x in takeProfitIdentifiers):
-                takeProfit = line[line.find(" "):]
-
-                if " " in line:
-                    takeProfit = takeProfit[:line.find(" ")]
-
-                print("Take profit: " + takeProfit + "\n")
+                takeProfit = line[:line.find(" ")]
+                takeProfit = int(re.search(r'\d+', takeProfit).group())
+                print("Take profit: %d\n" % takeProfit)
                 takeGains.append(takeProfit)
+
+
+            if any(x in line for x in stopPriceIdentifiers):
+                stopPrice = int(re.search(r'\d+', line).group())
+                print("Stop Price: %d\n" % stopPrice)
+
+
 
         '''final determination of whether the alert is actually an alert.
          if we have 2 or more take profit indicators'''
@@ -98,12 +122,15 @@ def parseMessage(self, text):
             print(coin + "\n" + subject + "\n")
 
             order = {
-                'market': self.market,
-                'currency': self.currency,
+                'market': market,
+                'currency': currency,
                 'asset': coin,
-                'amount': 'The amount of asset to buy/sell',
+                'amount': 'Determine with bank',
                 'action': 'BUY',
                 'action-type': 'Optional value for the method to buy or sell- such as market, limit, or limit-maker. Implemented on a per market basis',
-                'price': 'An optional value for the price to buy or sell at. If not included, will just find the current price.',
-                'id': 'Telegram_Alert_BUY_%s_%s' % (coin, strftime('8'))
+                'price': entryPrice,
+                'id': '%s Telegram_Alert_BUY_%s' % (str(datetime.datetime.now()), coin)
             }
+            print(order)
+            telegramStrategy.addOrder(order)
+            return order
