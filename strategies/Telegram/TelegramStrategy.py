@@ -74,7 +74,7 @@ def parseMessage(self, text):
         lines = text.splitlines(False)
         for line in lines:
 
-            if "#" in line:
+            if '#' in line:
                 coin = line[line.find("#") + 1:]
 
                 if " " in line:
@@ -91,19 +91,19 @@ def parseMessage(self, text):
                 print("Take profit: " + takeProfit + "\n")
                 takeGains.append(takeProfit)
 
-            subject = ("$$ %s BTC LONG BINANCE $$" % coin.upper())
-            print(coin + "\n" + subject + "\n")
-
         '''final determination of whether the alert is actually an alert.
          if we have 2 or more take profit indicators'''
         if len(takeGains) >= 2:
+            subject = ("$$ %s BTC LONG BINANCE $$" % coin.upper())
+            print(coin + "\n" + subject + "\n")
+
             order = {
                 'market': self.market,
-                 'currency': self.currency,
-                 'asset': coin,
-                 'amount': 'The amount of asset to buy/sell',
-                 'action': 'BUY',
-                 'action-type': 'Optional value for the method to buy or sell- such as market, limit, or limit-maker. Implemented on a per market basis',
-                 'price': 'An optional value for the price to buy or sell at. If not included, will just find the current price.',
-                 'id': 'Telegram_Alert_BUY_%s_%s' % (coin, strftime())
+                'currency': self.currency,
+                'asset': coin,
+                'amount': 'The amount of asset to buy/sell',
+                'action': 'BUY',
+                'action-type': 'Optional value for the method to buy or sell- such as market, limit, or limit-maker. Implemented on a per market basis',
+                'price': 'An optional value for the price to buy or sell at. If not included, will just find the current price.',
+                'id': 'Telegram_Alert_BUY_%s_%s' % (coin, strftime('8'))
             }
