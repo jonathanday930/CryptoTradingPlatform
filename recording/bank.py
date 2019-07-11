@@ -11,7 +11,7 @@ from recordtype import recordtype
 
 from recording import logger
 
-orderBookLocation = 'logs'
+orderBookLocation = 'order_logs'
 
 bankFile = 'bank.txt'
 allTradeFileName = 'allTrades.json'
@@ -40,7 +40,7 @@ def trimDict(transactionStatement):
 
 def createDirectoryForTransaction(transactionStatement):
     try:
-        os.makedirs('logs/' + str(transactionStatement['market']) + '/' + str(transactionStatement['currency']) +
+        os.makedirs(orderBookLocation + '/' + str(transactionStatement['market']) + '/' + str(transactionStatement['currency']) +
                     str(transactionStatement['asset']) + '/')
     except FileExistsError:
         pass
