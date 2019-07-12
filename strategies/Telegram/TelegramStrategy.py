@@ -13,6 +13,7 @@ from telethon import events
 
 
 class TelegramStrategy(strategy):
+    """ """
 
     strategyName = 'Telegram'
 
@@ -36,6 +37,7 @@ class TelegramStrategy(strategy):
 
 
     def listen(self):
+        """ """
         @self.telegramClient.on(events.NewMessage)
         async def my_event_handler(event):
             print(event.raw_text)
@@ -47,6 +49,7 @@ class TelegramStrategy(strategy):
 
 
     def importAPIKeys(self):
+        """ """
         f = open('strategies/Telegram/TelegramCredentials.json', 'r')
         with open(f.name) as jsonFile:
             data = json.load(jsonFile)
@@ -59,15 +62,30 @@ class TelegramStrategy(strategy):
 
 
     def runStrategy(self, marketControllers):
+        """
+
+        :param marketControllers: 
+
+        """
         return self.orders
 
     def addOrder(self, order):
+        """
+
+        :param order: 
+
+        """
         self.orders.append(order)
 
 
 def parseMessage(telegramStrategy, text):
     """Grab the message parse the data and format for Gmail
-    handler. subject looks like: '$$$ BUY BTC USD $$$' """
+    handler. subject looks like: '$$$ BUY BTC USD $$$'
+
+    :param telegramStrategy: 
+    :param text: 
+
+    """
 
     market = 'BINANCE'
     currency = 'BTC'

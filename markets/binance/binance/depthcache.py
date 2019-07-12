@@ -9,12 +9,12 @@ from .websockets import BinanceSocketManager
 class DepthCache(object):
 
     def __init__(self, symbol):
-        """Intialise the DepthCache
+    """Intialise the DepthCache
 
-        :param symbol: Symbol to create depth cache for
-        :type symbol: string
+    :param symbol: Symbol to create depth cache for
+    :type symbol: string
 
-        """
+    """
         self.symbol = symbol
         self._bids = {}
         self._asks = {}
@@ -22,8 +22,7 @@ class DepthCache(object):
     def add_bid(self, bid):
         """Add a bid to the cache
 
-        :param bid:
-        :return:
+        :param bid: return:
 
         """
         self._bids[bid[0]] = float(bid[1])
@@ -33,8 +32,7 @@ class DepthCache(object):
     def add_ask(self, ask):
         """Add an ask to the cache
 
-        :param ask:
-        :return:
+        :param ask: return:
 
         """
         self._asks[ask[0]] = float(ask[1])
@@ -43,11 +41,11 @@ class DepthCache(object):
 
     def get_bids(self):
         """Get the current bids
-
+        
         :return: list of bids with price and quantity as floats
-
+        
         .. code-block:: python
-
+        
             [
                 [
                     0.0001946,  # Price
@@ -71,16 +69,17 @@ class DepthCache(object):
                 ]
             ]
 
+
         """
         return DepthCache.sort_depth(self._bids, reverse=True)
 
     def get_asks(self):
         """Get the current asks
-
+        
         :return: list of asks with price and quantity as floats
-
+        
         .. code-block:: python
-
+        
             [
                 [
                     0.0001955,  # Price
@@ -104,12 +103,17 @@ class DepthCache(object):
                 ]
             ]
 
+
         """
         return DepthCache.sort_depth(self._asks, reverse=False)
 
     @staticmethod
     def sort_depth(vals, reverse=False):
         """Sort bids or asks by price
+
+        :param vals: 
+        :param reverse:  (Default value = False)
+
         """
         lst = [[float(price), quantity] for price, quantity in vals.items()]
         lst = sorted(lst, key=itemgetter(0), reverse=reverse)
@@ -117,6 +121,7 @@ class DepthCache(object):
 
 
 class DepthCacheManager(object):
+    """ """
 
     _default_refresh = 60 * 30  # 30 minutes
 
@@ -148,8 +153,10 @@ class DepthCacheManager(object):
 
     def _init_cache(self):
         """Initialise the depth cache calling REST endpoint
-
+        
         :return:
+
+
         """
         self._last_update_id = None
         self._depth_message_buffer = []
@@ -178,8 +185,10 @@ class DepthCacheManager(object):
 
     def _start_socket(self):
         """Start the depth cache socket
-
+        
         :return:
+
+
         """
         if self._bm is None:
             self._bm = BinanceSocketManager(self._client)
@@ -195,8 +204,7 @@ class DepthCacheManager(object):
     def _depth_event(self, msg):
         """Handle a depth event
 
-        :param msg:
-        :return:
+        :param msg: return:
 
         """
 
@@ -218,7 +226,7 @@ class DepthCacheManager(object):
         """Process a depth event message.
 
         :param msg: Depth event message.
-        :return:
+        :param buffer:  (Default value = False)
 
         """
 
@@ -248,16 +256,20 @@ class DepthCacheManager(object):
 
     def get_depth_cache(self):
         """Get the current depth cache
-
+        
         :return: DepthCache object
+
 
         """
         return self._depth_cache
 
     def close(self, close_socket=False):
         """Close the open socket for this manager
-
+        
         :return:
+
+        :param close_socket:  (Default value = False)
+
         """
         self._bm.stop_socket(self._conn_key)
         if close_socket:

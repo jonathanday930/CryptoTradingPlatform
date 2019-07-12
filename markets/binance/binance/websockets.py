@@ -14,15 +14,27 @@ from markets.binance.binance import Client
 
 
 class BinanceClientProtocol(WebSocketClientProtocol):
+    """ """
 
     def __init__(self):
         super().__init__()
 
     def onConnect(self, response):
+        """
+
+        :param response: 
+
+        """
         # reset the delay after reconnecting
         self.factory.resetDelay()
 
     def onMessage(self, payload, isBinary):
+        """
+
+        :param payload: 
+        :param isBinary: 
+
+        """
         if not isBinary:
             try:
                 payload_obj = json.loads(payload.decode('utf8'))
@@ -33,6 +45,7 @@ class BinanceClientProtocol(WebSocketClientProtocol):
 
 
 class BinanceReconnectingClientFactory(ReconnectingClientFactory):
+    """ """
 
     # set initial delay to a short time
     initialDelay = 0.1
@@ -43,6 +56,7 @@ class BinanceReconnectingClientFactory(ReconnectingClientFactory):
 
 
 class BinanceClientFactory(WebSocketClientFactory, BinanceReconnectingClientFactory):
+    """ """
 
     protocol = BinanceClientProtocol
     _reconnect_error_payload = {
@@ -51,17 +65,30 @@ class BinanceClientFactory(WebSocketClientFactory, BinanceReconnectingClientFact
     }
 
     def clientConnectionFailed(self, connector, reason):
+        """
+
+        :param connector: 
+        :param reason: 
+
+        """
         self.retry(connector)
         if self.retries > self.maxRetries:
             self.callback(self._reconnect_error_payload)
 
     def clientConnectionLost(self, connector, reason):
+        """
+
+        :param connector: 
+        :param reason: 
+
+        """
         self.retry(connector)
         if self.retries > self.maxRetries:
             self.callback(self._reconnect_error_payload)
 
 
 class BinanceSocketManager(threading.Thread):
+    """ """
 
     STREAM_URL = 'wss://stream.binance.com:9443/'
 
@@ -89,6 +116,13 @@ class BinanceSocketManager(threading.Thread):
         self._user_timeout = user_timeout
 
     def _start_socket(self, path, callback, prefix='ws/'):
+        """
+
+        :param path: 
+        :param callback: 
+        :param prefix:  (Default value = 'ws/')
+
+        """
         if path in self._conns:
             return False
 
@@ -104,7 +138,7 @@ class BinanceSocketManager(threading.Thread):
 
     def start_depth_socket(self, symbol, callback, depth=None):
         """Start a websocket for symbol market depth returning either a diff or a partial book
-
+        
         https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#partial-book-depth-streams
 
         :param symbol: required
@@ -113,13 +147,12 @@ class BinanceSocketManager(threading.Thread):
         :type callback: function
         :param depth: optional Number of depth entries to return, default None. If passed returns a partial book instead of a diff
         :type depth: str
-
         :returns: connection key string if successful, False otherwise
-
+        
         Partial Message Format
-
+        
         .. code-block:: python
-
+        
             {
                 "lastUpdateId": 160,  # Last update ID
                 "bids": [             # Bids to be updated
@@ -137,12 +170,12 @@ class BinanceSocketManager(threading.Thread):
                     ]
                 ]
             }
-
-
+        
+        
         Diff Message Format
-
+        
         .. code-block:: python
-
+        
             {
                 "e": "depthUpdate", # Event type
                 "E": 123456789,     # Event time
@@ -173,7 +206,7 @@ class BinanceSocketManager(threading.Thread):
 
     def start_kline_socket(self, symbol, callback, interval=Client.KLINE_INTERVAL_1MINUTE):
         """Start a websocket for symbol kline data
-
+        
         https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#klinecandlestick-streams
 
         :param symbol: required
@@ -182,13 +215,12 @@ class BinanceSocketManager(threading.Thread):
         :type callback: function
         :param interval: Kline interval, default KLINE_INTERVAL_1MINUTE
         :type interval: str
-
         :returns: connection key string if successful, False otherwise
-
+        
         Message Format
-
+        
         .. code-block:: python
-
+        
             {
                 "e": "kline",					# event type
                 "E": 1499404907056,				# event time
@@ -213,27 +245,27 @@ class BinanceSocketManager(threading.Thread):
                     "B": "13279784.01349473"	# can be ignored
                     }
             }
+
         """
         socket_name = '{}@kline_{}'.format(symbol.lower(), interval)
         return self._start_socket(socket_name, callback)
 
     def start_miniticker_socket(self, callback, update_time=1000):
         """Start a miniticker websocket for all trades
-
+        
         This is not in the official Binance api docs, but this is what
         feeds the right column on a ticker page on Binance.
 
         :param callback: callback function to handle messages
         :type callback: function
-        :param update_time: time between callbacks in milliseconds, must be 1000 or greater
+        :param update_time: time between callbacks in milliseconds, must be 1000 or greater (Default value = 1000)
         :type update_time: int
-
         :returns: connection key string if successful, False otherwise
-
+        
         Message Format
-
+        
         .. code-block:: python
-
+        
             [
                 {
                     'e': '24hrMiniTicker',  # Event type
@@ -247,26 +279,26 @@ class BinanceSocketManager(threading.Thread):
                     'q': '5903.84338533'    # quote volume
                 }
             ]
+
         """
 
         return self._start_socket('!miniTicker@arr@{}ms'.format(update_time), callback)
 
     def start_trade_socket(self, symbol, callback):
         """Start a websocket for symbol trade data
-
+        
         https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#trade-streams
 
         :param symbol: required
         :type symbol: str
         :param callback: callback function to handle messages
         :type callback: function
-
         :returns: connection key string if successful, False otherwise
-
+        
         Message Format
-
+        
         .. code-block:: python
-
+        
             {
                 "e": "trade",     # Event type
                 "E": 123456789,   # Event time
@@ -286,20 +318,19 @@ class BinanceSocketManager(threading.Thread):
 
     def start_aggtrade_socket(self, symbol, callback):
         """Start a websocket for symbol trade data
-
+        
         https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#aggregate-trade-streams
 
         :param symbol: required
         :type symbol: str
         :param callback: callback function to handle messages
         :type callback: function
-
         :returns: connection key string if successful, False otherwise
-
+        
         Message Format
-
+        
         .. code-block:: python
-
+        
             {
                 "e": "aggTrade",		# event type
                 "E": 1499405254326,		# event time
@@ -319,20 +350,19 @@ class BinanceSocketManager(threading.Thread):
 
     def start_symbol_ticker_socket(self, symbol, callback):
         """Start a websocket for a symbol's ticker data
-
+        
         https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#individual-symbol-ticker-streams
 
         :param symbol: required
         :type symbol: str
         :param callback: callback function to handle messages
         :type callback: function
-
         :returns: connection key string if successful, False otherwise
-
+        
         Message Format
-
+        
         .. code-block:: python
-
+        
             {
                 "e": "24hrTicker",  # Event type
                 "E": 123456789,     # Event time
@@ -364,20 +394,19 @@ class BinanceSocketManager(threading.Thread):
 
     def start_ticker_socket(self, callback):
         """Start a websocket for all ticker data
-
+        
         By default all markets are included in an array.
-
+        
         https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#all-market-tickers-stream
 
         :param callback: callback function to handle messages
         :type callback: function
-
         :returns: connection key string if successful, False otherwise
-
+        
         Message Format
-
+        
         .. code-block:: python
-
+        
             [
                 {
                     'F': 278610,
@@ -403,26 +432,26 @@ class BinanceSocketManager(threading.Thread):
                     'v': '15743.68900000'
                 }
             ]
+
         """
         return self._start_socket('!ticker@arr', callback)
 
     def start_multiplex_socket(self, streams, callback):
         """Start a multiplexed socket using a list of socket names.
         User stream sockets can not be included.
-
+        
         Symbols in socket name must be lowercase i.e bnbbtc@aggTrade, neobtc@ticker
-
+        
         Combined stream events are wrapped as follows: {"stream":"<streamName>","data":<rawPayload>}
-
+        
         https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md
 
         :param streams: list of stream names in lower case
         :type streams: list
         :param callback: callback function to handle messages
         :type callback: function
-
         :returns: connection key string if successful, False otherwise
-
+        
         Message Format - see Binance API docs for all types
 
         """
@@ -431,15 +460,15 @@ class BinanceSocketManager(threading.Thread):
 
     def start_user_socket(self, callback):
         """Start a websocket for user data
-
+        
         https://www.binance.com/restapipub.html#user-wss-endpoint
 
         :param callback: callback function to handle messages
         :type callback: function
-
         :returns: connection key string if successful, False otherwise
-
+        
         Message Format - see Binance API docs for all types
+
         """
         # Get the user listen key
         user_listen_key = self._client.stream_get_listen_key()
@@ -448,6 +477,12 @@ class BinanceSocketManager(threading.Thread):
         return conn_key
 
     def _start_user_socket(self, user_listen_key, callback):
+        """
+
+        :param user_listen_key: 
+        :param callback: 
+
+        """
         # With this function we can start a user socket with a specific key
         if self._user_listen_key:
             # cleanup any sockets with this key
@@ -465,11 +500,13 @@ class BinanceSocketManager(threading.Thread):
         return conn_key
 
     def _start_user_timer(self):
+        """ """
         self._user_timer = threading.Timer(self._user_timeout, self._keepalive_user_socket)
         self._user_timer.setDaemon(True)
         self._user_timer.start()
 
     def _keepalive_user_socket(self):
+        """ """
         user_listen_key = self._client.stream_get_listen_key()
         # check if they key changed and
         if user_listen_key != self._user_listen_key:
@@ -486,8 +523,8 @@ class BinanceSocketManager(threading.Thread):
 
         :param conn_key: Socket connection key
         :type conn_key: string
-
         :returns: connection key string if successful, False otherwise
+
         """
         if conn_key not in self._conns:
             return
@@ -502,6 +539,7 @@ class BinanceSocketManager(threading.Thread):
             self._stop_user_socket()
 
     def _stop_user_socket(self):
+        """ """
         if not self._user_listen_key:
             return
         # stop the timer
@@ -510,6 +548,7 @@ class BinanceSocketManager(threading.Thread):
         self._user_listen_key = None
 
     def run(self):
+        """ """
         try:
             reactor.run(installSignalHandlers=False)
         except ReactorAlreadyRunning:
@@ -517,9 +556,7 @@ class BinanceSocketManager(threading.Thread):
             pass
 
     def close(self):
-        """Close all connections
-
-        """
+        """Close all connections"""
         keys = set(self._conns.keys())
         for key in keys:
             self.stop_socket(key)

@@ -6,6 +6,7 @@ buyText = 'BUY'
 sellText = 'SELL'
 
 class marketBaseClass(ABC):
+    """ """
     limitOrderEnabled = None
     buyText = buyText
     sellText = sellText
@@ -28,25 +29,54 @@ class marketBaseClass(ABC):
 
     @abstractmethod
     def connect(self):
+        """ """
         pass
 
     @abstractmethod
     def getAmountOfItem(self, val1, val2=None, orderType=None):
+        """
+
+        :param val1: 
+        :param val2:  (Default value = None)
+        :param orderType:  (Default value = None)
+
+        """
         pass
 
     @abstractmethod
     def makeOrder(self, order):
+        """
+
+        :param order: 
+
+        """
         pass
 
     @abstractmethod
     def interpretType(self, type):
+        """
+
+        :param type: 
+
+        """
         pass
 
     @abstractmethod
     def getCurrentPrice(self, val1, val2=None):
+        """
+
+        :param val1: 
+        :param val2:  (Default value = None)
+
+        """
         pass
 
     def parseOrderForBasicInfo(self, order):
+        """
+
+        :param order: 
+
+        """
         sliceDict = {}
         for key in order:
             if key in ['market', 'asset', 'currency', 'currentPrice', 'action', 'action-type']:
@@ -54,6 +84,14 @@ class marketBaseClass(ABC):
         return sliceDict
 
     def logOrderInBank(self, order, orderAmount=None, orderPrice=None, action=None):
+        """
+
+        :param order: 
+        :param orderAmount:  (Default value = None)
+        :param orderPrice:  (Default value = None)
+        :param action:  (Default value = None)
+
+        """
         transactionStatement = {}
         transactionStatement['market'] = order['market']
         transactionStatement['strategy'] = order['strategy']

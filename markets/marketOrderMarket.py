@@ -8,32 +8,73 @@ from markets.marketBaseClass import marketBaseClass
 
 
 class marketOrderMarket(marketBaseClass):
+    """ """
 
     @abstractmethod
     def connect(self):
+        """ """
         pass
 
     @abstractmethod
     def getAmountOfItem(self, val1, val2=None, orderType=None):
+        """
+
+        :param val1: 
+        :param val2:  (Default value = None)
+        :param orderType:  (Default value = None)
+
+        """
         pass
 
     @abstractmethod
     def interpretType(self, type):
+        """
+
+        :param type: 
+
+        """
         pass
 
     @abstractmethod
     def getCurrentPrice(self, val1, val2=None):
+        """
+
+        :param val1: 
+        :param val2:  (Default value = None)
+
+        """
         pass
 
     @abstractmethod
     def marketBuy(self, orderQuantity, asset, currency, note=None):
+        """
+
+        :param orderQuantity: 
+        :param asset: 
+        :param currency: 
+        :param note:  (Default value = None)
+
+        """
         pass
 
     @abstractmethod
     def marketSell(self, orderQuantity, asset, currency, note=None):
+        """
+
+        :param orderQuantity: 
+        :param asset: 
+        :param currency: 
+        :param note:  (Default value = None)
+
+        """
         pass
 
     def makeOrder(self, order):
+        """
+
+        :param order: 
+
+        """
         tries = 0
         maxTries = 7
         while tries < maxTries:

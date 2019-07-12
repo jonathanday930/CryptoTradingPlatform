@@ -8,13 +8,14 @@ from datetime import datetime
 
 def date_to_milliseconds(date_str):
     """Convert UTC date to milliseconds
-
+    
     If using offset strings add "UTC" to date string e.g. "now UTC", "11 hours ago UTC"
-
+    
     See dateparse docs for formats http://dateparser.readthedocs.io/en/latest/
 
     :param date_str: date in readable format, i.e. "January 01, 2018", "11 hours ago UTC", "now UTC"
-    :type date_str: str
+    :type date_str: str: str
+
     """
     # get epoch value in UTC
     epoch = datetime.utcfromtimestamp(0).replace(tzinfo=pytz.utc)
@@ -33,9 +34,7 @@ def interval_to_milliseconds(interval):
 
     :param interval: Binance interval string, e.g.: 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d, 3d, 1w
     :type interval: str
-
-    :return:
-         int value of interval in milliseconds
+    :returns: int value of interval in milliseconds
          None if interval prefix is not a decimal integer
          None if interval suffix is not one of m, h, d, w
 

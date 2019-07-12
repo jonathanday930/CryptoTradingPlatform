@@ -10,6 +10,7 @@ import json
 
 
 class controller:
+    """ """
     marketControllers = {}
     marketOrderPercent = 0.4
     real_money = False
@@ -26,6 +27,7 @@ class controller:
         self.strategies = {}
 
     def run(self):
+        """ """
         for market in self.marketControllers:
             self.marketControllers[market].connect()
         currentOrders = []
@@ -41,6 +43,11 @@ class controller:
             time.sleep(5)
 
     def processOrders(self, currentOrders):
+        """
+
+        :param currentOrders: 
+
+        """
         for order in currentOrders:
             if order['market'].upper() in self.marketControllers:
                 self.marketControllers[order['market'].upper()].makeOrder(order)
@@ -54,6 +61,12 @@ class controller:
                 bank.updateAllBalances()
 
     def removeDuplicateOrders(self, newOrders, orders):
+        """
+
+        :param newOrders: 
+        :param orders: 
+
+        """
         for newOrder in newOrders[:]:
             if 'id' in newOrder:
                 for order in orders:
@@ -62,6 +75,7 @@ class controller:
                             newOrders.remove(newOrder)
 
     def importAPIKeys(self):
+        """ """
         folder = 'API_KEYS/'
         for filename in os.listdir(folder):
             if filename.endswith(".json"):
@@ -87,14 +101,33 @@ class controller:
         #     data = json.load(f)
 
     def addMarket(self, market, name):
+        """
+
+        :param market: 
+        :param name: 
+
+        """
         market.marginFromPrice = self.marginFromPrice
         market.maximumDeviationFromPrice = self.maximumDeviationFromPrice
         self.marketControllers[name] = market
 
     def addStrategy(self, strategy):
+        """
+
+        :param strategy: 
+
+        """
         self.strategies[strategy.strategyName] = strategy
 
     def marketOrder(self, market, asset, currency, type):
+        """
+
+        :param market: 
+        :param asset: 
+        :param currency: 
+        :param type: 
+
+        """
 
         if type == 'LONG':
             return market.marketOrder('buy', asset, currency)

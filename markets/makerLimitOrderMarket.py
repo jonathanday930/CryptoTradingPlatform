@@ -10,6 +10,7 @@ from markets.marketBaseClass import marketBaseClass
 
 
 class makerLimitOrderMarket(marketBaseClass):
+    """ """
     maximumDeviationFromPrice = 0.02
 
     def __init__(self, marketApiKey, marketApiKeySecret, realMoney, name):
@@ -18,69 +19,170 @@ class makerLimitOrderMarket(marketBaseClass):
 
     @abstractmethod
     def connect(self):
+        """ """
         pass
 
     @abstractmethod
     def getAmountOfItem(self, val1, val2=None, orderType=None):
+        """
+
+        :param val1: 
+        :param val2:  (Default value = None)
+        :param orderType:  (Default value = None)
+
+        """
         pass
 
     @abstractmethod
     def interpretType(self, type):
+        """
+
+        :param type: 
+
+        """
         pass
 
     @abstractmethod
     def getCurrentPrice(self, val1, val2=None):
+        """
+
+        :param val1: 
+        :param val2:  (Default value = None)
+
+        """
         pass
 
     @abstractmethod
     def limitBuy(self, limitPrice, asset, currency, orderQuantity, orderNumber=None, note=None):
+        """
+
+        :param limitPrice: 
+        :param asset: 
+        :param currency: 
+        :param orderQuantity: 
+        :param orderNumber:  (Default value = None)
+        :param note:  (Default value = None)
+
+        """
         pass
 
     @abstractmethod
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None, note=None):
+        """
+
+        :param limitPrice: 
+        :param asset: 
+        :param currency: 
+        :param orderQuantity: 
+        :param orderNumber:  (Default value = None)
+        :param note:  (Default value = None)
+
+        """
         pass
 
     @abstractmethod
     def closeLimitOrders(self, asset, currency):
+        """
+
+        :param asset: 
+        :param currency: 
+
+        """
         pass;
 
     @abstractmethod
     def getOrderBook(self, asset, currency):
+        """
+
+        :param asset: 
+        :param currency: 
+
+        """
         pass
 
     @abstractmethod
     def orderCanceled(self, orderID):
+        """
+
+        :param orderID: 
+
+        """
         pass
 
     @abstractmethod
     def limitOrderStatus(self, orderID):
+        """
+
+        :param orderID: 
+
+        """
         pass
 
     @abstractmethod
     def closeLimitOrder(self, orderID):
+        """
+
+        :param orderID: 
+
+        """
         pass
 
     @abstractmethod
     def orderisOpen(self, orderID):
+        """
+
+        :param orderID: 
+
+        """
         pass
 
     @abstractmethod
     def quantityLeftInOrder(self, orderID, orderQuantity=None):
+        """
+
+        :param orderID: 
+        :param orderQuantity:  (Default value = None)
+
+        """
         pass
 
     @abstractmethod
     def extractMakerLimitPrice(self, type, asset, currency):
+        """
+
+        :param type: 
+        :param asset: 
+        :param currency: 
+
+        """
         pass
 
     @abstractmethod
     def orderOpen(self, orderID):
+        """
+
+        :param orderID: 
+
+        """
         pass
 
     @abstractmethod
     def getOrderPrice(self, orderID):
+        """
+
+        :param orderID: 
+
+        """
         pass
 
     def getLimit(self, type, price, percent):
+        """
+
+        :param type: 
+        :param price: 
+        :param percent: 
+
+        """
         if type == self.buyText:
             value = price * (1 + percent)
             return value
@@ -90,6 +192,15 @@ class makerLimitOrderMarket(marketBaseClass):
                 return value
 
     def isInRange(self, type, firstPrice, currentPrice, percent, enabled=True):
+        """
+
+        :param type: 
+        :param firstPrice: 
+        :param currentPrice: 
+        :param percent: 
+        :param enabled:  (Default value = True)
+
+        """
         if enabled and currentPrice is not None:
             if type == self.buyText:
                 value = self.getLimit(type, firstPrice, percent) > currentPrice
@@ -102,6 +213,17 @@ class makerLimitOrderMarket(marketBaseClass):
             return True
 
     def sendLimitOrder(self, type, asset, currency, orderQuantity, orderID, note=None, currentLimitPrice=None):
+        """
+
+        :param type: 
+        :param asset: 
+        :param currency: 
+        :param orderQuantity: 
+        :param orderID: 
+        :param note:  (Default value = None)
+        :param currentLimitPrice:  (Default value = None)
+
+        """
 
         result = collections.namedtuple('result', ['limitPrice', 'orderID'])
         res = result(currentLimitPrice, orderID)
@@ -126,6 +248,11 @@ class makerLimitOrderMarket(marketBaseClass):
         return res
 
     def initializeLimitOrder(self, order):
+        """
+
+        :param order: 
+
+        """
         # order['type'] = self.interpretType(order['type'])
 
         amount = 0
@@ -161,6 +288,11 @@ class makerLimitOrderMarket(marketBaseClass):
         order['orderQuantity'] = amount
 
     def makeOrder(self, order):
+        """
+
+        :param order: 
+
+        """
         tryMaxCount = 7
         tries = 0
         while tries < tryMaxCount:
@@ -208,6 +340,11 @@ class makerLimitOrderMarket(marketBaseClass):
                 self.connect()
 
     def finishOrderStep(self, order):
+        """
+
+        :param order: 
+
+        """
         if not order['equilibrium']:
             order['equilibrium'] = True
             order['initialized'] = False

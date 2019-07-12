@@ -12,6 +12,7 @@ from markets.marketBaseClass import marketBaseClass
 
 
 class gmailStrategy(strategy):
+    """ """
     strategyName = 'Gmail'
 
     label = 'inbox'
@@ -38,6 +39,11 @@ class gmailStrategy(strategy):
         self.gmailAPI = build('gmail', 'v1', http=creds.authorize(Http()))
 
     def runStrategy(self, marketControllers):
+        """
+
+        :param marketControllers: 
+
+        """
 
         if not self.real_money:
             response = self.gmailAPI.users().messages().list(userId='me',
@@ -51,6 +57,11 @@ class gmailStrategy(strategy):
             return []
 
     def interpretType(self, word):
+        """
+
+        :param word: 
+
+        """
         if word.upper() == 'LONG':
             return marketBaseClass.buyText
         else:
@@ -61,6 +72,11 @@ class gmailStrategy(strategy):
 
     # Returns a list of orders created from the email
     def readEmails(self, emails):
+        """
+
+        :param emails: 
+
+        """
         messageIds = emails['messages']
 
         orders = []
@@ -77,6 +93,11 @@ class gmailStrategy(strategy):
         return orders
 
     def getSubjectMessage(self, email):
+        """
+
+        :param email: 
+
+        """
         subject = self.getSubjectFromMessage(email)
 
         firstIndex = subject.find(self.boundaryString)
@@ -84,18 +105,38 @@ class gmailStrategy(strategy):
         return subject[firstIndex + self.boundaryString.__len__():secondIndex].split()
 
     def getSubjectFromMessage(self, email):
+        """
+
+        :param email: 
+
+        """
         for header in email['payload']['headers']:
             if header['name'] == 'Subject':
                 return header['value']
 
     def finalizeOrder(self, order):
+        """
+
+        :param order: 
+
+        """
         if str(order['result']) == str(0):
             self.setEmailToRead(order['id'])
 
     def setEmailToRead(self, messageID):
+        """
+
+        :param messageID: 
+
+        """
         self.gmailAPI.users().messages().modify(userId='me', id=messageID,
                                                 body=self.readEmailCommand).execute()
 
     def authEmail(self, email):
+        """
+
+        :param email: 
+
+        """
         return self.getSubjectFromMessage(email).find(
             self.boundaryString) != -1

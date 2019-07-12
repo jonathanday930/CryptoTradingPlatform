@@ -2,6 +2,7 @@
 
 
 class BinanceAPIException(Exception):
+    """ """
 
     def __init__(self, response):
         self.code = 0
@@ -21,6 +22,7 @@ class BinanceAPIException(Exception):
 
 
 class BinanceRequestException(Exception):
+    """ """
     def __init__(self, message):
         self.message = message
 
@@ -29,6 +31,7 @@ class BinanceRequestException(Exception):
 
 
 class BinanceOrderException(Exception):
+    """ """
 
     def __init__(self, code, message):
         self.code = code
@@ -39,6 +42,7 @@ class BinanceOrderException(Exception):
 
 
 class BinanceOrderMinAmountException(BinanceOrderException):
+    """ """
 
     def __init__(self, value):
         message = "Amount must be a multiple of %s" % value
@@ -46,6 +50,7 @@ class BinanceOrderMinAmountException(BinanceOrderException):
 
 
 class BinanceOrderMinPriceException(BinanceOrderException):
+    """ """
 
     def __init__(self, value):
         message = "Price must be at least %s" % value
@@ -53,6 +58,7 @@ class BinanceOrderMinPriceException(BinanceOrderException):
 
 
 class BinanceOrderMinTotalException(BinanceOrderException):
+    """ """
 
     def __init__(self, value):
         message = "Total must be at least %s" % value
@@ -60,6 +66,7 @@ class BinanceOrderMinTotalException(BinanceOrderException):
 
 
 class BinanceOrderUnknownSymbolException(BinanceOrderException):
+    """ """
 
     def __init__(self, value):
         message = "Unknown symbol %s" % value
@@ -67,6 +74,7 @@ class BinanceOrderUnknownSymbolException(BinanceOrderException):
 
 
 class BinanceOrderInactiveSymbolException(BinanceOrderException):
+    """ """
 
     def __init__(self, value):
         message = "Attempting to trade an inactive symbol %s" % value
@@ -74,6 +82,7 @@ class BinanceOrderInactiveSymbolException(BinanceOrderException):
 
 
 class BinanceWithdrawException(Exception):
+    """ """
     def __init__(self, message):
         if message == u'参数异常':
             message = 'Withdraw to this address through the website first'

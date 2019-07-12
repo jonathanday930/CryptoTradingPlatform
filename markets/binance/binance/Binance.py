@@ -2,6 +2,7 @@ from markets.binance.binance import Client
 
 
 class Binance():
+    """ """
     binance = None
 
     client = Client("a", "b")
@@ -45,6 +46,11 @@ class Binance():
 
     # start aggregated trade websocket for BNBBTC
     def process_message(msg):
+        """
+
+        :param msg: 
+
+        """
         print("message type: {}".format(msg['e']))
         print(msg)
         # do something

@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class strategy(ABC):
+    """ """
 
     strategyName = 'Default. You need to override this value'
     # Initializes a strategy. This could mean logging into gmail or twitter. The config file will serve to store any
@@ -25,6 +26,11 @@ class strategy(ABC):
 
     @abstractmethod
     def runStrategy(self, marketControllers):
+        """
+
+        :param marketControllers: 
+
+        """
         pass
 
     # Sometimes you want to do something after an order is finished or removed. In this case, there is this function.
@@ -32,4 +38,9 @@ class strategy(ABC):
     # If the result value is 0, then it was a success. Might add more things to this depending on what fields are useful.
     # The immediate application of this function is for marking an email as read after the order has been carried out.
     def finalizeOrder(self,order):
+        """
+
+        :param order: 
+
+        """
         pass

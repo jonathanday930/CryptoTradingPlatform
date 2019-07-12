@@ -6,6 +6,14 @@ from markets.bitmex.bitmexApi.BitMEXAPIKeyAuthenticator import APIKeyAuthenticat
 
 
 def bitmex(test=True, config=None, api_key=None, api_secret=None):
+    """
+
+    :param test:  (Default value = True)
+    :param config:  (Default value = None)
+    :param api_key:  (Default value = None)
+    :param api_secret:  (Default value = None)
+
+    """
 
     if config is None:
         # See full config options at http://bravado.readthedocs.io/en/latest/configuration.html
