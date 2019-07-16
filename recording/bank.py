@@ -1,13 +1,8 @@
-import collections
+import copy
 import datetime
 import json
 import math
 import os
-import traceback
-import copy
-from os import path
-
-from recordtype import recordtype
 
 from recording import logger
 

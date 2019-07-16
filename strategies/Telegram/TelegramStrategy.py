@@ -3,14 +3,16 @@
 '''Class for listening to Telegram chat messages and parsing for trade alerts'''
 
 import datetime
-import logging
 import json
+import logging
 import re
-from strategies.strategy import strategy
-from telethon.sync import TelegramClient
-from telethon import events
+try:
+    from telethon import events
+    from telethon.sync import TelegramClient
 
-
+    from strategies.strategy import strategy
+except ValueError:
+    pass
 
 class TelegramStrategy(strategy):
     """ """
