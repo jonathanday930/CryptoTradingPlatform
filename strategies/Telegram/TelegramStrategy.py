@@ -121,7 +121,7 @@ def parseMessage(telegramStrategy, text):
 
 
             if any(x in line for x in takeProfitIdentifiers):
-                takeProfit = line[:line.find(" ")]
+                takeProfit = line[line.find(" "):]
                 takeProfit = int(re.search(r'\d+', takeProfit).group())
                 print("Take profit: %d\n" % takeProfit)
                 takeGains.append(takeProfit)

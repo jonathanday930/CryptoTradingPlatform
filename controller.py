@@ -1,6 +1,6 @@
 import time
 
-from markets.livetest.livetest import livetest
+# from markets.livetest.livetest import livetest
 from recording import bank
 from markets.bitmex.Bitmex import Bitmex
 
