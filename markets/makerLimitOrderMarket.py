@@ -10,7 +10,9 @@ from markets.marketBaseClass import marketBaseClass
 
 
 class makerLimitOrderMarket(marketBaseClass):
-    """ """
+    """ A class to manage making a maker type limit order on the market. Involved changing the price so that it is as close to the price as possible to be fulfilled fast enough, but
+    also will cancel if the price deviates enough
+    """
     maximumDeviationFromPrice = 0.02
 
     def __init__(self, marketApiKey, marketApiKeySecret, realMoney, name):
@@ -19,16 +21,18 @@ class makerLimitOrderMarket(marketBaseClass):
 
     @abstractmethod
     def connect(self):
-        """ """
+        """ Connects to the exchange, if necessary. """
         pass
 
     @abstractmethod
     def getAmountOfItem(self, val1, val2=None, orderType=None):
         """
 
-        :param val1: 
-        :param val2:  (Default value = None)
-        :param orderType:  (Default value = None)
+       Gets the amount of an item, like XRPBTC
+
+        :param val1: The first value
+        :param val2:  (Default value = None) The second value in the pair, if there is one.
+        :param orderType:  (Default value = None) The type of order. Must be able to handle marketBaseClass.buyText, or marketBaseClass.sellText
 
         """
         pass
@@ -37,7 +41,9 @@ class makerLimitOrderMarket(marketBaseClass):
     def interpretType(self, type):
         """
 
-        :param type: 
+         Interprets a type into the market accepted type. For example, USD could be turned into USDT if the market uses USDT.
+
+        :param type: A string for the type to be converted.
 
         """
         pass
@@ -45,22 +51,26 @@ class makerLimitOrderMarket(marketBaseClass):
     @abstractmethod
     def getCurrentPrice(self, val1, val2=None):
         """
+        Gets the price of an item on the exchange. Val1 and Val2 exist because some markets are contractural and some are with actual currency.
 
-        :param val1: 
-        :param val2:  (Default value = None)
-
+        :param val1: The first value
+        :param val2:  (Default value = None) The second value
         """
         pass
 
     @abstractmethod
     def limitBuy(self, limitPrice, asset, currency, orderQuantity, orderNumber=None, note=None):
         """
+        Sends a limit order to buy at a given price. If a limit order has already been put in place, orderNumber will not be None, and
+        instead of sending in a new order, this function simply updates it to match the limitPrice.
 
-        :param limitPrice: 
-        :param asset: 
-        :param currency: 
-        :param orderQuantity: 
-        :param orderNumber:  (Default value = None)
+        In other words, it sends in an order, and if an order is already in place, changes the price.
+
+        :param limitPrice: The price, a decimal
+        :param asset: The asset, a string
+        :param currency:  The currency, a string
+        :param orderQuantity:  The quantity, a decimal
+        :param orderNumber:  (Default value = None) The orderNumber of the current limit order, if None, then create a new order. If not, change the price on the exchange.
         :param note:  (Default value = None)
 
         """
@@ -70,11 +80,16 @@ class makerLimitOrderMarket(marketBaseClass):
     def limitSell(self, limitPrice, asset, currency, orderQuantity, orderNumber=None, note=None):
         """
 
-        :param limitPrice: 
-        :param asset: 
-        :param currency: 
-        :param orderQuantity: 
-        :param orderNumber:  (Default value = None)
+        Sends a limit order to sell at a given price. If a limit order has already been put in place, orderNumber will not be None, and
+        instead of sending in a new order, this function simply updates it to match the limitPrice.
+
+        In other words, it sends in an order, and if an order is already in place, changes the price.
+
+        :param limitPrice: The price, a decimal
+        :param asset: The asset, a string
+        :param currency:  The currency, a string
+        :param orderQuantity:  The quantity, a decimal
+        :param orderNumber:  (Default value = None) The orderNumber of the current limit order, if None, then create a new order. If not, change the price on the exchange.
         :param note:  (Default value = None)
 
         """
@@ -83,9 +98,10 @@ class makerLimitOrderMarket(marketBaseClass):
     @abstractmethod
     def closeLimitOrders(self, asset, currency):
         """
+        Cancells the limit orders for an asset and currency pair if they are still open.
 
-        :param asset: 
-        :param currency: 
+        :param asset: The asset, a string
+        :param currency: The currency, a string
 
         """
         pass;
@@ -93,9 +109,10 @@ class makerLimitOrderMarket(marketBaseClass):
     @abstractmethod
     def getOrderBook(self, asset, currency):
         """
-
-        :param asset: 
-        :param currency: 
+        Gets the order book of the market, which lists the asks around the current price. This will be used to calculate
+        the price that is one tick below the current price, so that a maker order closest to the price can be maintained for fastest fulfillment.
+        :param asset: The asset, a string
+        :param currency: The currency, a string
 
         """
         pass
@@ -103,17 +120,8 @@ class makerLimitOrderMarket(marketBaseClass):
     @abstractmethod
     def orderCanceled(self, orderID):
         """
-
-        :param orderID: 
-
-        """
-        pass
-
-    @abstractmethod
-    def limitOrderStatus(self, orderID):
-        """
-
-        :param orderID: 
+        Checks to see if an order has been cancelled.
+        :param orderID:  The order ID
 
         """
         pass
@@ -121,26 +129,18 @@ class makerLimitOrderMarket(marketBaseClass):
     @abstractmethod
     def closeLimitOrder(self, orderID):
         """
-
-        :param orderID: 
-
-        """
-        pass
-
-    @abstractmethod
-    def orderisOpen(self, orderID):
-        """
-
-        :param orderID: 
+        Cancells a particular limit order.
+        :param orderID: The order id, a string
 
         """
         pass
+
 
     @abstractmethod
     def quantityLeftInOrder(self, orderID, orderQuantity=None):
         """
-
-        :param orderID: 
+        Finds the quantity left in an order. If the orderID is None or the order is not valid, then return orderQuantity.
+        :param orderID: The order id, a string
         :param orderQuantity:  (Default value = None)
 
         """
@@ -149,10 +149,12 @@ class makerLimitOrderMarket(marketBaseClass):
     @abstractmethod
     def extractMakerLimitPrice(self, type, asset, currency):
         """
+        Extracts the maker limit price from the market. In implementing this, call getOrderBook and then get the price closest
+        to the price that isnt a taker order.
 
-        :param type: 
-        :param asset: 
-        :param currency: 
+        :param type: Either marketBaseClass.buyText, or marketBaseClass.sellText
+        :param asset: The asset, a string
+        :param currency: The currency, a string
 
         """
         pass
@@ -160,8 +162,9 @@ class makerLimitOrderMarket(marketBaseClass):
     @abstractmethod
     def orderOpen(self, orderID):
         """
+        Checks if an order is still open
 
-        :param orderID: 
+        :param orderID: The order id, a string
 
         """
         pass
@@ -169,16 +172,18 @@ class makerLimitOrderMarket(marketBaseClass):
     @abstractmethod
     def getOrderPrice(self, orderID):
         """
-
-        :param orderID: 
+        Gets the received price of an order. This is useful because if a market receives a certain price and truncates it to
+        fit a tick amount (like every 0.5) then it is good to get the price the market is using.
+        :param orderID: The orderID, a string
 
         """
         pass
 
     def getLimit(self, type, price, percent):
         """
+        Returns either a percent above or percent below the price
 
-        :param type: 
+        :param type: Either marketBaseClass.buyText, or marketBaseClass.sellText
         :param price: 
         :param percent: 
 
@@ -193,12 +198,13 @@ class makerLimitOrderMarket(marketBaseClass):
 
     def isInRange(self, type, firstPrice, currentPrice, percent, enabled=True):
         """
+         Checks if the current price has deviated too far from the original ordered price.
 
-        :param type: 
-        :param firstPrice: 
-        :param currentPrice: 
-        :param percent: 
-        :param enabled:  (Default value = True)
+        :param type: Either marketBaseClass.buyText, or marketBaseClass.sellText
+        :param firstPrice: The first price when the order was received, a decimal.
+        :param currentPrice: The current price, a decimal
+        :param percent: A decimal
+        :param enabled:  (Default value = True) If False, then returns True. Used in makeOrder
 
         """
         if enabled and currentPrice is not None:
@@ -214,14 +220,15 @@ class makerLimitOrderMarket(marketBaseClass):
 
     def sendLimitOrder(self, type, asset, currency, orderQuantity, orderID, note=None, currentLimitPrice=None):
         """
+        Sends a limit order.
 
-        :param type: 
-        :param asset: 
-        :param currency: 
-        :param orderQuantity: 
-        :param orderID: 
-        :param note:  (Default value = None)
-        :param currentLimitPrice:  (Default value = None)
+        :param type: Either marketBaseClass.buyText, or marketBaseClass.sellText
+        :param asset: The asset, a string
+        :param currency: A string
+        :param orderQuantity: A decimal
+        :param orderID: A string
+        :param note:  (Default value = None) A string or None
+        :param currentLimitPrice:  (Default value = None) The current price of the limit order, if there is an order open.
 
         """
 
@@ -249,8 +256,9 @@ class makerLimitOrderMarket(marketBaseClass):
 
     def initializeLimitOrder(self, order):
         """
+        Initializes the limit order process.
 
-        :param order: 
+        :param order: The order dict, specified in strategy
 
         """
         # order['type'] = self.interpretType(order['type'])
@@ -289,8 +297,9 @@ class makerLimitOrderMarket(marketBaseClass):
 
     def makeOrder(self, order):
         """
+        Makes the order happen, and when called in the future checks the status.
 
-        :param order: 
+        :param order: The order dict, specified in strategy
 
         """
         tryMaxCount = 7
@@ -341,8 +350,9 @@ class makerLimitOrderMarket(marketBaseClass):
 
     def finishOrderStep(self, order):
         """
+        Finalizes an order.
 
-        :param order: 
+        :param order: The order dict, specified in strategy
 
         """
         if not order['equilibrium']:

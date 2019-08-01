@@ -12,7 +12,7 @@ from markets.marketBaseClass import marketBaseClass
 
 
 class gmailStrategy(strategy):
-    """ """
+    """ aaa"""
     strategyName = 'Gmail'
 
     label = 'inbox'
