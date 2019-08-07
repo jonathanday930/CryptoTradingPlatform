@@ -108,6 +108,7 @@ class controller:
     def addMarket(self, market, name):
         """
         Adds a market to the controller's list of markets to use.
+
         :param market: A child of marketBaseClass
         :param name: The name of this market instance, which is arbitrary (could be 'Jday's_Bitmex').
 
@@ -119,6 +120,7 @@ class controller:
     def addStrategy(self, strategy):
         """
         Adds a strategy to the controller's list of currently enabled strategies.
+
         :param strategy: A child of the strategy class.
 
         """

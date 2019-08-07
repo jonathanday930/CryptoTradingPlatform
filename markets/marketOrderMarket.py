@@ -93,28 +93,25 @@ class marketOrderMarket(marketBaseClass):
                 text = "current amount of %s%s: %f \n " % (order['currency'], order['asset'], currentAmount)
                 print(text)
 
-                if currentAmount > 0 and order['action'] == self.sellText or currentAmount < 0 and order['action'] == self.buyText:
+                if currentAmount > 0 and order['action'] == self.sellText or currentAmount < 0 and order[
+                    'action'] == self.buyText:
                     self.marketBuy(-currentAmount, order['currency'], order['asset'], note='Resetting to equilibrium')
                     self.logOrderInBank(order, action=self.buyText if -currentAmount > 0 else self.sellText,
                                         orderAmount=abs(currentAmount),
                                         orderPrice=self.getCurrentPrice(order['currency'], order['asset']))
 
-                # TODO: This should not be here long term
-                if order['asset'] == 'USD':
-                    orderSize = (self.getAmountOfItem('xbt') * self.getCurrentPrice(order['currency'],
-                                                                                    order['asset'])) * .4
-                else:
-                    orderSize = (self.getAmountOfItem('xbt') / self.getCurrentPrice(order['currency'],
-                                                                                    order['asset'])) * .4
+                orderSize = order['orderQuantity']
 
                 if order['action'] == self.buyText:
                     result = self.marketBuy(orderSize, order['currency'], order['asset'], note='Going long')
-                    self.logOrderInBank(order, action=self.buyText, orderAmount=self.getAmountOfItem(order['currency'], order['asset']),
+                    self.logOrderInBank(order, action=self.buyText,
+                                        orderAmount=self.getAmountOfItem(order['currency'], order['asset']),
                                         orderPrice=self.getCurrentPrice(order['currency'], order['asset']))
                 else:
                     if order['action'] == self.sellText:
                         result = self.marketSell(orderSize, order['currency'], order['asset'], note='Going short')
-                        self.logOrderInBank(order, action=self.sellText, orderAmount=self.getAmountOfItem(order['currency'], order['asset']),
+                        self.logOrderInBank(order, action=self.sellText,
+                                            orderAmount=self.getAmountOfItem(order['currency'], order['asset']),
                                             orderPrice=self.getCurrentPrice(order['currency'], order['asset']))
                 order['result'] = '0'
                 break
